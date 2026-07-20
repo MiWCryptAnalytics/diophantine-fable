@@ -47,3 +47,35 @@
   deliverable, not an afterthought.
 - Literature agent still out; frontier claims remain [P] until it reports
   and the citation-verification pass runs.
+
+## 2026-07-20 — the Nagell trap, the LMM fix, and first growth data
+
+- **A real bug in our complexity story, caught by writing it down.** While
+  drafting the accounting for theorem target A1, noticed that the
+  generalized-Pell representative search used Nagell's window
+  y ≤ u·√|N|/√(2(t∓1)) — and the fundamental unit u has *exponentially many
+  digits* in s. The scan was doubly exponential, silently betraying the
+  single-exponential thesis of the whole quadratic layer. Moral for the
+  eventual A1 write-up: complexity claims must be audited per bound, not per
+  "we have an algorithm".
+- **Fix: the LMM/PQa method.** Class representatives now come from
+  continued-fraction expansions of (z + √D)/|m| over square divisors f² | N
+  and square roots z² ≡ D (mod |m|), with every candidate verified by direct
+  big-integer arithmetic (sidestepping the literature's sign conventions).
+  Representative search is now period-bounded — single-exponential, no u
+  anywhere. Validated three ways: 400-case brute-force agreement, exact
+  solvability match against the old Nagell scan where both apply, and
+  hand-worked PQa runs (x² − 2y² = 7: the z = ±3 expansions produce (−3, 1)
+  and (3, 1), as computed on paper before coding).
+- **Lenstra's monster, tamed.** d = 1000099: our CF computes the fundamental
+  t with **1128 digits** (computed here, not quoted); the negative Pell
+  equation is unsolvable (even period); x² − 1000099y² = N decides instantly
+  for sample N. Search-based methods are hopeless here by construction —
+  this is the single-exponential claim made executable.
+- **First Track B data** (`experiments/pell_growth.py`, 0.1s for d ≤ 20000):
+  33 record-setting d; digits(t) climbs 10 → 278 while s(f) goes 13 → 22,
+  with digits/√d rising ≈1.3 → ≈2.2. Empirically log t ≈ 2√d, i.e. witness
+  magnitude 2^(2^Θ(s)) — the doubly-exponential envelope as machine data
+  (`experiments/data/pell_records.csv`).
+- **Program note:** the pre-plan literature agent was stopped by the user;
+  the frontier [P] tags stay pending until a citation pass is green-lit.

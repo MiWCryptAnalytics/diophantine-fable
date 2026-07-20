@@ -17,7 +17,10 @@ Even decidability (two-variable Hilbert 10) is open.
 - **[V]** Pell minimal solutions are enormous: fundamental solution of
   x² − 61y² = 1 is (1766319049, 226153980) (`tests/test_solvers.py`); in
   general ~2^Θ(√d) — doubly exponential in s = O(log d). **[P]** for the
-  general growth statement (regulator bounds). Consequence: a (2^s)^c
+  general growth statement (regulator bounds). **[V]** empirically: record
+  digits(t) reach 278 by d = 17341 with log₁₀t ≈ 2√d
+  (`experiments/data/pell_records.csv`); d = 1000099 has a 1128-digit
+  fundamental solution yet decides instantly via LMM/PQa. Consequence: a (2^s)^c
   algorithm cannot work by exhibiting solutions; our Pell orbit walk
   (`smale5/solvers/pell.py`) is the constructive counterpoint — decision via
   residue cycles.

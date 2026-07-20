@@ -4,10 +4,13 @@ integer points.
 
 This module is the toolkit's showpiece of the Smale-#5 moral: minimal
 solutions can have exponentially many digits in the input size (so search is
-hopeless), yet solvability is decided by (1) Nagell's bound, which confines
-one representative of each solution class to a small window, and (2) walking
-each class's orbit under the fundamental automorphism σ *modulo M*, which is
-finite and purely periodic. A hit is reconstructed (or certified symbolically
+hopeless), yet solvability is decided by (1) the LMM/PQa continued-fraction
+method, which finds one representative of every solution class within a CF
+period — crucially WITHOUT the fundamental unit u entering any bound (the
+classical Nagell window ~u·√|N| is doubly exponential in the input size,
+since u itself has exponentially many digits; the CF period is only
+single-exponential), and (2) walking each class's orbit under the fundamental
+automorphism σ *modulo M*, which is finite and purely periodic. A hit is reconstructed (or certified symbolically
 when the witness would be astronomically large); a completed scan with no hit
 is a proof of NO.
 """
@@ -87,19 +90,12 @@ def decide_pell_like(D: int, N: int, cong: OrbitCongruence | None = None,
         base = [neg]
         completeness = "x²−Dy²=−1: all solutions are ±σ^k(x₁,y₁)"
     else:
-        # Nagell: each class of x²−Dy²=N has a representative with
-        # 0 ≤ y ≤ u·√|N| / √(2(t∓1)). We scan the (larger) t−1 bound for both
-        # signs of N — enlarging the window never hurts completeness.
-        B = sp.integer_nthroot((u * u * abs(N)) // max(2 * (t - 1), 1), 2)[0] + 2
-        if B > scan_cap:
-            return undecided("pell-nagell", bound=scan_cap,
-                             detail=f"representative bound {B} exceeds scan cap")
-        base = []
-        for yv in range(B + 1):
-            rhs = N + D * yv * yv
-            if is_square(rhs):
-                base.append((int(sp.integer_nthroot(rhs, 2)[0]), yv))
-        completeness = f"Nagell representative scan complete up to y ≤ {B}"
+        base = lmm_representatives(D, N, neg, step_cap=scan_cap)
+        if base is None:
+            return undecided("pell-lmm", bound=scan_cap,
+                             detail="LMM representative search exceeded caps")
+        completeness = ("LMM/PQa representative search over square divisors "
+                        "f² | N and square roots of D mod |N/f²|")
 
     if cong is None:
         if base:
@@ -145,6 +141,105 @@ def decide_pell_like(D: int, N: int, cong: OrbitCongruence | None = None,
               detail=f"{completeness}; all {len(seeds)} sign-variant orbits "
                      f"walked one full period mod {M} (periods {periods}); "
                      "no residue satisfies the congruences")
+
+
+def _floor_quad(P: int, Q: int, s: int) -> int:
+    """floor((P + √D)/Q) in exact arithmetic, s = ⌊√D⌋, √D irrational."""
+    if Q > 0:
+        return (P + s) // Q
+    return -((P + s) // (-Q)) - 1
+
+
+def _pqa_reps(D: int, m: int, s: int, neg, step_cap: int):
+    """Representatives of the primitive solution classes of x² − D·y² = m via
+    PQa continued-fraction runs (the LMM method): for each square root z of D
+    mod |m| in (−|m|/2, |m|/2], expand (z + √D)/|m|; when some Qᵢ₊₁ = ±1 the
+    convergent pair (Gᵢ, Bᵢ) solves x² − Dy² = ±m, and a −m hit converts to +m
+    through the fundamental −1 solution when it exists. Direct big-integer
+    verification of every candidate sidesteps sign-convention pitfalls.
+
+    Returns (reps, steps) — reps is None if step_cap was exhausted."""
+    am = abs(m)
+    if am == 1:
+        if m == 1:
+            return [(1, 0)], 0
+        return ([neg] if neg is not None else []), 0
+    roots = sp.ntheory.sqrt_mod(D % am, am, all_roots=True) or []
+    reps, steps = [], 0
+    seen_z = set()
+    for r in roots:
+        z = int(r)
+        if 2 * z > am:
+            z -= am
+        if z in seen_z:
+            continue
+        seen_z.add(z)
+        P, Q = z, am
+        G_prev, G = -P, Q      # G_{-2}, G_{-1}  (G_i = |m|·A_i − z·B_i)
+        B_prev, B = 1, 0       # B_{-2}, B_{-1}
+        visited = set()
+        while (P, Q) not in visited:
+            visited.add((P, Q))
+            steps += 1
+            if steps > step_cap:
+                return None, steps
+            a = _floor_quad(P, Q, s)
+            P = a * Q - P
+            Q = (D - P * P) // Q
+            G_prev, G = G, a * G + G_prev
+            B_prev, B = B, a * B + B_prev
+            if Q in (1, -1):
+                val = G * G - D * B * B
+                cand = None
+                if val == m:
+                    cand = (G, B)
+                elif val == -m and neg is not None:
+                    xn, yn = neg
+                    cand = (G * xn + D * B * yn, G * yn + B * xn)
+                if cand is not None:
+                    assert cand[0] ** 2 - D * cand[1] ** 2 == m
+                    reps.append(cand)
+                    break
+                # a ∓m-only hit without a −1 unit: keep walking the cycle —
+                # a usable Q = ±1 may still occur before the period closes.
+    return reps, steps
+
+
+_FACTOR_CAP = 10**15
+
+
+def lmm_representatives(D: int, N: int, neg, step_cap: int = 500_000):
+    """One representative of every solution class of x² − D·y² = N: solutions
+    with content f (f² | N) are f times a primitive solution of N/f².
+    Returns None when caps are exhausted (caller must confess UNDECIDED)."""
+    if abs(N) > _FACTOR_CAP:
+        return None
+    s = int(sp.integer_nthroot(D, 2)[0])
+    base, total = [], 0
+    for f in sp.divisors(abs(N)):
+        if N % (f * f):
+            continue
+        reps, steps = _pqa_reps(D, N // (f * f), s, neg, step_cap - total)
+        if reps is None:
+            return None
+        total += steps
+        base.extend((f * x, f * y) for (x, y) in reps)
+    return base
+
+
+def nagell_representatives(D: int, N: int, t: int, u: int, cap: int = 10**6):
+    """Classical Nagell-bounded scan — kept only as a small-case cross-check
+    for LMM in the tests. Its window involves u, so it is doubly exponential
+    in the input size and must never be used in the decision path."""
+    B = int(sp.integer_nthroot((u * u * abs(N)) // max(2 * (t - 1), 1), 2)[0]) + 2
+    if B > cap:
+        return None
+    out = []
+    for yv in range(B + 1):
+        rhs = N + D * yv * yv
+        if is_square(rhs):
+            out.append((int(sp.integer_nthroot(rhs, 2)[0]), yv))
+    return out
 
 
 def _reconstruct(D, N, seed, k, t, u, recover, digit_cap) -> Decision:

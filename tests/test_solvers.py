@@ -1,8 +1,11 @@
+import sympy as sp
+
 from smale5.decision import Status
 from smale5.poly import is_solution, parse
 from smale5.solvers.linear import solve_linear
 from smale5.solvers.local import local_obstruction, real_obstruction
-from smale5.solvers.pell import cf_fundamental, decide_pell_like
+from smale5.solvers.pell import (cf_fundamental, decide_pell_like,
+                                 lmm_representatives, nagell_representatives)
 from smale5.solvers.quadratic import solve_quadratic
 
 
@@ -44,6 +47,60 @@ def test_generalized_pell_representatives():
     x, y = dec.certificate
     assert x * x - 2 * y * y == 7
     assert decide_pell_like(5, 2).status is Status.NO
+
+
+def test_pell_like_matches_bruteforce_small():
+    """LMM-based decisions must agree with exhaustive search wherever search
+    can see: brute YES forces solver YES; solver NO forces brute silence."""
+    for D in (2, 3, 5, 6, 7, 8, 10, 11, 12, 13):
+        for N in range(-20, 21):
+            if N == 0:
+                continue
+            dec = decide_pell_like(D, N)
+            assert dec.status in (Status.YES, Status.NO), (D, N, dec)
+            brute = None
+            for y in range(0, 300):
+                rhs = N + D * y * y
+                if rhs >= 0:
+                    r, exact = sp.integer_nthroot(rhs, 2)
+                    if exact:
+                        brute = (int(r), y)
+                        break
+            if brute is not None:
+                assert dec.status is Status.YES, (D, N, brute, dec)
+            if dec.status is Status.YES:
+                x, y = dec.certificate
+                assert x * x - D * y * y == N, (D, N, dec)
+            else:
+                assert brute is None, (D, N, brute)
+
+
+def test_lmm_agrees_with_nagell_solvability():
+    """Both representative searches are complete on small inputs, so their
+    solvability verdicts must coincide exactly."""
+    for D in (2, 3, 5, 6, 7, 10, 13):
+        (t, u), neg = cf_fundamental(D)
+        for N in range(-15, 16):
+            if N == 0:
+                continue
+            lmm = lmm_representatives(D, N, neg)
+            nag = nagell_representatives(D, N, t, u)
+            assert lmm is not None and nag is not None
+            assert bool(lmm) == bool(nag), (D, N, lmm, nag)
+
+
+def test_pell_like_huge_unit_via_lmm():
+    """D = 1000099 (Lenstra's monster): the fundamental solution has hundreds
+    of digits, so any Nagell/search-based method is hopeless — LMM must still
+    decide instantly. This is the single-exponential claim made executable."""
+    (t, _u), _neg = cf_fundamental(1000099)
+    assert len(str(t)) > 200
+    for N in (2, 3, 5, 7, -3):
+        dec = decide_pell_like(1000099, N)
+        assert dec.status in (Status.YES, Status.NO), (N, dec)
+        if dec.status is Status.YES and isinstance(dec.certificate, tuple):
+            x, y = dec.certificate
+            assert x * x - 1000099 * y * y == N
 
 
 def test_quadratic_pell_conic():

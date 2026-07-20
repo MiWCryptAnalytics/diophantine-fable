@@ -79,7 +79,7 @@ member of our zoo where NO lives strictly beyond local reasons.
 | Stratum | Method | Verdict quality |
 |---|---|---|
 | linear | Bézout / extended gcd | complete |
-| all binary quadratics | ellipse window · parabola congruence classes · split-form divisors · **Pell orbit walk mod M** | complete (caps confessed) |
+| all binary quadratics | ellipse window · parabola congruence classes · split-form divisors · **LMM/PQa class search + Pell orbit walk mod M** | complete (caps confessed) |
 | Thue F(x,y) = m, deg ≥ 3 | PARI `thueinit(·,1)` — unconditional | complete |
 | univariate components | rational root theorem | complete |
 | everything else | obstructions (ℝ, prime powers ≤ 81) + bounded search | YES or honest UNDECIDED |
