@@ -15,8 +15,14 @@ The next morning, this repository was opened against a neighboring peak,
 **Smale's 5th problem**:
 
 > Can one decide whether a Diophantine equation f(x, y) = 0 (input f ∈ ℤ[u,v]
-> of size s) has an integer solution in time (2^s)^c — that is, in
-> single-exponential time?
+> of size s) has an integer solution in time 2^(s^c) — that is, in
+> exponential time?
+
+(Our first citation sweep corrected the problem statement itself: popular
+renderings — including Wikipedia's — print a single-exponential bound
+(2^s)^c, but Smale's paper asks for 2^(s^c), verified against the primary
+source. The expedition's first casualty was its own epigraph; see
+[notes/frontier.md](notes/frontier.md).)
 
 This is a different kind of mountain. #16 could fall to one clever algebraic
 object; #5 is a decidability-and-complexity question where **even plain
@@ -28,9 +34,11 @@ the beating heart of the project).
 
 ## Why this problem bites
 
-- **NP-hard floor.** Deciding two-variable quadratics is already NP-complete
-  (Manders–Adleman 1978, ℕ-variant), so polynomial time is off the table;
-  single-exponential is the right question.
+- **A hardness floor with a twist.** Deciding ax² + by = c over the
+  *naturals* is NP-complete (Manders–Adleman 1978); but over ℤ that same
+  equation sits in NP ∩ coNP, and Lagarias (1979) proved all binary
+  quadratics over ℤ are in NP. Whether two-variable H10 over ℤ is NP-hard
+  at all is itself open — one of this program's Track B targets.
 - **Witnesses are too big to exhibit.** The least solution of x² − 61y² = 1
   is (1766319049, 226153980); in general Pell fundamental solutions have
   ~2^Θ(√d) digits — *doubly* exponential in the input size. Any (2^s)^c

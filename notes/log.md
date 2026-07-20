@@ -112,6 +112,48 @@
   squareful moduli, PQa pre-period claims, orbit seed coverage), and
   `break-pipeline` (end-to-end fuzz + classifier soundness against
   provably-infinite families). Verdicts feed regression tests.
+## 2026-07-20 — the citation machine reports: our epigraph was wrong
+
+Nine verifiers, 236 tool calls, ~463k tokens: six claims confirmed (with
+sharpenings), three corrected — and the corrections cut deep. In order of
+pain:
+
+1. **The problem statement itself.** Smale asks for time **2^(s^c)** —
+   exponential time proper — not the single-exponential (2^s)^c we (and
+   Wikipedia, whose rendering conflicts with the primary PDF and with
+   Lagarias's quotation of the AMS reprint) had. The size measure is dense:
+   every exponent slot ≤ d contributes, so s ≥ ~(d+1)(d+2)/2. Consequences:
+   A1's 2^{O(s)} is comfortably *stronger* than Smale's budget, and his
+   Height Bound Hypothesis frames the NP route for positive genus.
+2. **The Thue sting.** Bugeaud–Győry bounds are polynomial in coefficient
+   *magnitude* — exponential in bit-size — so even fixed-degree-3 Thue is
+   not known decidable in 2^(s^c) via height bounds. G2 rewritten: the open
+   route is compact-representation decision (Pell-style
+   decide-without-exhibit, one rung up). This kills our hoped-for A1-v2
+   shortcut and replaces it with a better question.
+3. **The hardness floor was mis-scoped.** Manders–Adleman NP-completeness is
+   an ℕ-statement; the ℤ-variant is NP ∩ coNP (quadratic residuosity — and
+   the verifier caught an *error in the authors' own 1978 tech report*
+   claiming poly-time via Jacobi symbols). Lagarias 1979: binary quadratics
+   over ℤ in NP and in 2^{O(L)} — so our A1 deg-2 stratum is his theorem,
+   now credited. New Track B question: is two-variable H10 over ℤ NP-hard
+   at all?
+4. **Attribution fixes.** The 9-unknowns theorem is Matiyasevich's, written
+   up by Jones 1982 (we had it backwards); Siegel 1929 appeared in the
+   Abhandlungen, not the Sitzungsberichte (Wikipedia again).
+5. **Post-cutoff intelligence.** Alpöge–Lawrence, *Conditional algorithmic
+   Mordell* (2024: algorithm for C(K) conditional on Hodge+Tate+Fontaine–
+   Mazur); Garcia-Fritz–Pasten 2025 (unconditional effective heights, enough
+   automorphisms); Bennett–Ghadermarzi solved Mordell for |k| ≤ 10⁷ (2015 —
+   our GPZ 10⁴ figure was stale); Elkies' record Hall ratio 46.6; H10
+   undecidable over rings of integers of all number fields (2024–25); ℤ[i]
+   in 18 unknowns (2026). Two-variable H10: still open in both directions.
+
+`frontier.md` rewritten with citations ([P] → [C] throughout); README's
+epigraph corrected; A1.md re-budgeted and re-credited. All 73 citations
+archived in `notes/citations/2026-07-20-frontier-verification.json`. House
+rule from here on: primary sources only.
+
 - **Hall-ratio sweep** (`experiments/hall_ratios.py`, 3.9s to x = 10⁷):
   rediscovered the classical extremal point from scratch — x = 5234,
   y = 378661, x³ − y² = −17, ratio √x/|k| ≈ 4.2557 — and it is one of only

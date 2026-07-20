@@ -1,0 +1,361 @@
+[
+  {
+    "id": "smale-statement",
+    "verdict": "corrected",
+    "corrected_statement": "Smale's 5th problem (\"Height bounds for diophantine curves\", in S. Smale, \"Mathematical problems for the next century\", Math. Intelligencer 20 (1998), no. 2, 7-15; reprinted in Mathematics: Frontiers and Perspectives, AMS 2000, 271-294) asks: \"Can one decide if a diophantine equation f(x,y)=0 (input f in Z[u,v]) has an integer solution, (x,y), in time 2^(s^c) where c is a universal constant? That is, can the problem be decided in exponential time?\" The bound is 2^(s^c) — exponential in a polynomial of the size (EXP-type), NOT (2^s)^c = 2^(cs) single-exponential. Time means number of Turing-machine operations. Smale's size convention is the dense size s(f) = sum over all alpha=(a1,a2) with |alpha|=a1+a2<=d of max(log|a_alpha|,1), where f(x,y) = sum_{|alpha|<=d} a_alpha x^{a1} y^{a2} (so every exponent slot up to total degree d contributes at least 1, plus log of coefficient magnitudes). Smale explicitly states that even decidability is open: \"it is not even known if one can decide this diophantine problem at all, let alone in exponential time.\" The problem \"is essentially posed in [Cucker-Koiran-Smale, 1997]\"; the accompanying Height Bound Hypothesis (for curves of positive genus, any integer solution implies one with log max(|a|,|b|) polynomially bounded by s(f)) would put the positive-genus case in NP and answer the problem affirmatively.",
+    "notes": "CORRECTION (bound shape): claim said time (2^s)^c i.e. single-exponential 2^(cs); the paper itself prints 2 with superscript s^c (verified in the PDF layout of the Smale Institute reprint — no parentheses), and Lagarias (arXiv:math/0611209, Sec. 1.4), quoting the AMS 2000 reprint p. 275, independently renders it O(2^(s^c)). Wikipedia's \"Smale's problems\" page renders it (2^s)^c — this conflicts with both primary-quality sources and is likely where the claim's error came from; do not cite Wikipedia's rendering. Smale's phrase \"exponential time\" means 2^(poly(s)), not 2^(O(s)). CONFIRMED: venue/year (Math. Intelligencer 20(2), 1998, 7-15, DOI 10.1007/BF03025291), input f in Z[u,v] (two variables), solution sought in Z^2, Turing model, and that decidability itself is stated as open (Matiyasevich undecidability applies only when the number of variables is unrestricted; Smale cites 27, possibly 20 or 11, sufficient). SIZE CAVEAT: s(f) is a dense size — the sum runs over all |alpha|<=d, so zero-coefficient slots each contribute 1 (s(f) >= ~(d+1)(d+2)/2); some secondary sources paraphrase it as a sum over nonzero coefficients only, which is not what the paper prints. Lagarias's own restatement inserts \"of exact total degree d, and of genus at least one\" — that restriction is Lagarias's framing; Smale's main question has no genus restriction (genus enters only in the later Height Bound Hypothesis discussion). Source caveat: my primary text is the Math Track reprint hosted at smaleinstitute.com (Springer original is paywalled), but it agrees with Lagarias's quotation of the AMS 2000 reprint. PARTIAL RESULTS: bivariate degree <=2 decidable in time O(2^(c1 L)) (c=1 in Smale's bound) — Lagarias 1979 FOCS / arXiv:math/0611209 (2006); genus-1 effective via Baker/Baker-Coates (noted by Smale himself). 2024-2026 STATUS: no resolution found; two-variable decidability remains open. Adjacent 2024-2025 developments do not affect the claim: undecidability of H10 for rings of integers of all number fields (Koymans-Pagano; Alpoge-Bhargava et al., Quanta Feb 2025) and 2025 undecidability for cubics with unboundedly many variables; bivariate (even bivariate cubic) decidability still open per Gasarch's surveys (arXiv:2104.07220).",
+    "citations": [
+      {
+        "ref": "S. Smale, Mathematical problems for the next century, The Mathematical Intelligencer 20 (1998), no. 2, 7-15",
+        "url": "http://smaleinstitute.com/Mathematical_problems_for_the_next_century.pdf"
+      },
+      {
+        "ref": "S. Smale, Mathematical problems for the next century, The Mathematical Intelligencer 20 (1998) — publisher record",
+        "url": "https://link.springer.com/article/10.1007/BF03025291"
+      },
+      {
+        "ref": "J. C. Lagarias, Succinct certificates for solutions to binary quadratic Diophantine equations, arXiv:math/0611209 (2006; long version of 1979 FOCS paper), Sec. 1.4 'Retrospective: Smale's Problem 5'",
+        "url": "https://arxiv.org/abs/math/0611209"
+      },
+      {
+        "ref": "S. Smale, Mathematical problems for the next century, in: Mathematics: Frontiers and Perspectives, Amer. Math. Soc., 2000, 271-294 (reprint quoted by Lagarias at p. 275)",
+        "url": "https://www.worldscientific.com/doi/abs/10.1142/9789812792815_0045"
+      },
+      {
+        "ref": "Wikipedia, Smale's problems (discrepant rendering (2^s)^c — flagged, not endorsed)",
+        "url": "https://en.wikipedia.org/wiki/Smale%27s_problems"
+      },
+      {
+        "ref": "W. Gasarch, Hilbert's Tenth Problem: Refinements and Variants, arXiv:2104.07220",
+        "url": "https://arxiv.org/pdf/2104.07220"
+      }
+    ]
+  },
+  {
+    "id": "manders-adleman",
+    "verdict": "confirmed",
+    "corrected_statement": "Manders & Adleman, \"NP-complete decision problems for binary quadratics\", J. Comput. System Sci. 16(2) (1978), pp. 168-184 (conference version: STOC 1976), prove: the set {<a,b,c> : a,b,c positive integers given in binary, ∃ nonnegative integers x,y with a·x² + b·y = c} is NP-complete (their Theorem: equivalently stated by the authors as solvability in ω = {0,1,2,...}; Garey-Johnson list the trivially equivalent positive-integer variant as problem AN8). The companion NP-complete problem is the bounded quadratic congruence {<a,b,c> : ∃x, 0 ≤ x ≤ c, x² ≡ a (mod b)} (Garey-Johnson AN1), which stays NP-hard even if the factorization of b is given. Z-VARIANT (x,y range over all integers, b ≠ 0): solvability is equivalent to solvability of the congruence a·x² ≡ c (mod |b|) — for gcd(a,b)=1, to whether a⁻¹c is a quadratic residue mod |b| — so the problem is: (i) in NP ∩ coNP (yes-witness: x mod b; no-witness: prime factorization of b with primality certificates, then poly-time checks mod each prime power), hence NOT NP-complete unless NP = coNP; (ii) decidable in deterministic polynomial time given the prime factorization of b, and in random polynomial time with a factoring oracle (hence in BQP via Shor); (iii) not known to be in P — on composite b of unknown factorization it contains the quadratic residuosity problem, a standard cryptographic hardness assumption (Goldwasser-Micali). The nonnegativity/size constraint is thus exactly what buys NP-hardness; Lagarias proved the general binary quadratic ax²+bxy+cy²+dx+ey+f=0 solvability over Z is in NP (succinct certificates; smallest solutions can be exponentially long), claiming NP-completeness only for the nonnegative-solution variants.",
+    "notes": "All claimed details check out: authors' order (Manders & Adleman for JCSS 1978), venue JCSS vol 16 issue 2 pp 168-184, DOI 10.1016/0022-0000(78)90044-2, year 1978, equation form ax²+by=c, x,y nonnegative (authors' own ω = {0,1,2,...} in ERL M78/30 Thm 2.2.1(i); Lagarias's restatement '∃ nonnegative x1,x2'; Rojas Thm 16 'root (x,y) ∈ N²'), binary (sparse) encoding of a,b,c. Caveats: (1) coefficients a,b,c are positive integers/naturals in the original; (2) Garey-Johnson AN8 (p. 251) states it with POSITIVE x,y — equivalent, but quote whichever variant you cite; (3) claim wording 'a*x^2' is fine but note the STOC'76 title is 'quadratic polynomials', the JCSS'78 title is 'binary quadratics' — cite the right title per venue. DISCREPANCY FOUND in a primary source: the authors' own tech report (Adleman-Manders, UCB/ERL M78/30, June 1978, §2.2) claims the Z-variant 'is easily decided in polynomial time, using the quadratic reciprocity law for the Jacobi symbol' — this is only valid for prime (or fully factored) b; for composite b Jacobi symbol +1 is inconclusive (counterexample: Jacobi(2,15)=+1 yet x²≡2 (mod 15) has no solution), and deciding quadratic residuosity mod composites of unknown factorization is precisely the Goldwasser-Micali hardness assumption — do NOT cite that sentence as 'Z-variant is in P'. The NP∩coNP/factoring status of the Z-variant is assembled from standard facts (Pratt certificates or AKS for the coNP witness; poly-time congruence solving given factorization); I found no single canonical reference stating it verbatim for this exact equation, so flag it as folklore-with-cited-pieces in the notes file. Lagarias (arXiv:math/0611209, orig. FOCS 1979) Thm 1.2: nonnegative variants Σ1, Σ2 NP-complete via [38]=Manders-Adleman, all-integers variant Σ3 only placed in NP — he pointedly does not claim NP-hardness over Z. 2024-2026 developments: none change the status; minor additions only — a 2025 Groningen BSc thesis gives FPT algorithms for the QDEP parameterized by an upper bound on y or by coefficient b (brute-force x mod b), and 2025 arXiv papers (e.g., one-parametric Presburger QE, arXiv:2506.23730) still use Manders-Adleman as the standard hardness anchor. No factoring/QR breakthrough by Jan 2026 affects the Z-variant. Berkeley hosts free scans of the related tech reports (ERL M78/30, 1978; and a 1976 predecessor, report 28865); the JCSS PDF itself is paywalled/bot-blocked on ScienceDirect.",
+    "citations": [
+      {
+        "ref": "K. L. Manders, L. M. Adleman, NP-complete decision problems for binary quadratics, Journal of Computer and System Sciences 16(2), 1978, pp. 168-184",
+        "url": "https://doi.org/10.1016/0022-0000(78)90044-2"
+      },
+      {
+        "ref": "K. L. Manders, L. M. Adleman, NP-complete decision problems for quadratic polynomials, Proc. 8th ACM STOC, 1976, pp. 23-29",
+        "url": "https://dl.acm.org/doi/10.1145/800113.803627"
+      },
+      {
+        "ref": "L. Adleman, K. Manders, Intractability Proofs and the Computational Complexity of Binary Quadratics, UC Berkeley ERL Memorandum UCB/ERL M78/30, 1978 (§2.2 and Theorem 2.2.1)",
+        "url": "http://www2.eecs.berkeley.edu/Pubs/TechRpts/1978/Archive/ERL-m-78-30.pdf"
+      },
+      {
+        "ref": "J. C. Lagarias, Succinct certificates for solutions to binary quadratic Diophantine equations, arXiv:math/0611209 (extended version of FOCS 1979 paper), Theorems 1.2-1.3 and ref [38]",
+        "url": "https://arxiv.org/abs/math/0611209"
+      },
+      {
+        "ref": "J. M. Rojas, Algebraic Geometry Over Four Rings and the Frontier to Tractability, arXiv:math/0005204, Theorem 16",
+        "url": "https://arxiv.org/abs/math/0005204"
+      },
+      {
+        "ref": "M. R. Garey, D. S. Johnson, Computers and Intractability: A Guide to the Theory of NP-Completeness, Freeman 1979, problems AN1 (Quadratic Congruences) and AN8 (Quadratic Diophantine Equations, p. 251)"
+      },
+      {
+        "ref": "S. Goldwasser, S. Micali, Probabilistic encryption, Journal of Computer and System Sciences 28(2), 1984, pp. 270-299 (quadratic residuosity assumption)",
+        "url": "https://doi.org/10.1016/0022-0000(84)90070-9"
+      },
+      {
+        "ref": "R. Hartung, Computational Problems of Quadratic Forms: Complexity and Cryptographic Perspectives, Dissertation, Frankfurt (discussion of [MA78] bounded-congruence formulation and factorization-given hardness)",
+        "url": "https://d-nb.info/988433699/34"
+      },
+      {
+        "ref": "A. van Hees, Interplay of Number Theory and Fixed-Parameter Tractable Algorithms, BSc thesis, University of Groningen 2025 (FPT parameterizations of QDEP)",
+        "url": "https://fse.studenttheses.ub.rug.nl/35856/1/bCS2025VanHeesA.pdf"
+      }
+    ]
+  },
+  {
+    "id": "siegel-1929",
+    "verdict": "confirmed",
+    "corrected_statement": "Siegel's theorem (C.L. Siegel, \"Über einige Anwendungen diophantischer Approximationen\", Abh. Preuss. Akad. Wiss., Phys.-Math. Kl. 1929, Nr. 1; reprinted Ges. Abh. I, 209–266): for a geometrically irreducible affine curve C over a number field K — in particular an affine plane curve f(x,y)=0 with f irreducible over Q̄ — the set of points with coordinates in O_K (over K=Q: integer points) is finite whenever C has geometric genus > 0 or at least 3 places at infinity, where places at infinity are the places of the function field Q̄(C) at which a coordinate function has a pole (equivalently, points over the line at infinity on the normalization of the projective closure, counted over the algebraic closure). Hence such a curve has infinitely many integral points only if it has geometric genus 0 and at most 2 places at infinity. The converse fails over Z (e.g., x²+y²=1); the exact iff-classification was given by Silverman (2000) and Poulakis (Proc. AMS 131, 2003) for Z, and by Alvanos–Bilu–Poulakis (Int. J. Number Theory 5, 2009) for S-integers over any number field.",
+    "notes": "All load-bearing details check out: year 1929, attribution to Siegel alone, genus-0 condition, at-most-2-places condition, and the \"only if\" (necessary-condition) direction, confirmed against Alvanos–Bilu–Poulakis (IJNT 2009, communicated by Zannier), which cites Siegel 1929 for exactly \"C(O_S) finite if g(C)>0 or at least 3 points at infinity\" with genus/places defined via Q̄(C) (so singular plane curves are handled via the normalization, matching the claim's \"geometric genus\" and \"places\"). Precision caveats folded into corrected_statement: (1) \"irreducible\" is best sharpened to geometrically irreducible — genus and places are ill-defined otherwise, though irreducible-over-Q-but-geometrically-reducible curves have finitely many rational points trivially, so the claim is not falsified; (2) places at infinity must be counted over Q̄, not as closed places over Q; (3) Siegel 1929 proved this over rings of integers of arbitrary number fields, so \"over Q\" understates the original scope; S-integral refinements are due to Mahler (1934, genus 1 over Q) and Lang (1960). Discrepancy found: Wikipedia cites the venue as \"Sitzungsberichte der Preussischen Akademie der Wissenschaften\", but the standard scholarly citation (ABP bibliography, Numdam/Séminaire citations, ~70 pp., Nr. 1) is \"Abhandlungen der Preussischen Akademie der Wissenschaften, Physikalisch-Mathematische Klasse, 1929, Nr. 1\" — use Abhandlungen. The theorem is ineffective in general (effective cases via Baker's method; genus-0 with ≤2 places has effective parametrization). Modern proofs: Corvaja–Zannier subspace-theorem proof (2002); Lawrence–Venkatesh-method proof (arXiv:2101.07111). English translation with commentary: Fuchs–Zannier, Edizioni della Normale 2014. 2024–2026 developments: none change the classification — arXiv:2411.17930 (2024, genus-2 effectivity examples) and arXiv:2503.08800 \"A positive Siegel theorem\" (Zhang, 2025) are extensions, not revisions; Faltings 1983 supersedes only the rational-point statement for g≥2.",
+    "citations": [
+      {
+        "ref": "C.L. Siegel, Über einige Anwendungen diophantischer Approximationen, Abh. Preuss. Akad. Wiss., Phys.-Math. Kl. 1929, Nr. 1 (Ges. Abh. I, 209–266)",
+        "url": "https://link.springer.com/book/10.1007/978-88-7642-520-2"
+      },
+      {
+        "ref": "P. Alvanos, Yu. Bilu, D. Poulakis, Characterizing algebraic curves with infinitely many integral points, Int. J. Number Theory 5 (2009)",
+        "url": "https://arxiv.org/abs/0907.2097"
+      },
+      {
+        "ref": "C. Fuchs, U. Zannier, Integral points on curves: Siegel's theorem after Siegel's proof, in On Some Applications of Diophantine Approximations, Edizioni della Normale 2014",
+        "url": "https://link.springer.com/chapter/10.1007/978-88-7642-520-2_3"
+      },
+      {
+        "ref": "D. Poulakis, Affine curves with infinitely many integral points, Proc. Amer. Math. Soc. 131 (2003), 1357–1359",
+        "url": "https://www.ams.org/journals/proc/2003-131-05/S0002-9939-02-06841-5/"
+      },
+      {
+        "ref": "Wikipedia, Siegel's theorem on integral points (venue discrepancy: lists Sitzungsberichte)",
+        "url": "https://en.wikipedia.org/wiki/Siegel's_theorem_on_integral_points"
+      }
+    ]
+  },
+  {
+    "id": "baker-bounds",
+    "verdict": "confirmed",
+    "corrected_statement": "Baker (Philos. Trans. Roy. Soc. London Ser. A 263 (1967/68), 173-191) gave the first effective height bound for Thue equations F(x,y)=m with F an irreducible binary form of degree n >= 3: for any kappa > n+1, max(|x|,|y|) < C exp((log|m|)^kappa) with C = C(n, kappa, F) effectively computable. Baker-Coates (Proc. Cambridge Philos. Soc. 67 (1970), 595-602) gave effective bounds for integer points on affine plane curves F(x,y)=0 of genus 1: max(|x|,|y|) < exp exp exp((2H)^(10^(N^10))), triple-exponential in the height H of F (N = total degree); Schmidt (Compositio Math. 81 (1992), 33-59) reduced this to a single exponential exp(c(N) H^((4N)^13)) over Q. The best current general Thue bounds are Bugeaud-Győry (Acta Arith. 74 (1996), 273-292, Theorem 3): all solutions of F(x,y)=b with deg F = n >= 3, height(F) <= H (H >= 3), |b| <= B (B >= e) satisfy max(|x|,|y|) < exp{c4 H^(2n-2) (log H)^(2n-1) log B} with c4 = 3^(3(n+9)) n^(18(n+1)), and also max(|x|,|y|) < exp{c3 R (log* R)(R + log(HB))} with R the regulator of Q(alpha), r its unit rank, c3 = 3^(r+27) (r+1)^(7r+19) n^(2n+6r+14); Győry-Yu (Acta Arith. 123 (2006), 9-41) improve the constants but keep the same character. Hence in degree d and coefficient height A, the best known effective bound has shape log max(|x|,|y|) <= d^(O(d)) A^(2d-2) (log A)^(2d-1) log|m| : polynomial in A itself (degree 2d-2 up to log factors) for fixed d, i.e. EXPONENTIAL in log A, NOT polynomial in log A. This exponential dependence on A is intrinsic to the exponential character of linear-forms-in-logarithms lower bounds (Evertse-Győry-Stewart survey).",
+    "notes": "All precise details of the claim check out. Discrepancies/caveats: (1) Baker's Thue paper appears in Phil. Trans. vol. 263 dated 1967/68 (received 1967, published 1968; DOI 10.1098/rsta.1968.0010) — 'Baker 1968' is the standard citation but some sources (e.g. Evertse's Leiden notes) say 1967. (2) Baker's original bound is exponential in a power of log m with C depending effectively but not explicitly on F; fully explicit dependence on the height A came later (Baker 1968 Part II gives explicit constants for y^2=x^3+k, and Győry-Papp / Bugeaud-Győry for general Thue). (3) Baker-Coates 1970 bound is TRIPLE exponential in the height (verified verbatim from Schmidt, Compositio 81 (1992), eq. (1.9)); Schmidt 1992 improved it to single-exponential, so 'Baker-Coates gives effective bounds' is correct but their bound is far from current best for genus 1. (4) Answer to the shape question: NO, not polynomial in log A — Bugeaud-Győry Theorem 3.3 (read directly from the Acta Arith. PDF) gives log max(|x|,|y|) < 3^(3(n+9)) n^(18(n+1)) H^(2n-2) (log H)^(2n-1) log B, polynomial in A=H of degree 2d-2 (up to logs), with d^(O(d)) degree dependence; the regulator-form bound (Thm 3.2) can be much smaller when the regulator is small but is still worst-case polynomial in A. Győry-Yu 2006 improves c(n) and H-dependence but depends on splitting-field parameters and remains exponential-type; Evertse-Győry-Stewart state explicitly the exponential dependence stems from the exponential character of linear-forms-in-logs bounds. 2024-2026 developments: Győry-Le Fourn, 'Improved bounds for some S-unit equations', Acta Arith. 214 (2024), 311-326 (sharpens S-unit bounds feeding into such estimates); Calegari-Dimitrov-Tang, 'Arithmetic holonomy bounds and effective Diophantine approximation' (arXiv:2510.04156, ICM 2026 invited lecture) provides a new non-Baker method covering algorithmic resolution of S-unit, Thue-Mahler, hyperelliptic/superelliptic equations — methodologically significant but does not change the bound shape to polylog in A. No source found claiming poly(log A) bounds; such a bound would be a major breakthrough.",
+    "citations": [
+      {
+        "ref": "A. Baker, Contributions to the theory of Diophantine equations I. On the representation of integers by binary forms, Philos. Trans. Roy. Soc. London Ser. A 263 (1967/68), 173-191",
+        "url": "https://royalsocietypublishing.org/doi/10.1098/rsta.1968.0010"
+      },
+      {
+        "ref": "A. Baker and J. Coates, Integer points on curves of genus 1, Proc. Cambridge Philos. Soc. 67 (1970), 595-602",
+        "url": "https://www.cambridge.org/core/journals/mathematical-proceedings-of-the-cambridge-philosophical-society/article/abs/integer-points-on-curves-of-genus-1/2E2195CEC3D50EA56836A7C0945603B3"
+      },
+      {
+        "ref": "Y. Bugeaud and K. Győry, Bounds for the solutions of Thue-Mahler equations and norm form equations, Acta Arith. 74 (1996), 273-292",
+        "url": "http://matwbn.icm.edu.pl/ksiazki/aa/aa74/aa7437.pdf"
+      },
+      {
+        "ref": "W. M. Schmidt, Integer points on curves of genus 1, Compositio Math. 81 (1992), 33-59",
+        "url": "http://www.numdam.org/item/CM_1992__81_1_33_0/"
+      },
+      {
+        "ref": "J.-H. Evertse, K. Győry, C. L. Stewart, Mahler's work on Diophantine equations and subsequent developments, in: Documenta Mathematica volume on Mahler / arXiv 2018",
+        "url": "https://arxiv.org/abs/1806.00355"
+      },
+      {
+        "ref": "K. Győry and K. Yu, Bounds for the solutions of S-unit equations and decomposable form equations, Acta Arith. 123 (2006), 9-41",
+        "url": "https://www.impan.pl/en/publishing-house/journals-and-series/acta-arithmetica/all/123"
+      },
+      {
+        "ref": "C. Heuberger, On general families of parametrized Thue equations, survey (states Baker's kappa > n+1 bound and Bugeaud-Győry Theorem 3)",
+        "url": "https://www.math.aau.at/heuberger/publications/pdf/nt98.pdf"
+      },
+      {
+        "ref": "K. Győry and S. Le Fourn, Improved bounds for some S-unit equations, Acta Arith. 214 (2024), 311-326",
+        "url": "https://www.impan.pl/en/publishing-house/journals-and-series/acta-arithmetica/all/214/0/115434/improved-bounds-for-some-s-unit-equations"
+      },
+      {
+        "ref": "F. Calegari, V. Dimitrov, Y. Tang, Arithmetic holonomy bounds and effective Diophantine approximation, arXiv:2510.04156, Proc. ICM 2026",
+        "url": "https://arxiv.org/abs/2510.04156"
+      }
+    ]
+  },
+  {
+    "id": "effective-mordell",
+    "verdict": "corrected",
+    "corrected_statement": "All known unconditional proofs of Faltings' theorem (Mordell conjecture) — Faltings 1983, Vojta 1991, Lawrence–Venkatesh 2020 — are ineffective for smooth projective curves of genus >= 2 over number fields: they bound (even uniformly, after Dimitrov–Gao–Habegger and Kühne, with quantitative refinements by Yu–Yuan–Zhou, 2026) the NUMBER of rational points, but give no computable bound on their heights, hence no proven algorithm to list them. Siegel's theorem on integral points is likewise ineffective in general (Thue–Siegel–Roth approximation), though Baker's linear forms in logarithms make it effective for genus 0 and 1 and for standard plane models of arbitrary genus (Thue equations, hyperelliptic y^2=f(x), superelliptic); effective Siegel is open already for a general genus-2 affine curve (e.g. a non-Weierstrass point removed), with effectivity for dense families of such curves obtained by Corvaja–Lombardo–Zannier (arXiv:2411.17930, 2024). Conditional routes: (1) Elkies (IMRN 1991) proved abc implies Mordell via Belyi maps, and the reduction is effective — an effective abc yields effective height bounds (explicit versions: van Frankenhuysen, J. Number Theory 2002; Murty–Pasten, J. Number Theory 2013); (2) an EFFECTIVE form of Vojta's height conjecture implies effective Mordell (the conjecture with unspecified constants yields only finiteness); (3) Kim's non-abelian Chabauty program (Invent. Math. 161 (2005); Publ. RIMS 45 (2009)): Bloch–Kato-type conjectures give finiteness of the Chabauty–Kim loci, and Kim's conjecture X(Q) = intersection of the loci would make determination of X(Q) algorithmic; Balakrishnan–Dogra gave an effective depth-2 Chabauty–Kim theorem (Compositio Math. 155 (2019)). 2024–2026 progress: Alpöge–Lawrence, \"Conditional algorithmic Mordell\" (arXiv:2408.11653, Aug 2024), construct an explicit algorithm that outputs C(K) and whose termination follows from the Hodge, Tate, and Fontaine–Mazur conjectures (algorithmic, not height-effective, Mordell), extending the Lawrence–Venkatesh method; Garcia-Fritz–Pasten (arXiv:2503.10443, 2025) prove unconditional, completely explicit Néron–Tate height bounds for genus >= 2 curves with sufficiently many automorphisms relative to the Mordell–Weil rank of the Jacobian, via Arakelov theory; earlier, Alpöge (\"Modularity and effective Mordell I\", arXiv:2109.07917) gave unconditional effective Mordell for curves admitting maps to certain Hilbert modular stacks over odd-degree totally real fields, and Urbanik (arXiv:2110.14829) an effective strategy for Lawrence–Venkatesh-style Shafarevich problems.",
+    "notes": "Discrepancies fixed: (1) \"plane curves\" is imprecise — smooth plane curves of genus >= 2 have degree >= 4 and genus 3, 6, ... (genus-2 curves are not smooth plane curves); the correct scope is smooth projective curves of genus >= 2. (2) The blanket \"Siegel ineffective for genus >= 2\" overstates: Baker's method (1969) is effective for hyperelliptic/superelliptic plane models of any genus and for Thue equations; the open case is a general affine model (e.g. genus 2 minus a non-Weierstrass point) — cf. Corvaja–Lombardo–Zannier 2024. (3) Vojta's conjecture per se (ineffective constants) only re-proves finiteness; the conditional effective route requires an effective form of the conjecture — Vojta's unconditional 1991 Annals proof is itself ineffective. (4) Kim's program needs two hypotheses to be an effective route: Bloch–Kato-type finiteness plus Kim's conjecture that the Chabauty–Kim locus equals X(Q). (5) \"Ineffective\" now means only heights: uniform/quantitative bounds on the number of points are proven (Dimitrov–Gao–Habegger Annals 2021, Kühne, Yu–Yuan–Zhou; surveyed in Yuan arXiv:2606.27129, June 2026) — uniformity is not effectivity. 2024–2026 developments confirmed: Alpöge–Lawrence \"Conditional algorithmic Mordell\" arXiv:2408.11653 (Aug 2024; conditional on Hodge + Tate + Fontaine–Mazur — NOT on abc or Vojta; it gives an algorithm, not height bounds); Garcia-Fritz–Pasten arXiv:2503.10443 (Mar 2025, unconditional but restricted to curves with enough automorphisms; includes worked genus-2 rank-2 example); Corvaja–Lombardo–Zannier arXiv:2411.17930 (Nov 2024, effective integral points on dense families of genus-2 curves); Yuan expositions arXiv:2508.11888 (2025) and arXiv:2606.27129 (2026). No unconditional effective Mordell exists as of July 2026. Caveat: author list of the survey arXiv:1910.12755 (\"Two recent p-adic approaches towards the (effective) Mordell conjecture\") not independently verified; Murty–Pasten 2013's headline application is effective S-unit/Frey-height results, with effective-abc-to-effective-Diophantine machinery, so cite it for the quantitative abc-to-Mordell chain cautiously.",
+    "citations": [
+      {
+        "ref": "N. D. Elkies, ABC implies Mordell, Int. Math. Res. Notices 1991, no. 7, 99-109",
+        "url": "https://academic.oup.com/imrn/article-abstract/1991/7/99/667898"
+      },
+      {
+        "ref": "L. Alpöge, B. Lawrence, Conditional algorithmic Mordell, arXiv:2408.11653, 2024",
+        "url": "https://arxiv.org/abs/2408.11653"
+      },
+      {
+        "ref": "B. Lawrence, A. Venkatesh, Diophantine problems and p-adic period mappings, Invent. Math. 221 (2020), 893-999",
+        "url": "https://link.springer.com/article/10.1007/s00222-020-00966-7"
+      },
+      {
+        "ref": "M. Kim, The motivic fundamental group of P^1\\{0,1,infty} and the theorem of Siegel, Invent. Math. 161 (2005), 629-656",
+        "url": "https://link.springer.com/article/10.1007/s00222-004-0433-9"
+      },
+      {
+        "ref": "M. Kim, The unipotent Albanese map and Selmer varieties for curves, Publ. Res. Inst. Math. Sci. 45 (2009), 89-133"
+      },
+      {
+        "ref": "J. S. Balakrishnan, N. Dogra, An effective Chabauty-Kim theorem, Compositio Math. 155 (2019), 1057-1075",
+        "url": "https://www.cambridge.org/core/journals/compositio-mathematica/article/abs/an-effective-chabautykim-theorem/480F7F6DB0FE35FC2C745DAC576C8EB0"
+      },
+      {
+        "ref": "N. Garcia-Fritz, H. Pasten, Effective Mordell for curves with enough automorphisms, arXiv:2503.10443, 2025",
+        "url": "https://arxiv.org/abs/2503.10443"
+      },
+      {
+        "ref": "P. Corvaja, D. Lombardo, U. Zannier, Examples of effectivity for integral points on certain curves of genus 2, arXiv:2411.17930, 2024",
+        "url": "https://arxiv.org/abs/2411.17930"
+      },
+      {
+        "ref": "X. Yuan, Quantitativity in the Mordell Conjecture (survey, incl. Yu-Yuan-Zhou), arXiv:2606.27129, 2026",
+        "url": "https://arxiv.org/abs/2606.27129"
+      },
+      {
+        "ref": "X. Yuan, On Vojta's proof of the Mordell conjecture, arXiv:2508.11888, 2025",
+        "url": "https://arxiv.org/abs/2508.11888"
+      },
+      {
+        "ref": "P. Vojta, Siegel's theorem in the compact case, Ann. of Math. 133 (1991), 509-548"
+      },
+      {
+        "ref": "M. R. Murty, H. Pasten, Modular forms and effective Diophantine approximation, J. Number Theory 133 (2013), 3739-3754",
+        "url": "https://www.sciencedirect.com/science/article/pii/S0022314X13001583"
+      },
+      {
+        "ref": "M. van Frankenhuysen, The ABC conjecture implies Vojta's height inequality for curves, J. Number Theory 95 (2002), 289-302",
+        "url": "https://www.sciencedirect.com/science/article/pii/S0022314X01927696"
+      },
+      {
+        "ref": "L. Alpöge, Modularity and effective Mordell I, arXiv:2109.07917, 2021",
+        "url": "https://people.math.harvard.edu/~alpoge/papers/modularity%20and%20effective%20mordell%20i.pdf"
+      },
+      {
+        "ref": "D. Urbanik, Effective Methods for Diophantine Finiteness, arXiv:2110.14829, 2021",
+        "url": "https://arxiv.org/abs/2110.14829"
+      },
+      {
+        "ref": "Balakrishnan et al., Two recent p-adic approaches towards the (effective) Mordell conjecture, arXiv:1910.12755, 2019",
+        "url": "https://arxiv.org/abs/1910.12755"
+      }
+    ]
+  },
+  {
+    "id": "hall-gpz",
+    "verdict": "confirmed",
+    "corrected_statement": "Hall's conjecture (M. Hall Jr., 1971) concerns integer points on the Mordell equation y^2 = x^3 + k. Original form (NO epsilon): there is an absolute constant C such that every integer solution satisfies |x|^(1/2) < C|k|, i.e. |x| << k^2 with an absolute implied constant (Hall suggested |y^2 - x^3| > |x|^(1/2)/5); this strong form is now generally believed to be false, though it is not disproved. The accepted \"weak Hall conjecture\" (attributed to Stark and Trotter, ca. 1980; stated in Lang's form by Gebel-Petho-Zimmer): for every eps > 0 there is C_eps with |x| < C_eps |k|^(2+eps) (equivalently |x^3 - y^2| >> x^(1/2-eps)); it follows from the abc conjecture, and Danilov (1982) showed the exponent is optimal (0 < |x^3 - y^2| < 0.97 x^(1/2) infinitely often). The proven Baker-type bound is only exponential in |k|: Baker (Phil. Trans. R. Soc. London A 263, no. 1139 (1968), 193-208) proved max(|x|,|y|) < exp{(10^10 |k|)^(10^4)}, improved by Stark (Acta Arith. 24 (1973), 251-259) to max(|x|,|y|) < exp(C_eps |k|^(1+eps)) for any eps > 0 — far weaker than the polynomial bound Hall conjectured. Gebel, Petho and Zimmer (Compositio Math. 110 (1998), 335-367) solved Mordell's equation in Z (all integral points) for all 0 < |k| <= 10^4, partially extended the computation to 0 < |k| <= 10^5, and found that in this range Hall's inequality |x|^(1/2) < C|k| holds with C = 5; Bennett and Ghadermarzi (LMS J. Comput. Math. 18 (2015), 633-646) later extended the complete solution to |k| <= 10^7.",
+    "notes": "All three anchors of the claim check out against primary sources. (1) Original-vs-weak form: confirmed from GPZ 1998 Sec. 6.2 (\"|x|^(1/2) < C|k| ... with an absolute constant C\"; Lang's weaker form |x|^(1/2) < C_eps|k|^(1+eps)) and Bennett-Ghadermarzi 2015 Conj. 5.1 (\"The original statement ... actually predicts that a like inequality holds for eps = 0. The current thinking is that such a result is unlikely to be true (though it has not been disproved)\"). Wikipedia dates the weak form to Stark-Trotter ca. 1980 and Hall's suggested constant 1/5. (2) Baker bound: original 1968 abstract retrieved via OpenAlex confirms exp{(10^10|k|)^(10^4)} WITH parentheses; caution: reputable secondary sources (K. Conrad's slides, Everest-Ward arXiv:1005.0315) drop the parentheses and write exp(10^10 |k|^(10^4)), a much smaller bound — cite the parenthesized original. Conrad dates the theorem 1967 (work/announcement) vs 1968 publication. Stark's paper verified as Acta Arith. 24 (1973) 251-259; shape exp(C_eps|k|^(1+eps)) confirmed by Everest-Ward and Conrad; GPZ cite Stark (and Sprindzuk) as the best theoretical bound. (3) GPZ: Compositio Math. 110 (1998) 335-367 abstract confirms complete solution for 0 < |k| <= 10^4 and partial extension to 10^5 (about 1000 curves in 10^4 < |k| <= 10^5 unresolved, no integer point with |x| < 10^28 found); their C = 5 statement for |k| <= 10^5 is modulo that partial resolution. Hall's paper venue: Computers in Number Theory (Atlas Symposium, Oxford 1969; eds. Atkin & Birch), Academic Press 1971, pp. 173-198. 2024-2026 status: no change — Hall's conjecture remains open and is still used as a hypothesis (e.g. Badziahin, arXiv:2509.01105, rev. Jan 2026); largest known Hall ratio still Elkies' 46.6 (k = -1641843); computational record remains Bennett-Ghadermarzi |k| <= 10^7 (2015); related 2025-2026 development: Calegari-Dimitrov-Tang arithmetic holonomy bounds (ICM 2026 / SIAM 2026) give new proofs in effective Diophantine approximation but do not change the exponential shape in |k| for Mordell equations.",
+    "citations": [
+      {
+        "ref": "A. Baker, Contributions to the theory of Diophantine equations II. The Diophantine equation y^2 = x^3 + k, Phil. Trans. R. Soc. London Ser. A 263 (1968), 193-208",
+        "url": "https://doi.org/10.1098/rsta.1968.0011"
+      },
+      {
+        "ref": "H. M. Stark, Effective estimates of solutions of some diophantine equations, Acta Arith. 24 (1973), 251-259",
+        "url": "https://doi.org/10.4064/aa-24-3-251-259"
+      },
+      {
+        "ref": "J. Gebel, A. Petho, H. G. Zimmer, On Mordell's equation, Compositio Math. 110 (1998), 335-367",
+        "url": "https://www.cambridge.org/core/journals/compositio-mathematica/article/on-mordells-equation/9BCC27AD0EA056233BFF224A5EEEDD7A"
+      },
+      {
+        "ref": "M. Hall Jr., The Diophantine equation x^3 - y^2 = k, in Computers in Number Theory (eds. A. O. L. Atkin, B. J. Birch), Academic Press 1971, 173-198"
+      },
+      {
+        "ref": "M. A. Bennett, A. Ghadermarzi, Mordell's equation: a classical approach, LMS J. Comput. Math. 18 (2015), 633-646",
+        "url": "https://personal.math.ubc.ca/~bennett/BeGh-LMSJCM-2015.pdf"
+      },
+      {
+        "ref": "N. D. Elkies, List of integers x,y with x < 10^18, 0 < |x^3 - y^2| < sqrt(x) (Hall's conjecture page), Harvard",
+        "url": "https://people.math.harvard.edu/~elkies/hall.html"
+      },
+      {
+        "ref": "G. Everest, T. Ward, The repulsion motif in Diophantine equations, arXiv:1005.0315 (2010)",
+        "url": "https://arxiv.org/pdf/1005.0315"
+      },
+      {
+        "ref": "K. Conrad, Mordell's equation (Ross program lecture slides), 2008",
+        "url": "https://kconrad.math.uconn.edu/ross2008/mordell.pdf"
+      },
+      {
+        "ref": "Hall's conjecture, Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Hall%27s_conjecture"
+      },
+      {
+        "ref": "D. Badziahin, Distance between cubics and rationals, arXiv:2509.01105 (2025, rev. 2026)",
+        "url": "https://arxiv.org/abs/2509.01105"
+      }
+    ]
+  },
+  {
+    "id": "h10-counts",
+    "verdict": "corrected",
+    "corrected_statement": "Hilbert's 10th problem is undecidable already for polynomial equations in 9 unknowns over N — Matiyasevich's 9-unknowns theorem, announced in 1975, with the full proof published by Jones (J. Symbolic Logic 47 (1982), 549-571), who credits the result to Matiyasevich — and in 11 unknowns over Z (Zhi-Wei Sun's 11-unknowns theorem, announced in his 1992 PhD thesis, full proof in Sci. China Math. 64 (2021), 281-306; arXiv:1704.03504). The 2-variable case over Z is open: it is not known whether ∃² over Z is decidable, and no undecidability proof is known either (the status of ∃^ν over Z is open for every ν with 2 ≤ ν ≤ 10; over Z only ν=1 is known decidable, plus special subclasses such as degree ≤ 2 and absolutely irreducible degree-3 curves in two variables).",
+    "notes": "Discrepancy found and corrected: the parenthetical \"Matiyasevich, refining Jones\" reverses the actual attribution. Matiyasevich announced the 9-unknowns theorem in 1975 (writeup: \"Some purely mathematical results inspired by mathematical logic\", Proc. 5th Int. Congress LMPS, Reidel 1977); Jones's 1982 JSL paper \"Universal Diophantine equation\" supplies the detailed proof and explicitly credits the result to Matiyasevich (confirmed by Gasarch's survey: \"Jones' 1982 paper presents the proof of this result and credits it to Matijasevic\", and by Sun's slides: \"Matiyasevich's 9 unknowns theorem, 1975; details in Jones [J. Symbolic Logic, 1982]\"). If anything, Jones wrote up/extended Matiyasevich, not the reverse; alternatively one can say the 9-unknowns result refined the 13-unknowns bound of Matiyasevich-Robinson (Acta Arith. 27, 1975). Confirmed exactly as claimed: 11 unknowns over Z is Sun's (announced 1992, published 2021, still the record over Z as of mid-2026); 2-variable case over Z open in both directions (Sun's slides state \"It is not known whether ∃² over Z is decidable\"; Gasarch notes even HZ(3,2) is open, while HZ(2,2)=D and 1-unknown is decidable). Caveats: the 9-unknowns equation has astronomical degree (~1.6×10^45 per Jones's table); Sun's 11-unknowns theorem gives no stated degree bound. 2024-2026 developments: none change these counts over N or Z. Recent work concerns other rings: Matiyasevich-Sun proved 20 unknowns suffice for undecidability over the Gaussian integers Z[i] (arXiv:2510.18794, Oct 2025), improved to 18 unknowns in an AI-assisted proof (arXiv:2606.12776, June 2026); and H10 over rings of integers of all number fields was shown undecidable (Koymans-Pagano; Alpoge-Bhargava-Ho-Shnidman, 2024-2025, covered by Quanta Feb 2025). Minor phrasing note: over N the claim should ideally say solutions in natural numbers (nonnegative integers); the open range over N is 2-8 unknowns.",
+    "citations": [
+      {
+        "ref": "J. P. Jones, Universal Diophantine equation, J. Symbolic Logic 47 (1982), 549-571",
+        "url": "https://doi.org/10.2307/2273588"
+      },
+      {
+        "ref": "Z.-W. Sun, Further results on Hilbert's Tenth Problem, Sci. China Math. 64 (2021), 281-306",
+        "url": "https://link.springer.com/article/10.1007/s11425-020-1813-5"
+      },
+      {
+        "ref": "Z.-W. Sun, Further results on Hilbert's Tenth Problem, arXiv:1704.03504 (2017)",
+        "url": "https://arxiv.org/abs/1704.03504"
+      },
+      {
+        "ref": "Z.-W. Sun, The 11 Unknowns Theorem and its Applications, plenary talk slides, Chinese Annual Conf. on Math. Logic 2021",
+        "url": "https://logic.nankai.edu.cn/_upload/article/files/73/9a/bc6df29a42fe8dd60c911873f3db/45ed40e8-4442-455f-8030-d50ffac9e4f0.pdf"
+      },
+      {
+        "ref": "W. Gasarch, Hilbert's Tenth Problem: Refinements and Variants, arXiv:2104.07220 (2021); SIGACT News open problems column",
+        "url": "https://arxiv.org/abs/2104.07220"
+      },
+      {
+        "ref": "Y. Matiyasevich, Some purely mathematical results inspired by mathematical logic, Proc. Fifth Int. Congress on Logic, Methodology and Philosophy of Science (London, Ontario 1975), Reidel 1977, 121-127",
+        "url": "https://logic.pdmi.ras.ru/~yumat/publications/matiyasevich_bib.pdf"
+      },
+      {
+        "ref": "Y. Matiyasevich and Z.-W. Sun, Undecidability on Diophantine equations over Z[i] with 20 unknowns, arXiv:2510.18794 (2025)",
+        "url": "https://arxiv.org/abs/2510.18794"
+      },
+      {
+        "ref": "Wikipedia, Hilbert's tenth problem (accessed 2026-07)",
+        "url": "https://en.wikipedia.org/wiki/Hilbert%27s_tenth_problem"
+      }
+    ]
+  },
+  {
+    "id": "pari-thueinit",
+    "verdict": "confirmed",
+    "corrected_statement": "In PARI/GP (current stable 2.17.4, 2026), thueinit(P,{flag=0}) initializes a tnf for solving the Thue equation P(X/Y)Y^deg(P) = a. With the default flag=0 the class-group/unit data is computed assuming GRH; with any nonzero flag (e.g. thueinit(P,1)) the docs state \"If flag is nonzero, certify results unconditionally\", and correspondingly for thue: \"If tnf was computed without assuming GRH (flag 1 in thueinit), then the result is unconditional\" — i.e. thue(tnf,a) then returns a provably complete list of integer solutions. Caveats: (i) P must have at least two distinct irreducible factors over Q, or one irreducible factor of degree > 2 or with two conjugate complex roots (necessary and sufficient for finitely many solutions); otherwise thueinit raises a domain error, and thue issues an error if there are infinitely many solutions; (ii) even with flag=0, results are often unconditionally correct — in particular for right-hand side ±1, for reducible P (not a pure power of an irreducible), or when the conditionally computed class group is trivial; per the docs the result is GRH-conditional only when a ≠ ±1 and P has a single irreducible rational factor whose tentative class number h and regulator R (computed under GRH) satisfy h > 1 and R/0.2 > 1.5; (iii) the implementation raises an overflow error (rather than silently returning an incomplete list) when huge solutions exist and deg P > 2 (the imaginary quadratic case is special, handled via bnfisintnorm); (iv) when P is irreducible without a real root, thue solves unconditionally by enumeration in time |a|^(1/deg P) and may skip computing (certified) bnf data even when flag = 1, so \"computes number-field data unconditionally\" more precisely means \"certifies the GRH-computed bnf data, or avoids needing it\"; (v) the hardest case — irreducible P of degree > 2 with a real root — uses Bilu–Hanrot's algorithm.",
+    "notes": "Verified against verbatim text extracted (via curl, tag-stripped) from the official PARI/GP stable documentation (html-stable = version 2.17.4). Both key sentences confirmed word-for-word: thueinit: \"If flag is nonzero, certify results unconditionally. Otherwise, assume GRH, this being much faster of course. In the latter case, the result may still be unconditionally correct, see thue.\"; thue: \"If tnf was computed without assuming GRH (flag 1 in thueinit), then the result is unconditional.\" Discrepancies/nuances vs. the claim: (1) the docs say \"nonzero\" flag, not specifically 1 (1 is the conventional value); (2) \"computes its number-field data unconditionally\" is a mild oversimplification — the bnf is computed under GRH then certified, and for irreducible P with no real root the code may not compute a bnf at all (using |a|^(1/deg P) enumeration instead), yet the result is still unconditional; (3) completeness is subject to the finiteness precondition on P (else domain error / \"infinitely many solutions\" error) and to a possible loud overflow error for huge solutions in degree > 2 — neither silently truncates the solution list. The curious-looking GRH-conditionality criterion \"h > 1, R/0.2 > 1.5\" is genuinely in the official docs. 2024–2026 developments: none material — CHANGES files for PARI 2.17.3 (released 24/11/2025) and 2.17.4 (released 29/06/2026) contain no thue/thueinit entries; historical thue bugs (missing solutions, SEGV) were all fixed by the 2.4–2.8 series (pre-2016). Note the docs' first WebFetch summary paraphrased loosely; the corrected_statement is based on the raw extracted text, not the summaries.",
+    "citations": [
+      {
+        "ref": "The PARI Group, User's Guide to PARI/GP (functions thue, thueinit), version 2.17.4, Univ. Bordeaux 2026",
+        "url": "https://pari.math.u-bordeaux.fr/dochtml/html-stable/Polynomials_and_power_series.html"
+      },
+      {
+        "ref": "The PARI Group, PARI/GP CHANGES file, pari-2.17.4 release 2026 (no thue-related changes in 2.17.3/2.17.4)",
+        "url": "https://fossies.org/linux/pari/CHANGES"
+      },
+      {
+        "ref": "Yu. Bilu and G. Hanrot, Solving Thue equations of high degree, Journal of Number Theory 60 (1996), 373-392 (algorithm cited by the PARI docs for the hardest case)",
+        "url": "https://doi.org/10.1006/jnth.1996.0129"
+      }
+    ]
+  },
+  {
+    "id": "pell-growth",
+    "verdict": "confirmed",
+    "corrected_statement": "Let x1+y1*sqrt(d) be the fundamental solution of x^2 - d*y^2 = 1 and R_d = log(x1+y1*sqrt(d)) the regulator. (1) Upper bound, all nonsquare d: log(2*sqrt(d)) < R_d < sqrt(d)*(log(4d)+2) (Lenstra's formulation of Hua 1942; Hua's own theorem, in the x^2-dy^2=4 normalization, is log eps < sqrt(d)*((1/2)log d + 1), improving Schur 1918's log eps <= sqrt(d)*log d). Hence x1 < exp(O(sqrt(d) log d)), i.e. x1 has O(sqrt(d) log d) digits — exponentially many in the bit-size log d of the input. (2) Proven lower bound infinitely often: there is an infinite set of d and a constant c>0 with R_d = c*sqrt(d) exactly; concretely, for any integers d0,d1 > 1 with d0 nonsquare there is m such that all d = d0*d1^(2n), n >= m, satisfy R_d = c(d0,d1)*sqrt(d) (Lenstra 2002). Thus for infinitely many d the number of digits of x1 is >> sqrt(d) = 2^(b/2) (b = bit-size of d), so any algorithm writing x1, y1 in decimal/binary is exponentially slow for infinitely many d. CAVEAT: this family is non-squarefree; for squarefree d it is still open whether limsup (log R_d)/log sqrt(d) > 0, and the best unconditional infinitely-often bound for fundamental discriminants D is Yamamoto 1971: log eps_D > c*(log sqrt(D))^3, i.e. >> (log D)^3. The folklore conjecture that R_d = d^(1/2+o(1)) for a density-1 set of d (cf. Hooley 1984) remains open.",
+    "notes": "All details verified against primary sources read directly (Hua's 1942 BAMS paper in full; Yamamoto's 1971 Osaka J. Math. paper, Introduction eq. (0.2) and Theorem 3.2; Lenstra's survey pp. 7-8 of the MSRI 2008 reprint of the Notices 2002 article). Discrepancies/precision points vs. the claim as posed: (a) the claim is correct that exp(O(sqrt(d) log d)) is the general upper bound on the fundamental solution (equivalently R_d = O(sqrt(d) log d)); explicit constants: R_d < sqrt(d)(log(4d)+2) (Lenstra/Hua), and the trivial lower bound R_d > log(2 sqrt(d)) is attained up to o(1) for d = k^2-1 (x1=k, y1=1), so R_d 'fluctuates wildly'. (b) 'digits exponential in bit-size infinitely often' IS proven, but only via NON-squarefree families d = d0*d1^(2n) with R_d = c*sqrt(d) (stated with proof sketch in Lenstra; mechanism is the index growth of powers of eps_{d0} mod d1^n, same phenomenon as Amthor's 1880 cattle-problem solution u^2329); any note citing this should not claim it for squarefree d. (c) For squarefree/fundamental discriminants the best unconditional infinitely-often lower bound is only polylogarithmic: Yamamoto 1971 gives log eps > c1 (log sqrt(D))^3 along D_k from m_k=(p^k q+p+1)^2-4p; even R_d > d^delta infinitely often for squarefree d is open (Lenstra states the limsup conjecture is 'wide open'). (d) Attribution check: the sqrt(d) log d upper bound originates with Schur 1918 (Goettinger Nachrichten, 30-36), refined by Hua 1942; Lenstra also derives (1/2)log 2 * l < R_d < (1/2)log(4d) * l linking R_d to continued-fraction period length l. 2024-2026 developments: no change in status. Diao, arXiv:2408.03774 (Aug 2024) gives lower bounds on fundamental solutions for almost all d in a class only CONDITIONALLY on the Browning-Wilsch log-K3 integral-points conjecture; distribution results (Fouvry, Crelle 717 (2016); Xi, Compositio 154 (2018), arXiv:1704.04916) concern counting d with eps_d <= d^(1/2+alpha) (Hooley's conjecture) and give only log eps_d >> log d for almost all d, not d^delta. Verdict 'confirmed' because both halves of the claim as posed are authoritatively established; the corrected_statement adds the exact constants and the squarefree caveat.",
+    "citations": [
+      {
+        "ref": "H. W. Lenstra Jr., Solving the Pell equation, Notices Amer. Math. Soc. 49 (2002), no. 2, 182-192; reprinted in Algorithmic Number Theory, MSRI Publications 44, 2008",
+        "url": "https://pub.math.leidenuniv.nl/~lenstrahw/PUBLICATIONS/2008a/art.pdf"
+      },
+      {
+        "ref": "L.-K. Hua, On the least solution of Pell's equation, Bull. Amer. Math. Soc. 48 (1942), 731-735",
+        "url": "https://projecteuclid.org/euclid.bams/1183504769"
+      },
+      {
+        "ref": "Y. Yamamoto, Real quadratic number fields with large fundamental units, Osaka J. Math. 8 (1971), 261-270",
+        "url": "https://projecteuclid.org/euclid.ojm/1200693242"
+      },
+      {
+        "ref": "I. Schur, Goettinger Nachrichten 1918, 30-36 (cited in Hua 1942 as the source of log eps <= sqrt(d) log d)"
+      },
+      {
+        "ref": "E. Fouvry, On the size of the fundamental solution of the Pell equation, J. reine angew. Math. 717 (2016), 1-33",
+        "url": "https://www.degruyterbrill.com/document/doi/10.1515/crelle-2014-0031/html"
+      },
+      {
+        "ref": "P. Xi, Counting fundamental solutions to the Pell equation with prescribed size, Compositio Math. 154 (2018)",
+        "url": "https://arxiv.org/abs/1704.04916"
+      },
+      {
+        "ref": "Y. Diao, Class numbers and integer points on some Pellian surfaces, arXiv:2408.03774, 2024",
+        "url": "https://arxiv.org/abs/2408.03774"
+      }
+    ]
+  }
+]
