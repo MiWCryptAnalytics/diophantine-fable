@@ -79,3 +79,24 @@
   (`experiments/data/pell_records.csv`).
 - **Program note:** the pre-plan literature agent was stopped by the user;
   the frontier [P] tags stay pending until a citation pass is green-lit.
+
+## 2026-07-20 — A1 drafted; citation workflow in flight
+
+- **`notes/A1.md` v1.** The theorem we can actually prove today: components
+  of degree ≤ 2 or univariate ⇒ decidable in 2^{O(s)}, with the full cost
+  accounting per stratum (CF unit, LMM, orbit walk each bounded 2^{O(s)};
+  the write-up explicitly marks where log t is *stored* — fine — versus
+  where it must never enter a *bound* — the Nagell trap, institutionalized
+  as a lesson).
+- **The gap ladder is the real yield.** G1: genus-0/≤2-places/deg ≥ 3 via
+  Sendra–Winkler parametrization (next implementation milestone). G2: the
+  program's first crisp open question — *is {f : all components genus 0}
+  decidable in 2^{O(s)} uniformly in the degree?* — fixed degree likely
+  follows from Thue bounds (awaiting citation shapes). G3: effective Siegel,
+  the wall; single-exp effective Siegel ⇒ Smale #5 positive, converse not
+  claimed.
+- **Citation workflow launched** (nine adversarial verifiers, one per
+  frontier claim: Smale's formulation, Manders–Adleman, Siegel 1929, Baker
+  bound shapes, effective-Mordell routes, Hall/GPZ, H10 variable counts,
+  PARI thueinit flag semantics, Pell regulator growth). Results will
+  reconcile the [P] tags in `frontier.md`.
