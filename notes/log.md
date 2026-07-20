@@ -34,3 +34,16 @@
   and the complexity accounting).
 - Track B: implement Manders–Adleman reduction; extremal growth measurements
   over `families/`.
+
+## 2026-07-20 — publication prep
+
+- Rewrote `README.md` as the quest document: the JC backstory, why #5 is a
+  different kind of mountain (NP-hard floor; doubly-exponential Pell
+  witnesses; Siegel structure; the Hall-vs-Baker gap), the two tracks, the
+  honesty discipline, and the day-one trophies (x³−2y³=19; the honest
+  UNDECIDED on y²=x³+7).
+- Standing rule adopted at the user's request: **every session appends to
+  this log** — the narrative of decisions and discoveries is a first-class
+  deliverable, not an afterthought.
+- Literature agent still out; frontier claims remain [P] until it reports
+  and the citation-verification pass runs.
