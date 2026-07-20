@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "smale5"
+version = "0.1.0"
+description = "Toolkit for exploring Smale's 5th problem: deciding integer solutions of f(x,y)=0"
+requires-python = ">=3.11"
+dependencies = ["sympy>=1.12"]
+
+[project.optional-dependencies]
+pari = ["cypari2"]
+dev = ["pytest"]
+
+[tool.setuptools.packages.find]
+include = ["smale5*"]
