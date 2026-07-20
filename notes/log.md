@@ -100,3 +100,22 @@
   bound shapes, effective-Mordell routes, Hall/GPZ, H10 variable counts,
   PARI thueinit flag semantics, Pell regulator growth). Results will
   reconcile the [P] tags in `frontier.md`.
+
+## 2026-07-20 — the interrogation panel, and Hall's needle in the haystack
+
+- **Second workflow: `interrogate-findings`.** The citation pass checks the
+  literature; nobody had yet attacked *us*. Four hostile reviewers now
+  running: `break-lmm` (independent brute-force decider fuzzing D ≤ 300,
+  |N| ≤ 400 plus squareful-N edge cases), `break-quadratic` (5000+ fuzzed
+  conics vs a search oracle across every Δ branch), `audit-a1` (referee
+  hunting for hidden doubly-exponential steps — sqrt_mod root counts over
+  squareful moduli, PQa pre-period claims, orbit seed coverage), and
+  `break-pipeline` (end-to-end fuzz + classifier soundness against
+  provably-infinite families). Verdicts feed regression tests.
+- **Hall-ratio sweep** (`experiments/hall_ratios.py`, 3.9s to x = 10⁷):
+  rediscovered the classical extremal point from scratch — x = 5234,
+  y = 378661, x³ − y² = −17, ratio √x/|k| ≈ 4.2557 — and it is one of only
+  THREE records up to ten million. The sparsity is the finding: sporadic
+  points on Mordell equations are not just hard to bound, they are freakishly
+  rare, which is why nature gives us so little data to fit G3 against
+  (`experiments/data/hall_records.csv`).
