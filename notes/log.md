@@ -342,3 +342,17 @@ Moral for the log's collection: *the negative direction of an orbit is
 where the analysis gets honest.* Twice now (Nagell's window, the elementary
 window) the trap was an argument that worked beautifully in the direction
 where nothing interesting lives.
+
+## 2026-07-21 — Smale's Height Bound Hypothesis, first empirics
+
+`experiments/mordell_min_height.py`: sweep x ≤ 10⁶ harvesting the
+minimal-height integral point of y² = x³ + k for every |k| ≤ 2000. HBH is
+what would put the positive-genus stratum in NP, and within the resolved
+range it looks comfortable: the record ratio log(height)/log|k| is only
+**2.38** (k = −366, minimal point (11815, 1284253) — a seven-digit height
+for a three-digit k, and still tame). 1388 of 4000 k-values resolve inside
+the sweep; the honest caveat is censoring — 2612 don't, and the known
+monsters live there (k = −1090's minimal point has x ≈ 2.8×10⁷, invisible
+below 10⁶). The stress list is exactly where a follow-up should point a
+bigger sweep or the Bennett–Ghadermarzi tables
+(`experiments/data/mordell_min_heights.csv`).
