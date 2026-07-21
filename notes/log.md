@@ -343,6 +343,34 @@ where the analysis gets honest.* Twice now (Nagell's window, the elementary
 window) the trap was an argument that worked beautifully in the direction
 where nothing interesting lives.
 
+## 2026-07-21 — the Census and the war council
+
+Two creative engines launched while the A1-v2 citations verify:
+
+- **The Census** (`experiments/census.py`, running in background): enumerate
+  *every* primitive f ∈ ℤ[x,y] of dense size s ≤ 12 (canonicalized under
+  the 16-element symmetry group), decide each with the full pipeline, and
+  find **the smallest open Diophantine problems in existence** — the
+  literal specimens where the frontier of Smale #5 begins. Doubles as a
+  fuzzer (crashes and timeouts are recorded as specimens too) and yields
+  the toolkit's first honest coverage metric. Early returns: **complete
+  coverage through s = 9** — all 14,802 canonical polynomials decide, zero
+  UNDECIDED, zero crashes. The first escapee is expected around s = 11–12
+  (Mordell shapes need 10 slots plus constant bits).
+- **The hardness attack panel** (workflow, 4 attackers + hostile skeptic):
+  a genuine assault on our own Track B question — *is two-variable H10
+  over ℤ NP-hard?* Angles: (1) range gadgets (can poly-size curves force
+  x ∈ [0, N] while leaving y usable — the variable-budget wall made
+  precise); (2) a brand-new problem our graph stratum generated:
+  **DIVIS = {(A,B) : ∃x ∈ ℤ, A(x) | B(x)}** — NP-hard via CRT/knapsack
+  selection, or in NP via compressed witnesses?; (3) the barrier
+  direction: a Siegel/Bézout/Bombieri–Pila argument that poly-size range
+  gadgets *cannot exist* in two variables (windows of consecutive integers
+  force linear components — a theorem-shaped dichotomy worth having
+  regardless); (4) the literature landscape (has anyone placed 2-var H10
+  in the hardness hierarchy at all? has DIVIS been studied?). The skeptic
+  pass tries to break whatever the attackers claim before we believe it.
+
 ## 2026-07-21 — Smale's Height Bound Hypothesis, first empirics
 
 `experiments/mordell_min_height.py`: sweep x ≤ 10⁶ harvesting the

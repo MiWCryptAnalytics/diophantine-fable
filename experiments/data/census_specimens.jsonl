@@ -1,0 +1,5 @@
+{"s": 10, "f": "-x**3 + x**2 - x*y**2 - y**2 - 1", "status": "TIMEOUT"}
+{"s": 10, "f": "-x**3 + x**2 - x*y - y**2 - 1", "status": "TIMEOUT"}
+{"s": 10, "f": "-x**2 - y**3 - y**2 - 1", "status": "TIMEOUT"}
+{"s": 10, "f": "-x**2*y - x**2 - y**3 - y**2 - 1", "status": "TIMEOUT"}
+{"s": 10, "f": "x**3 - x**2 - x*y**2 - y**3 - y**2 - 1", "status": "TIMEOUT"}

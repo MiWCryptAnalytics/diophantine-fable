@@ -1,0 +1,100 @@
+{
+  "smax_done": 9,
+  "elapsed_s": 12.4,
+  "stats": {
+    "3": {
+      "tally": {
+        "total": 4,
+        "YES": 4
+      },
+      "methods": {}
+    },
+    "4": {
+      "tally": {
+        "total": 10,
+        "YES": 8,
+        "NO": 2
+      },
+      "methods": {
+        "local-obstruction": 2
+      }
+    },
+    "5": {
+      "tally": {
+        "total": 30,
+        "YES": 22,
+        "NO": 8
+      },
+      "methods": {
+        "local-obstruction": 8,
+        "search": 3
+      }
+    },
+    "6": {
+      "tally": {
+        "total": 153,
+        "YES": 116,
+        "NO": 37
+      },
+      "methods": {
+        "local-obstruction": 35,
+        "search": 15,
+        "real-obstruction": 2
+      }
+    },
+    "7": {
+      "tally": {
+        "total": 680,
+        "YES": 502,
+        "NO": 178
+      },
+      "methods": {
+        "local-obstruction": 168,
+        "search": 35,
+        "univariate-lines": 6,
+        "real-obstruction": 8,
+        "ellipse-empty": 2
+      }
+    },
+    "8": {
+      "tally": {
+        "total": 2874,
+        "YES": 2048,
+        "NO": 826
+      },
+      "methods": {
+        "local-obstruction": 749,
+        "search": 159,
+        "univariate-lines": 32,
+        "linear-gcd": 13,
+        "split-hyperbola": 13,
+        "ellipse-scan": 10,
+        "real-obstruction": 25,
+        "pell-orbit-scan": 1,
+        "ellipse-empty": 32,
+        "components": 1
+      }
+    },
+    "9": {
+      "tally": {
+        "total": 11051,
+        "YES": 7531,
+        "NO": 3520
+      },
+      "methods": {
+        "local-obstruction": 3111,
+        "search": 730,
+        "linear-gcd": 70,
+        "univariate-lines": 73,
+        "split-hyperbola": 101,
+        "pell-orbit": 5,
+        "pell-orbit-scan": 16,
+        "ellipse-scan": 73,
+        "real-obstruction": 70,
+        "ellipse-empty": 189,
+        "components": 2,
+        "hyperbola-divisors": 4
+      }
+    }
+  }
+}
