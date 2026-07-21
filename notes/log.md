@@ -114,7 +114,20 @@
   convention-independent — noted in A1.md, and the growth-records CSV was
   regenerated under the new measure.
 
-## 2026-07-20 — the interrogation panel, and Hall's needle in the haystack
+## 2026-07-20 — theorem A1-v1 grows a clause: rational-function graphs
+
+- **G1's first slice.** New solver `smale5/solvers/graph.py` decides every
+  component of degree 1 in one variable — the graphs y = −B(x)/A(x), any
+  total degree — completely and in single-exponential time. The argument is
+  Runge in miniature: A(x) | B(x) forces A(x) | R̂(x) for the integer
+  pseudo-remainder ℓB = Q̂A + R̂ with deg R̂ < deg A, so either x is an
+  integer root of R̂ or |A(x)| ≤ |R̂(x)| pins |x| inside an explicit window
+  ≤ 2 + Σ|coeffs|. Exact-division and constant-denominator branches reduce
+  to single congruences (infinite families detected, not searched).
+- Theorem A1-v1 now reads: degree ≤ 2, OR univariate, OR degree 1 in one
+  variable. First strictly-new coverage beyond the Lagarias stratum. A
+  pleasing NO exemplar: y·(x²+3) = x³ + 2 — no congruence obstruction, the
+  window argument alone certifies it. 38 tests green.
 
 - **Second workflow: `interrogate-findings`.** The citation pass checks the
   literature; nobody had yet attacked *us*. Four hostile reviewers now

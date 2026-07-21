@@ -11,7 +11,7 @@ import sympy as sp
 from ..classify import components, thue_shape
 from ..decision import Decision, Status, no, undecided, yes
 from ..poly import X, Y, is_solution, normalize, parse
-from . import local, linear, quadratic, search, thue_pari
+from . import graph, local, linear, quadratic, search, thue_pari
 
 
 def decide(f, search_bound: int = 2000) -> Decision:
@@ -57,6 +57,10 @@ def _solve_component(g: sp.Poly, H: int) -> Decision:
         return linear.solve_linear(g)
     if d == 2:
         return quadratic.solve_quadratic(g)
+    if g.degree(Y) == 1 or g.degree(X) == 1:
+        dec = graph.solve_graph(g)
+        if dec is not None:
+            return dec
     ts = thue_shape(g)
     if ts is not None:
         F, m = ts
