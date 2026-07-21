@@ -101,6 +101,19 @@
   PARI thueinit flag semantics, Pell regulator growth). Results will
   reconcile the [P] tags in `frontier.md`.
 
+## 2026-07-20 — panel resurrected; the dense size lands in code
+
+- The first interrogation run died of token exhaustion — all four hostile
+  reviewers hit the session usage limit mid-audit, returning zero verdicts
+  (a fitting hazard for an expedition: the panel starved on the glacier).
+  Relaunched from the saved script after the quota reset.
+- Folded the citation pass's last correction into code: `smale5.poly.size`
+  now implements Smale's **dense** convention (every exponent slot ≤ d
+  contributes ≥ 1). Pell-61's size drops 13 → 11; x⁵ − 1 costs all 21 slots.
+  Sparse and dense are polynomially related, so 2^(s^c) membership is
+  convention-independent — noted in A1.md, and the growth-records CSV was
+  regenerated under the new measure.
+
 ## 2026-07-20 — the interrogation panel, and Hall's needle in the haystack
 
 - **Second workflow: `interrogate-findings`.** The citation pass checks the

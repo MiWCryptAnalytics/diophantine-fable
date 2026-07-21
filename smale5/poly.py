@@ -42,11 +42,18 @@ def normalize(expr) -> sp.Poly:
 
 
 def size(poly: sp.Poly) -> int:
-    """Smale-style input size: total degree + Σ (1 + bitlength|a|) over coefficients."""
+    """Smale's dense input size (corrected per the 2026-07-20 citation pass):
+    s(f) = Σ_{|α| ≤ d} max(bitlength(a_α), 1) — every exponent slot up to the
+    total degree contributes at least 1, zero coefficients included. The
+    sparse and dense conventions are polynomially related, so the class
+    2^(s^c) is convention-independent; our 2^(O(s)) accounting only
+    strengthens under the dense measure."""
     if poly.is_zero:
         return 1
-    bits = sum(1 + abs(int(c)).bit_length() for c in poly.coeffs())
-    return poly.total_degree() + bits
+    d = poly.total_degree()
+    terms = coeff_dict(poly)
+    return sum(max(abs(terms.get((i, j), 0)).bit_length(), 1)
+               for i in range(d + 1) for j in range(d + 1 - i))
 
 
 def coeff_dict(poly: sp.Poly) -> dict[tuple[int, int], int]:

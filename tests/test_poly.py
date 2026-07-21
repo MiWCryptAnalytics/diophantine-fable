@@ -7,10 +7,12 @@ def test_parse_uv_synonyms():
     assert parse("u*v - 6") == parse("x*y - 6")
 
 
-def test_size_pell_61():
+def test_size_smale_dense():
     f = parse("x^2 - 61*y^2 - 1")
-    # coefficients 1, -61, -1 -> (1+1) + (1+6) + (1+1) = 11 bits, degree 2
-    assert size(f) == 13
+    # d=2 has 6 slots; coefficients 1, -61, -1 give 1+6+1, empty slots 1 each
+    assert size(f) == 11
+    # the dense measure charges for sparsity: x^5 - 1 has (5+1)(5+2)/2 = 21 slots
+    assert size(parse("x^5 - 1")) == 21
 
 
 def test_normalization_clears_denominators():
