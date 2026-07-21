@@ -373,6 +373,19 @@ Five verifiers, 176 tool calls, and every verdict moved us forward:
 - 57 citations archived (`notes/citations/2026-07-21-a1v2-verification
   .json`).
 
+## 2026-07-22 — the errata note drafted, machine-checked
+
+- `notes/AM-errata.md`: the citable-gap-#3 note in paper shape — E1 (the
+  misprinted trivial set), E2 (the Thm 2.4.1 bound bug: counterexample
+  ⟨27, 1343⟩ and the 3^k > 1+Σ|aᵢ| repair), E3/E4 (minor), and M (the
+  AKS modernization with the faithful/unfaithful bookkeeping, stated as
+  the theorem we would defend). `scripts/verify_am_erratum.py` makes
+  E1/E2 executable: the false YES (27·(−3)+2)·(−17) = 1343 and its
+  closure at k = 3 are asserted in-repo. TODO list includes the courtesy
+  step: these are living authors' early results — contact before
+  posting.
+- Census: s = 12 grinding; 805 specimens logged already beyond s ≤ 11.
+
 ## 2026-07-22 — the adversarial series: a death, a resurrection, and errata
 
 Ran the adversarial agents in series (quota discipline), interpreting
