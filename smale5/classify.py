@@ -114,8 +114,13 @@ def _certified_genus(g: sp.Poly) -> int | None:
 
 
 def _genus_deg2_fiber(g: sp.Poly, main, other) -> int | None:
-    """g quadratic in `main`: birational to w² = disc(other); genus from its
-    squarefree part (multiplying by squares does not change ℚ(x,√D))."""
+    """g quadratic in `main`: birational to w² = disc(other); genus from the
+    discriminant MODULO SQUARES — the product of its odd-multiplicity
+    irreducible factors. (NOT sqf_part: that is the radical, which keeps
+    even-multiplicity factors and overstates the genus — interrogation-panel
+    catch, 2026-07-20: y² = 2x⁴ + x² has disc 4x²(2x²+1), square class
+    2x²+1, genus 0 and an infinite Pell family; the radical x(2x²+1) claimed
+    genus 1.)"""
     p = sp.Poly(g.as_expr(), main)
     coeffs = p.all_coeffs()
     if len(coeffs) != 3:
@@ -124,8 +129,15 @@ def _genus_deg2_fiber(g: sp.Poly, main, other) -> int | None:
     D = sp.expand(B**2 - 4 * A * C)
     if D == 0:
         return None
-    sf = sp.sqf_part(D)
-    m = sp.degree(sf, gen=other)
+    try:
+        _, factors = sp.Poly(D, other).sqf_list()
+    except Exception:
+        return None
+    odd = sp.S.One
+    for fac, mult in factors:
+        if mult % 2:
+            odd *= fac.as_expr()
+    m = sp.degree(odd, gen=other)
     if m is sp.S.NegativeInfinity or m <= 2:
         return 0
     return (int(m) - 1) // 2

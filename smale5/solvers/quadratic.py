@@ -64,7 +64,7 @@ def _rect_hyperbola(b: int, d: int, e: int, g0: int) -> Decision:
                   detail=f"(bx+e)(by+d) = 0 requires {b} | {e} or {b} | {d}")
     if abs(W) > _DIVISOR_CAP:
         return undecided("hyperbola-divisors", bound=_DIVISOR_CAP,
-                         detail=f"|W| = {abs(W)} too large to factor")
+                         detail=f"|W| ~ 2^{W.bit_length()} too large to factor")
     for p0 in sp.divisors(abs(W)):
         for p in (p0, -p0):
             q = W // p
@@ -156,7 +156,7 @@ def _split_hyperbola(a, b, c, d, e, g0, k) -> Decision:
         return no("split-hyperbola", detail="neither factor line has integer points (Bézout)")
     if abs(W) > _DIVISOR_CAP:
         return undecided("split-hyperbola", bound=_DIVISOR_CAP,
-                         detail=f"|W| = {abs(W)} too large to factor")
+                         detail=f"|W| ~ 2^{W.bit_length()} too large to factor")
     for p0 in sp.divisors(abs(W)):
         for p in (p0, -p0):
             q = W // p

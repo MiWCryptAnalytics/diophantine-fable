@@ -20,17 +20,27 @@ from dataclasses import dataclass
 
 import sympy as sp
 
-from ..decision import Decision, no, undecided, yes
+from ..decision import Decision, _fmt, no, undecided, yes
 
 
 def is_square(n: int) -> bool:
     return n >= 0 and sp.integer_nthroot(n, 2)[1]
 
 
-def cf_fundamental(D: int):
+class CFBudgetExceeded(Exception):
+    """The continued-fraction period outran the step budget."""
+
+
+def cf_fundamental(D: int, step_cap: int | None = None):
     """Continued fraction of √D (D > 0 nonsquare): returns ((t,u), neg) where
     (t,u) is the least solution of t² − D·u² = 1 and neg is the least solution
-    of x² − D·y² = −1, or None (exists iff the CF period is odd)."""
+    of x² − D·y² = −1, or None (exists iff the CF period is odd).
+
+    step_cap bounds the period walked (the convergents' digit counts grow
+    linearly with it, so the cost is quadratic in the cap); when exceeded,
+    raises CFBudgetExceeded so callers can confess UNDECIDED — the
+    interrogation panel found this was the one uncapped exponential loop in
+    the decision path (hangs on Δ ≈ 10²³ conics)."""
     a0, exact = sp.integer_nthroot(D, 2)
     a0 = int(a0)
     if exact:
@@ -38,12 +48,16 @@ def cf_fundamental(D: int):
     m, dd, a = 0, 1, a0
     p_prev, p = 1, a0
     q_prev, q = 0, 1
+    steps = 0
     while True:
         m = dd * a - m
         dd = (D - m * m) // dd
         a = (a0 + m) // dd
         p_prev, p = p, a * p + p_prev
         q_prev, q = q, a * q + q_prev
+        steps += 1
+        if step_cap is not None and steps > step_cap:
+            raise CFBudgetExceeded(steps)
         if a == 2 * a0:
             break
     x1, y1 = p_prev, q_prev  # convergent just before the period closes
@@ -63,7 +77,8 @@ class OrbitCongruence:
 def decide_pell_like(D: int, N: int, cong: OrbitCongruence | None = None,
                      recover=None, scan_cap: int = 2_000_000,
                      walk_cap: int = 2_000_000,
-                     witness_digit_cap: int = 2_000_000) -> Decision:
+                     witness_digit_cap: int = 2_000_000,
+                     cf_cap: int = 50_000) -> Decision:
     """Decide ∃(x,y) ∈ ℤ²: x² − D·y² = N, and cong(x,y) if given.
 
     D > 0 nonsquare. `recover(x, y)` may map a raw Pell solution to a witness
@@ -74,10 +89,18 @@ def decide_pell_like(D: int, N: int, cong: OrbitCongruence | None = None,
         # D nonsquare: x² = D·y² forces (0,0).
         if cong is None or cong.accept(0, 0):
             w = (0, 0) if recover is None else recover(0, 0)
+            if w is None:
+                return undecided("pell-recover",
+                                 detail="candidate (0,0) rejected by recover hook")
             return yes("pell-trivial", w, "only solution of x² = D·y² is (0,0)")
         return no("pell-trivial", detail="only candidate (0,0) fails congruences")
 
-    (t, u), neg = cf_fundamental(D)
+    try:
+        (t, u), neg = cf_fundamental(D, step_cap=cf_cap)
+    except CFBudgetExceeded:
+        return undecided("pell-cf", bound=cf_cap,
+                         detail=f"continued fraction of √D exceeded {cf_cap} "
+                                "steps before the period closed")
 
     if N == 1:
         base = [(1, 0)]
@@ -98,11 +121,15 @@ def decide_pell_like(D: int, N: int, cong: OrbitCongruence | None = None,
                         "f² | N and square roots of D mod |N/f²|")
 
     if cong is None:
-        if base:
-            xw, yw = base[0]
+        for (xw, yw) in base:
             w = (xw, yw) if recover is None else recover(xw, yw)
-            return yes("pell-representative", w)
-        return no("pell-nagell-complete", certificate={"D": D, "N": N},
+            if w is not None:
+                return yes("pell-representative", w)
+        if base:
+            return undecided("pell-recover",
+                             detail="representatives exist but the recover hook "
+                                    "rejected all of them")
+        return no("pell-representatives-complete", certificate={"D": D, "N": N},
                   detail=completeness + "; no class representatives exist")
 
     # Orbit walk mod M. Seeds: all sign variants of every representative
@@ -243,20 +270,28 @@ def nagell_representatives(D: int, N: int, t: int, u: int, cap: int = 10**6):
 
 
 def _reconstruct(D, N, seed, k, t, u, recover, digit_cap) -> Decision:
-    est_digits = (k + 1) * (len(str(t)) + len(str(seed[0])) + 1)
+    # digits via bit_length: str(t) raises past CPython's int->str digit limit
+    # for Δ ≳ 10⁹ — the panel's critical catch: the crash hit exactly the
+    # astronomically-large-witness inputs this path exists for.
+    est_digits = (k + 1) * ((t.bit_length() + abs(seed[0]).bit_length()) // 3 + 2)
     if est_digits > digit_cap:
         return yes("pell-orbit-certificate",
                    {"D": D, "N": N, "class": seed, "power": k},
                    detail=f"solution σ^{k}(seed): the orbit identity keeps "
-                          f"x²−{D}y²={N} and the congruence was checked exactly "
-                          f"mod the walk modulus; ≈{est_digits} digits, not "
-                          "materialized")
+                          f"x²−{_fmt(D)}y²={_fmt(N)} and the congruence was "
+                          f"checked exactly mod the walk modulus; "
+                          f"≈{est_digits} digits, not materialized")
     x, y = seed
     for _ in range(k):
         x, y = t * x + D * u * y, u * x + t * y
     assert x * x - D * y * y == N
     if recover is not None:
         w = recover(x, y)
-        assert w is not None, "congruence-accepted solution failed recovery"
-        return yes("pell-orbit", w, f"σ^{k} applied to class representative {seed}")
-    return yes("pell-orbit", (x, y), f"σ^{k} applied to class representative {seed}")
+        if w is None:
+            return undecided("pell-recover",
+                             detail="orbit hit failed recovery: caller's accept "
+                                    "and recover hooks disagree")
+        return yes("pell-orbit", w,
+                   f"σ^{k} applied to class representative {_fmt(seed)}")
+    return yes("pell-orbit", (x, y),
+               f"σ^{k} applied to class representative {_fmt(seed)}")

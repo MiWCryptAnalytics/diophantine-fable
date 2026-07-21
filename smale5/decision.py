@@ -26,10 +26,23 @@ class Decision:
     def __str__(self) -> str:
         parts = [f"{self.status.value} [{self.method}]"]
         if self.certificate is not None:
-            parts.append(f"certificate={self.certificate}")
+            parts.append(f"certificate={_fmt(self.certificate)}")
         if self.detail:
             parts.append(self.detail)
         return "  ".join(parts)
+
+
+def _fmt(v) -> str:
+    """Abbreviate astronomically large integers: str(int) raises past
+    CPython's digit limit, and certified witnesses can have millions of
+    digits — the whole point of the orbit machinery."""
+    if isinstance(v, int) and v.bit_length() > 14_000:
+        return f"<int ~{v.bit_length() * 30103 // 100000} digits>"
+    if isinstance(v, tuple):
+        return "(" + ", ".join(_fmt(x) for x in v) + ")"
+    if isinstance(v, dict):
+        return "{" + ", ".join(f"{k}: {_fmt(x)}" for k, x in v.items()) + "}"
+    return str(v)
 
 
 def yes(method: str, witness=None, detail: str = "") -> Decision:

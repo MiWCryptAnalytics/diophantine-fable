@@ -114,7 +114,49 @@
   convention-independent — noted in A1.md, and the growth-records CSV was
   regenerated under the new measure.
 
-## 2026-07-20 — theorem A1-v1 grows a clause: rational-function graphs
+## 2026-07-21 — the interrogation panel reports: the math held, the code bled
+
+Four hostile reviewers, ~490k tokens, ~450,000 oracle-checked decisions.
+Headline: **zero wrong verdicts anywhere** — the LMM reviewer alone threw
+420k adversarial cases (including a direct class-completeness attack and a
+sympy cross-check of every NO), the quadratic reviewer 12,300 more, the
+pipeline reviewer 10,141 — the mathematics of the solver stack survived
+everything. But the panel earned its keep with four real defects:
+
+1. **CRITICAL — classifier unsound direction** (break-pipeline). My genus
+   formula used `sqf_part(disc)` — the *radical* — where the field
+   ℚ(x)(√D) is determined by D *modulo squares*: even-multiplicity factors
+   must vanish, not survive once. So y² = 2x⁴ + x² (square class 2x²+1,
+   genus 0, infinite Pell family (x_k, x_k·s_k)) was certified genus 1 and
+   labeled "finite" — falsifying the classifier docstring's own safety
+   claim. Fixed via `sqf_list` keeping odd-multiplicity factors only;
+   regression family in tests.
+2. **CRITICAL — crash on the showcase path** (audit-a1). `len(str(t))`
+   exceeds CPython's 4300-digit int→str limit for Δ ≳ 10⁹ — the crash hit
+   *precisely the astronomically-large-witness inputs the certificate path
+   was built for*. Fixed with bit_length arithmetic plus a safe formatter
+   for all certificate/detail rendering (huge witnesses print as
+   "<int ~N digits>").
+3. **MAJOR — the one uncapped loop** (break-quadratic + break-pipeline,
+   independently). `cf_fundamental` walked the CF period with no budget:
+   Δ ≈ 2×10²³ conics hang for ~10¹¹ steps; 81 of 150 big-coefficient fuzz
+   conics hit it. Now step-capped with an UNDECIDED confession
+   ("pell-cf"), restoring the never-hang contract.
+4. **MAJOR — A1's theorem-to-code sentence was false** (audit-a1). The caps
+   are constants, so the pipeline is a (sound, honest) *truncation* of the
+   analyzed algorithm — in-scope inputs went UNDECIDED at s = 26. A1
+   rephrased truthfully; size-scaled budgets queued as follow-up. Two A1
+   lemmas also corrected: the PQa run bound is pre-period O(log|m|) + the
+   reduced-class cycle (not O(ℓ(√Δ))), and the completeness argument now
+   states honestly that conjugation lands outside ⟨σ⟩×{±1} and is covered
+   by the four-variant seeding.
+
+Also: parse() no longer leaks raw sympy exceptions ("x/y", "x^x" → clean
+ValueError), and the recover-hook API hazard the LMM reviewer flagged is
+closed (rejections now yield honest UNDECIDED instead of silent-YES/assert).
+42 tests green. The ledger for the day: adversarial review found nothing
+wrong with the *theorems* and four things wrong with the *artifact* —
+exactly the asymmetry you want to discover before anyone else does.
 
 - **G1's first slice.** New solver `smale5/solvers/graph.py` decides every
   component of degree 1 in one variable — the graphs y = −B(x)/A(x), any

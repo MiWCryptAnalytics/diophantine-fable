@@ -24,6 +24,12 @@ def test_rejects_unknown_symbols():
         parse("x^2 + z")
 
 
+def test_rejects_charset_legal_non_polynomials():
+    for bad in ("x/y", "1/x", "x^x", "2^x", "1/0", "()"):
+        with pytest.raises(ValueError):
+            parse(bad)
+
+
 def test_evaluate_and_witness():
     f = parse("x^2 - 61*y^2 - 1")
     assert evaluate(f, 1766319049, 226153980) == 0

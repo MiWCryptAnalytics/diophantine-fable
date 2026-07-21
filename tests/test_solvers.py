@@ -103,6 +103,27 @@ def test_pell_like_huge_unit_via_lmm():
             assert x * x - 1000099 * y * y == N
 
 
+def test_cf_cap_confesses_instead_of_hanging():
+    """Interrogation-panel catch: cf_fundamental was the one uncapped
+    exponential loop — this conic (Δ ≈ 2×10²³) used to hang for ~10¹¹ steps."""
+    dec = solve_quadratic(parse(
+        "-117045681093*x^2 - 629408638379*x*y - 402519276592*y^2"
+        " - 388027523941*x - 82120207152*y - 957350659965"))
+    assert dec.status is Status.UNDECIDED
+    assert dec.method == "pell-cf"
+
+
+def test_large_delta_no_str_crash():
+    """Interrogation-panel catch: len(str(t)) exceeded CPython's int→str digit
+    limit for Δ ≳ 10⁹, crashing exactly the large-unit YES instances."""
+    f = parse("x^2 - 1000000007*y^2 + 49123")
+    dec = solve_quadratic(f)
+    assert dec.status in (Status.YES, Status.UNDECIDED)
+    if dec.status is Status.YES and isinstance(dec.certificate, tuple):
+        assert is_solution(f, dec.certificate)
+    str(dec)  # printing must not raise either
+
+
 def test_quadratic_pell_conic():
     f = parse("x^2 - 61*y^2 - 1")
     dec = solve_quadratic(f)

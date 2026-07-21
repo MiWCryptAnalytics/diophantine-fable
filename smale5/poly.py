@@ -20,9 +20,14 @@ def parse(text: str) -> sp.Poly:
     bad = set(text) - _ALLOWED_CHARS
     if bad:
         raise ValueError(f"disallowed characters in polynomial: {sorted(bad)!r}")
-    expr = sp.sympify(text.replace("^", "**"),
-                      locals={"x": X, "y": Y, "u": X, "v": Y}, rational=True)
-    return normalize(expr)
+    try:
+        expr = sp.sympify(text.replace("^", "**"),
+                          locals={"x": X, "y": Y, "u": X, "v": Y}, rational=True)
+        return normalize(expr)
+    except ValueError:
+        raise
+    except Exception as exc:  # sympy raises PolynomialError/TypeError/... on
+        raise ValueError(f"not a polynomial in x, y: {text!r} ({exc})") from exc
 
 
 def normalize(expr) -> sp.Poly:

@@ -44,6 +44,19 @@ def test_circle_is_honest_candidate():
     assert c.siegel == "infinite-candidate"
 
 
+def test_square_discriminant_families_not_finite():
+    """Interrogation-panel catch: sqf_part is the radical, not the square
+    class — these genus-0 curves carry infinite integer families and must
+    never be labeled 'finite'."""
+    for d in (2, 3, 5):
+        c = _single(parse(f"y^2 - {d}*x^4 - x^2"))  # points (x_k, x_k*s_k), s²−d·x²=1
+        assert c.genus == 0
+        assert c.siegel != "finite"
+    c = _single(parse("y^2 - x*(x^2+1)^2"))  # points (t², t(t⁴+1))
+    assert c.genus == 0
+    assert c.siegel != "finite"
+
+
 def test_reducible_splits():
     comps = classify(parse("(x^2 - 61*y^2 - 1) * (x + y)"))
     assert len(comps) == 2
