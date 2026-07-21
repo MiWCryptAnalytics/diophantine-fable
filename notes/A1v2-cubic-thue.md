@@ -30,12 +30,28 @@ one real embedding, one conjugate pair — so the unit group is ⟨−1, ε⟩ o
    k* ≲ C·(1 + h(rep)/R), and unit-reduced representatives have
    h(rep) = O(R + log|m|), giving the
 
-   > **Conjecture (window bound).** For unit-reduced class
+   > **Conjecture (window bound, strong form).** For unit-reduced class
    > representatives, every Thue-shape index satisfies
    > |k| ≤ C·(1 + log|m| / R) for an absolute constant C.
 
    Empirics: across 1120 grid cases (14 fields × m ∈ [−40,40]) the max
    vanishing index was **3** (`experiments/cubic_orbit_prototype.py`).
+
+   **Provable weak form (proof sketch, poly window — enough for EXP).**
+   Writing c₂(k) = A·λᵏ + 2Re(B·μᵏ) with λ = σ_real(ε), μ the complex
+   embedding: A = w₁σ₁(γ) ≠ 0 always (N(γ) = m ≠ 0 kills σ₁(γ) = 0, and
+   the interpolation weights wᵢ are nonzero by Vandermonde nondegeneracy
+   — the degenerate Skolem case simply cannot occur here). Vanishing
+   forces (|λ/μ|)^|k| ≤ 2|B/A|, and |λ/μ| = e^{3R/2}, so
+   |k| ≤ (2/3R)·log(2|B/A|) + O(1). Bounding log|B/A| by the
+   representative's embedding spread (≤ O(R + log|m|) after unit
+   reduction) plus the weight ratio (≤ O(log d) = O(s)), and using the
+   absolute lower bound on complex-cubic regulators (minimum at
+   x³ − x − 1, R ≈ 0.28), gives unconditionally
+   > |k*| ≤ C·s — a polynomial window,
+   which is all the EXP claim needs; the O(1) empirics reflect
+   log|m|/R being tiny on the grid. To be written up with explicit
+   constants and the unit-reduction lemma.
 4. **Certified zero-testing without materialization is available if ever
    needed**: |c₂(k)| ≤ 2^(O(s)) digits, so c₂(k) ≡ 0 modulo a prime set
    with product exceeding the height bound certifies c₂(k) = 0 in
