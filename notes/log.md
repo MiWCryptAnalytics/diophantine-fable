@@ -101,6 +101,67 @@
   PARI thueinit flag semantics, Pell regulator growth). Results will
   reconcile the [P] tags in `frontier.md`.
 
+## 2026-07-20 — the citation machine reports: our epigraph was wrong
+
+Nine verifiers, 236 tool calls, ~463k tokens: six claims confirmed (with
+sharpenings), three corrected — and the corrections cut deep. In order of
+pain:
+
+1. **The problem statement itself.** Smale asks for time **2^(s^c)** —
+   exponential time proper — not the single-exponential (2^s)^c we (and
+   Wikipedia, whose rendering conflicts with the primary PDF and with
+   Lagarias's quotation of the AMS reprint) had. The size measure is dense:
+   every exponent slot ≤ d contributes, so s ≥ ~(d+1)(d+2)/2. Consequences:
+   A1's 2^{O(s)} is comfortably *stronger* than Smale's budget, and his
+   Height Bound Hypothesis frames the NP route for positive genus.
+2. **The Thue sting.** Bugeaud–Győry bounds are polynomial in coefficient
+   *magnitude* — exponential in bit-size — so even fixed-degree-3 Thue is
+   not known decidable in 2^(s^c) via height bounds. G2 rewritten: the open
+   route is compact-representation decision (Pell-style
+   decide-without-exhibit, one rung up). This kills our hoped-for A1-v2
+   shortcut and replaces it with a better question.
+3. **The hardness floor was mis-scoped.** Manders–Adleman NP-completeness is
+   an ℕ-statement; the ℤ-variant is NP ∩ coNP (quadratic residuosity — and
+   the verifier caught an *error in the authors' own 1978 tech report*
+   claiming poly-time via Jacobi symbols). Lagarias 1979: binary quadratics
+   over ℤ in NP and in 2^{O(L)} — so our A1 deg-2 stratum is his theorem,
+   now credited. New Track B question: is two-variable H10 over ℤ NP-hard
+   at all?
+4. **Attribution fixes.** The 9-unknowns theorem is Matiyasevich's, written
+   up by Jones 1982 (we had it backwards); Siegel 1929 appeared in the
+   Abhandlungen, not the Sitzungsberichte (Wikipedia again).
+5. **Post-cutoff intelligence.** Alpöge–Lawrence, *Conditional algorithmic
+   Mordell* (2024: algorithm for C(K) conditional on Hodge+Tate+Fontaine–
+   Mazur); Garcia-Fritz–Pasten 2025 (unconditional effective heights, enough
+   automorphisms); Bennett–Ghadermarzi solved Mordell for |k| ≤ 10⁷ (2015 —
+   our GPZ 10⁴ figure was stale); Elkies' record Hall ratio 46.6; H10
+   undecidable over rings of integers of all number fields (2024–25); ℤ[i]
+   in 18 unknowns (2026). Two-variable H10: still open in both directions.
+
+`frontier.md` rewritten with citations ([P] → [C] throughout); README's
+epigraph corrected; A1.md re-budgeted and re-credited. All 73 citations
+archived in `notes/citations/2026-07-20-frontier-verification.json`. House
+rule from here on: primary sources only.
+
+## 2026-07-20 — the interrogation panel, and Hall's needle in the haystack
+
+- **Second workflow: `interrogate-findings`.** The citation pass checks the
+  literature; nobody had yet attacked *us*. Four hostile reviewers now
+  running: `break-lmm` (independent brute-force decider fuzzing D ≤ 300,
+  |N| ≤ 400 plus squareful-N edge cases), `break-quadratic` (5000+ fuzzed
+  conics vs a search oracle across every Δ branch), `audit-a1` (referee
+  hunting for hidden doubly-exponential steps — sqrt_mod root counts over
+  squareful moduli, PQa pre-period claims, orbit seed coverage), and
+  `break-pipeline` (end-to-end fuzz + classifier soundness against
+  provably-infinite families). Verdicts feed regression tests.
+- **Hall-ratio sweep** (`experiments/hall_ratios.py`, 3.9s to x = 10⁷):
+  rediscovered the classical extremal point from scratch — x = 5234,
+  y = 378661, x³ − y² = −17, ratio √x/|k| ≈ 4.2557 — and it is one of only
+  THREE records up to ten million. The sparsity is the finding: sporadic
+  points on Mordell equations are not just hard to bound, they are freakishly
+  rare, which is why nature gives us so little data to fit G3 against
+  (`experiments/data/hall_records.csv`).
+
 ## 2026-07-20 — panel resurrected; the dense size lands in code
 
 - The first interrogation run died of token exhaustion — all four hostile
@@ -113,6 +174,21 @@
   Sparse and dense are polynomially related, so 2^(s^c) membership is
   convention-independent — noted in A1.md, and the growth-records CSV was
   regenerated under the new measure.
+
+## 2026-07-20 — theorem A1-v1 grows a clause: rational-function graphs
+
+- **G1's first slice.** New solver `smale5/solvers/graph.py` decides every
+  component of degree 1 in one variable — the graphs y = −B(x)/A(x), any
+  total degree — completely and in single-exponential time. The argument is
+  Runge in miniature: A(x) | B(x) forces A(x) | R̂(x) for the integer
+  pseudo-remainder ℓB = Q̂A + R̂ with deg R̂ < deg A, so either x is an
+  integer root of R̂ or |A(x)| ≤ |R̂(x)| pins |x| inside an explicit window
+  ≤ 2 + Σ|coeffs|. Exact-division and constant-denominator branches reduce
+  to single congruences (infinite families detected, not searched).
+- Theorem A1-v1 now reads: degree ≤ 2, OR univariate, OR degree 1 in one
+  variable. First strictly-new coverage beyond the Lagarias stratum. A
+  pleasing NO exemplar: y·(x²+3) = x³ + 2 — no congruence obstruction, the
+  window argument alone certifies it. 38 tests green.
 
 ## 2026-07-21 — the interrogation panel reports: the math held, the code bled
 
@@ -158,74 +234,33 @@ closed (rejections now yield honest UNDECIDED instead of silent-YES/assert).
 wrong with the *theorems* and four things wrong with the *artifact* —
 exactly the asymmetry you want to discover before anyone else does.
 
-- **G1's first slice.** New solver `smale5/solvers/graph.py` decides every
-  component of degree 1 in one variable — the graphs y = −B(x)/A(x), any
-  total degree — completely and in single-exponential time. The argument is
-  Runge in miniature: A(x) | B(x) forces A(x) | R̂(x) for the integer
-  pseudo-remainder ℓB = Q̂A + R̂ with deg R̂ < deg A, so either x is an
-  integer root of R̂ or |A(x)| ≤ |R̂(x)| pins |x| inside an explicit window
-  ≤ 2 + Σ|coeffs|. Exact-division and constant-denominator branches reduce
-  to single congruences (infinite families detected, not searched).
-- Theorem A1-v1 now reads: degree ≤ 2, OR univariate, OR degree 1 in one
-  variable. First strictly-new coverage beyond the Lagarias stratum. A
-  pleasing NO exemplar: y·(x²+3) = x³ + 2 — no congruence obstruction, the
-  window argument alone certifies it. 38 tests green.
+## 2026-07-21 — clause (iv): the panel's counterexample family, decided
 
-- **Second workflow: `interrogate-findings`.** The citation pass checks the
-  literature; nobody had yet attacked *us*. Four hostile reviewers now
-  running: `break-lmm` (independent brute-force decider fuzzing D ≤ 300,
-  |N| ≤ 400 plus squareful-N edge cases), `break-quadratic` (5000+ fuzzed
-  conics vs a search oracle across every Δ branch), `audit-a1` (referee
-  hunting for hidden doubly-exponential steps — sqrt_mod root counts over
-  squareful moduli, PQa pre-period claims, orbit seed coverage), and
-  `break-pipeline` (end-to-end fuzz + classifier soundness against
-  provably-infinite families). Verdicts feed regression tests.
-## 2026-07-20 — the citation machine reports: our epigraph was wrong
-
-Nine verifiers, 236 tool calls, ~463k tokens: six claims confirmed (with
-sharpenings), three corrected — and the corrections cut deep. In order of
-pain:
-
-1. **The problem statement itself.** Smale asks for time **2^(s^c)** —
-   exponential time proper — not the single-exponential (2^s)^c we (and
-   Wikipedia, whose rendering conflicts with the primary PDF and with
-   Lagarias's quotation of the AMS reprint) had. The size measure is dense:
-   every exponent slot ≤ d contributes, so s ≥ ~(d+1)(d+2)/2. Consequences:
-   A1's 2^{O(s)} is comfortably *stronger* than Smale's budget, and his
-   Height Bound Hypothesis frames the NP route for positive genus.
-2. **The Thue sting.** Bugeaud–Győry bounds are polynomial in coefficient
-   *magnitude* — exponential in bit-size — so even fixed-degree-3 Thue is
-   not known decidable in 2^(s^c) via height bounds. G2 rewritten: the open
-   route is compact-representation decision (Pell-style
-   decide-without-exhibit, one rung up). This kills our hoped-for A1-v2
-   shortcut and replaces it with a better question.
-3. **The hardness floor was mis-scoped.** Manders–Adleman NP-completeness is
-   an ℕ-statement; the ℤ-variant is NP ∩ coNP (quadratic residuosity — and
-   the verifier caught an *error in the authors' own 1978 tech report*
-   claiming poly-time via Jacobi symbols). Lagarias 1979: binary quadratics
-   over ℤ in NP and in 2^{O(L)} — so our A1 deg-2 stratum is his theorem,
-   now credited. New Track B question: is two-variable H10 over ℤ NP-hard
-   at all?
-4. **Attribution fixes.** The 9-unknowns theorem is Matiyasevich's, written
-   up by Jones 1982 (we had it backwards); Siegel 1929 appeared in the
-   Abhandlungen, not the Sitzungsberichte (Wikipedia again).
-5. **Post-cutoff intelligence.** Alpöge–Lawrence, *Conditional algorithmic
-   Mordell* (2024: algorithm for C(K) conditional on Hodge+Tate+Fontaine–
-   Mazur); Garcia-Fritz–Pasten 2025 (unconditional effective heights, enough
-   automorphisms); Bennett–Ghadermarzi solved Mordell for |k| ≤ 10⁷ (2015 —
-   our GPZ 10⁴ figure was stale); Elkies' record Hall ratio 46.6; H10
-   undecidable over rings of integers of all number fields (2024–25); ℤ[i]
-   in 18 unknowns (2026). Two-variable H10: still open in both directions.
-
-`frontier.md` rewritten with citations ([P] → [C] throughout); README's
-epigraph corrected; A1.md re-budgeted and re-credited. All 73 citations
-archived in `notes/citations/2026-07-20-frontier-verification.json`. House
-rule from here on: primary sources only.
-
-- **Hall-ratio sweep** (`experiments/hall_ratios.py`, 3.9s to x = 10⁷):
-  rediscovered the classical extremal point from scratch — x = 5234,
-  y = 378661, x³ − y² = −17, ratio √x/|k| ≈ 4.2557 — and it is one of only
-  THREE records up to ten million. The sparsity is the finding: sporadic
-  points on Mordell equations are not just hard to bound, they are freakishly
-  rare, which is why nature gives us so little data to fit G3 against
-  (`experiments/data/hall_records.csv`).
+- **Budget schedules land** (`smale5/budget.py`): the caps now grow like
+  2^(s−21) up to a hard interactivity ceiling, closing the panel's fourth
+  finding properly — its concrete s = 26 parabola gap is a regression test
+  that decides (NO: −7 is not a QR mod 13, and 13 | 300001). A1's
+  theorem-to-code paragraph rewritten to match reality.
+- **The ExtraCong refactor**: the whole quadratic layer now accepts an
+  extra congruence accept(x mod K, y mod K) with completeness preserved on
+  every branch — finite scans filter, line families walk one full residue
+  cycle, and the Pell path enlarges its walk modulus to |2aΔ|·K. This is
+  the plumbing that lets higher strata *ride* the conic machinery.
+- **New stratum, A1 clause (iv)** (`smale5/solvers/deg2fiber.py`):
+  components a·y² + B(x)y + C(x) with constant lead whose discriminant has
+  square-class of degree ≤ 2. Complete the square: (2ay+B)² = E(x)²·Q₀(x);
+  off E's integer roots, w = (2ay+B)/E is forced integral with w² = Q₀(x)
+  — a conic — plus the fixed-modulus divisibility 2a | E(x)w − B(x). The
+  panel's y² = 2x⁴ + x² family is now *decided*, not merely correctly
+  classified. Flagship pair: (y+x+7)² = (x²+30)²(2x²+1) → YES via a Pell
+  conic point with the congruence riding along (E rootless, so no
+  shortcut); (3y+1)² = x²(2x²+1) → **NO certified by a complete orbit scan
+  mod 576** — on the whole Pell orbit of w²−2x²=1, x·w ≡ 0 (mod 3), never
+  ≡ 1. Mordell equations (square-class degree 3) honestly return None and
+  fall through. 50 tests green, including a 40-case planted fuzz against
+  the search oracle.
+- **The journal itself needed a bugfix**: anchor-based edits had eaten two
+  section headings and scrambled the chronology — restored from the file
+  and reordered. Even the log gets the honesty discipline.
+- Next targets unchanged: G1 general parametrization; A1-v2
+  compact-representation cubic Thue.
