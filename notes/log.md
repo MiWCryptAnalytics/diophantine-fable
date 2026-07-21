@@ -373,6 +373,43 @@ Five verifiers, 176 tool calls, and every verdict moved us forward:
 - 57 citations archived (`notes/citations/2026-07-21-a1v2-verification
   .json`).
 
+## 2026-07-22 — the adversarial series: a death, a resurrection, and errata
+
+Ran the adversarial agents in series (quota discipline), interpreting
+between. Two agents sufficed for the most consequential day of Track B:
+
+- **Agent 1 (the STOC-1977 reader) killed our candidate reduction in one
+  line**: (ax+1)y = c is solvable over ℤ by x = 0, y = c — always. The
+  trivial divisor d = 1 sits in every congruence class; no CRT
+  rigidification can excise it. The proposal was dead on arrival — and
+  the same agent then found that **the intended conclusion is 48-year-old
+  prior art we (and the landscape survey) had missed**: Adleman–Manders
+  themselves proved x² − a²y² = c and x(x+ay) = c γ-complete and random
+  complete over ℤ (ERL M78/30 §2.3, "Reductions that Lie" FOCS 1979).
+- **Agent 2 (hostile referee) verified everything against page scans**,
+  guard-railed the citation discipline (printed theorems: unfaithful
+  completeness unconditionally, faithful only under ERH; the AKS
+  substitution — certification consumes no nondeterminism — makes the
+  faithful version unconditional), and confirmed the bug Agent 1 found in
+  the memo's Thm 2.4.1 with an explicit false-YES witness: ⟨27, 1343⟩,
+  where (27·(−3)+2)·(−17) = 1343 rides the negative divisor −79 ≡ 2
+  (mod 27) that the printed bound fails to exclude. Repair: 3^k > 1+Σ|aᵢ|.
+  Two further errata surfaced (a sign slip, a ≤/≥ typo). A foundational
+  1978 memo, debugged by the expedition.
+- **The frontier corrects, hard**: two-variable H10 over ℤ IS hard under
+  randomized reductions — **L ∈ P ⟹ NP = coNP** — and has been since
+  1978. Our "no hardness known" (inherited from the landscape survey,
+  which missed §2.3 of the very memo it cited) is struck. The real Track
+  B target is now crisp: **deterministic NP-hardness = Adleman–McCurley
+  O33a**, open since 1979. And the structural poetry: the hardness
+  anchors live in our split-hyperbola stratum — the factoring-shaped
+  corner of the quadratic layer — while Baker's decidability conjecture
+  plus this hardness sketches exactly the "decidable but not in P"
+  picture Smale's problem list anticipates.
+- Citable-gap ledger grows to three: cubic-Thue-EXP, HBH⟹NP, and now
+  **the A–M errata note** (misprinted theorems, the bound bug +
+  counterexample + repair, the AKS modernization bookkeeping).
+
 ## 2026-07-21 — the Census names the frontier; the war council's first find
 
 - **The smallest open problems have addresses now.** The Census cleared

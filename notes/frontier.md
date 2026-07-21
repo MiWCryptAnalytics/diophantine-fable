@@ -30,12 +30,20 @@ positive-genus case in NP.
   (Garey–Johnson AN1), NP-hard even given the factorization of b. Caution:
   the authors' own tech report (ERL M78/30 §2.2) wrongly claims the ℤ-variant
   is poly-time via Jacobi symbols — do not cite that sentence.
-- **Over ℤ the floor is thinner than we first wrote**: the ℤ-variant of
-  ax² + by = c is in NP ∩ coNP (≡ quadratic residuosity mod |b|; contains the
-  Goldwasser–Micali QR problem; not NP-complete unless NP = coNP). Lagarias
-  (FOCS 1979; arXiv:math/0611209): solvability of the general binary
-  quadratic over ℤ is in NP, and decidable in time 2^(O(L)).
-  **Open (Track B target): is two-variable H10 over ℤ NP-hard at all?**
+- **Over ℤ the floor is FIRMER than we twice wrote** (corrected 2026-07-22
+  after an adversarial two-agent series on the primary source):
+  Adleman–Manders (ERL M78/30 1978 §2.3; FOCS 1979), AKS-modernized, prove
+  {⟨a,c⟩ : x² − a²y² = c solvable in ℤ} and {⟨a,c⟩ : x(x+ay) = c solvable
+  in ℤ} **random complete and γ-complete unconditionally** — so
+  two-variable H10 over ℤ is γ-hard and random-hard: **L ∈ P ⟹ NP = coNP;
+  L ∈ RP ⟹ RP = NP**. Both anchors live in the split-hyperbola
+  (factoring-shaped) stratum. The ℤ-variant of ax² + by = c stays
+  NP ∩ coNP (quadratic residuosity); Lagarias: binary quadratics over ℤ
+  in NP and 2^(O(L)). **Open (the real Track B target): deterministic
+  Karp NP-hardness — Adleman–McCurley O33a, open since 1979.** Baker
+  conjectured decidability (Jones 1981 §5): the emerging picture is
+  "decidable but not in P". Full verified account + three errata we found
+  in the 1978 memo: `notes/trackB-hardness.md`.
   **[V]** Beyond the Lagarias stratum, two clauses proved and implemented
   here: rational-function graphs (degree 1 in one variable;
   Runge-in-miniature window, `smale5/solvers/graph.py`) and constant-lead
