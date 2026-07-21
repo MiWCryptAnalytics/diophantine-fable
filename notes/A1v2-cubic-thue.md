@@ -37,21 +37,44 @@ one real embedding, one conjugate pair — so the unit group is ⟨−1, ε⟩ o
    Empirics: across 1120 grid cases (14 fields × m ∈ [−40,40]) the max
    vanishing index was **3** (`experiments/cubic_orbit_prototype.py`).
 
-   **Provable weak form (proof sketch, poly window — enough for EXP).**
-   Writing c₂(k) = A·λᵏ + 2Re(B·μᵏ) with λ = σ_real(ε), μ the complex
-   embedding: A = w₁σ₁(γ) ≠ 0 always (N(γ) = m ≠ 0 kills σ₁(γ) = 0, and
-   the interpolation weights wᵢ are nonzero by Vandermonde nondegeneracy
-   — the degenerate Skolem case simply cannot occur here). Vanishing
-   forces (|λ/μ|)^|k| ≤ 2|B/A|, and |λ/μ| = e^{3R/2}, so
-   |k| ≤ (2/3R)·log(2|B/A|) + O(1). Bounding log|B/A| by the
-   representative's embedding spread (≤ O(R + log|m|) after unit
-   reduction) plus the weight ratio (≤ O(log d) = O(s)), and using the
-   absolute lower bound on complex-cubic regulators (minimum at
-   x³ − x − 1, R ≈ 0.28), gives unconditionally
-   > |k*| ≤ C·s — a polynomial window,
-   which is all the EXP claim needs; the O(1) empirics reflect
-   log|m|/R being tiny on the grid. To be written up with explicit
-   constants and the unit-reduction lemma.
+   **Window bound, corrected split (2026-07-21, self-caught overclaim).**
+   Writing 3δ²·c₂(k) = σ₁(γ)·λᵏ + 2Re(ζ·σ₂(γ)·μᵏ) with λ = σ_real(ε) > 1,
+   |μ| = λ^(−1/2), and all interpolation weights of equal modulus 1/(3δ²)
+   (DFT structure of the power basis): the degenerate Skolem case cannot
+   occur (N(γ) = m ≠ 0 forces σ₁(γ) ≠ 0).
+
+   - **Positive direction (elementary).** Vanishing forces
+     λ^{3k/2} ≤ 2|σ₂(γ)/σ₁(γ)|, so k ≤ (2/3R)·log(2B/A) + O(1) — with
+     unit-reduced representatives and the absolute lower bound on
+     complex-cubic regulators (minimal field x³ − x − 1, R ≈ 0.28;
+     citation pending), a poly(s) bound with explicit constants.
+   - **Negative direction (this is where Baker hides — my earlier "no
+     linear forms in logarithms" claim was WRONG and is hereby retracted).
+     ** For k ≪ 0 the complex pair dominates and exact vanishing requires
+     |cos(φ + k·arg μ)| ≤ (A/2B)·λ^{3k/2} — the unit's angle must
+     approximate π/2 (mod π) super-exponentially well in |k|. Bounding the
+     largest such k IS an inhomogeneous linear form in logarithms;
+     Baker–Wüstholz gives an effective k₀ = 2^{O(s)} (polynomial decay of
+     the form vs exponential demand). Large solutions (|y| big, real
+     embedding small) live precisely on this side, which is why the
+     argument cannot be elementary: otherwise Thue would be effective
+     without Baker.
+
+   **Net effect — the reduction gets STRONGER, not weaker**: no conjecture
+   is needed. Both windows are effectively bounded (elementary + one Baker
+   inequality), each ≤ 2^{O(s)}, and each orbit element costs 2^{O(s)}
+   bit-operations, so:
+   > **Reduction (now unconditional modulo bnf).** Pure-cubic Thue
+   > decision in time 2^{poly(s)} follows from certified fundamental-unit
+   > and class-representative data computable in time 2^{poly(s)}.
+   The strong O(1 + log|m|/R) window remains an (empirically supported)
+   conjecture; max observed index 3.
+
+   **Priority caveat for the citation pass**: reorganizing Thue along the
+   unit orbit with Baker supplying one inequality is morally close to the
+   classical algorithmic pipeline (Tzanakis–de Weger, Bilu–Hanrot). Our
+   likely contribution is the explicit EXP-modulo-bnf accounting and the
+   sharp empirical window, not the skeleton — to be checked, not assumed.
 4. **Certified zero-testing without materialization is available if ever
    needed**: |c₂(k)| ≤ 2^(O(s)) digits, so c₂(k) ≡ 0 modulo a prime set
    with product exceeding the height bound certifies c₂(k) = 0 in

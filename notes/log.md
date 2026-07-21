@@ -301,3 +301,44 @@ bounds are hopeless. Today the program answered with a *reduction*:
 - Next: prove the window bound for pure cubics; citation pass on Skolem
   order-3 attribution and certified-bnfinit complexity; then promote the
   prototype into `smale5/solvers/` as A1 clause (v).
+
+## 2026-07-21 — where Baker hides: a self-caught overclaim
+
+Sat down to write the window-bound proof with explicit constants and
+promptly refuted my own headline. The elementary dominant-root argument is
+real — but it only bounds the **positive** orbit direction (small
+solutions). For k ≪ 0, the complex pair dominates, and exact vanishing of
+the α²-coordinate demands |cos(φ + k·arg μ)| ≲ λ^{3k/2}: the unit's angle
+must approximate π/2 (mod π) *super-exponentially well*. Bounding the last
+such k is an inhomogeneous **linear form in logarithms** — Baker was never
+avoided, only localized into a single inequality. Fittingly, the big
+solutions (|y| large, real embedding tiny) live exactly on that side; an
+elementary bound there would have made Thue effective without Baker, which
+should have smelled wrong a session earlier.
+
+The ledger is net positive, though:
+
+- **The reduction is now unconditional modulo bnf** — better than the
+  conjectural version. Both window directions are effectively bounded
+  (elementary + one Baker–Wüstholz inequality), each 2^{O(s)}, each orbit
+  step 2^{O(s)} bit-ops: *pure-cubic Thue in EXP follows from certified
+  unit/class data in EXP*, full stop. The conjecture is demoted to what it
+  always was: an empirical observation (max index 3) about how tiny the
+  windows are in practice.
+- **Priority caveat recorded**: unit-orbit + one Baker inequality is
+  morally the classical Tzanakis–de Weger / Bilu–Hanrot pipeline. Our
+  plausible contribution is the explicit EXP-modulo-bnf accounting and the
+  empirical window sharpness — flagged for verification, not assumed.
+- **Second citation workflow launched** (five verifiers): Skolem order-3
+  attribution (MST/Vereshchagin), certified-bnf complexity, the minimal
+  complex-cubic regulator (x³−x−1, R ≈ 0.281), bnfisintnorm's exact
+  semantics (completeness/GRH), and — the one that matters most — whether
+  "Thue in EXP modulo bnf" is already stated in the literature. An honest
+  "nobody states this" would mark our first genuinely publishable
+  increment; an honest "it's in Bilu–Hanrot §5" would save us from
+  embarrassment. Either answer is a win.
+
+Moral for the log's collection: *the negative direction of an orbit is
+where the analysis gets honest.* Twice now (Nagell's window, the elementary
+window) the trap was an argument that worked beautifully in the direction
+where nothing interesting lives.
