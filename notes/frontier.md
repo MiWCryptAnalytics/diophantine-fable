@@ -36,6 +36,12 @@ positive-genus case in NP.
   (FOCS 1979; arXiv:math/0611209): solvability of the general binary
   quadratic over ℤ is in NP, and decidable in time 2^(O(L)).
   **Open (Track B target): is two-variable H10 over ℤ NP-hard at all?**
+  **[V]** Beyond the Lagarias stratum, two clauses proved and implemented
+  here: rational-function graphs (degree 1 in one variable;
+  Runge-in-miniature window, `smale5/solvers/graph.py`) and constant-lead
+  degree-2 fibers with discriminant square-class ≤ 2 (conic + divisibility
+  as an orbit congruence, `smale5/solvers/deg2fiber.py`) — `notes/A1.md`
+  clauses (iii) and (iv).
 - **[V]** Pell witness sizes: fundamental solution of x²−61y²=1 is
   (1766319049, 226153980); record digits(t) reach 278 by d = 17341 with
   log₁₀ t ≈ 2√d (`experiments/data/pell_records.csv`); d = 1000099 has a
