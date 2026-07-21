@@ -103,6 +103,18 @@ def test_pell_like_huge_unit_via_lmm():
             assert x * x - 1000099 * y * y == N
 
 
+def test_scaled_caps_close_the_s26_gap():
+    """Interrogation-panel catch: fixed caps left this s=26 parabola
+    UNDECIDED; the scaled budget decides it (NO: −7 is not a QR mod 13,
+    and 13 | 300001)."""
+    from smale5.budget import scaled
+    from smale5.poly import size
+    f = parse("x^2 + 300001*y + 7")
+    assert solve_quadratic(f).status is Status.UNDECIDED
+    dec = solve_quadratic(f, caps=scaled(size(f)))
+    assert dec.status is Status.NO
+
+
 def test_cf_cap_confesses_instead_of_hanging():
     """Interrogation-panel catch: cf_fundamental was the one uncapped
     exponential loop — this conic (Δ ≈ 2×10²³) used to hang for ~10¹¹ steps."""

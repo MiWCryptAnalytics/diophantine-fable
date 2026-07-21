@@ -8,10 +8,11 @@ from __future__ import annotations
 
 import sympy as sp
 
+from ..budget import scaled
 from ..classify import components, thue_shape
 from ..decision import Decision, Status, no, undecided, yes
-from ..poly import X, Y, is_solution, normalize, parse
-from . import graph, local, linear, quadratic, search, thue_pari
+from ..poly import X, Y, is_solution, normalize, parse, size
+from . import deg2fiber, graph, local, linear, quadratic, search, thue_pari
 
 
 def decide(f, search_bound: int = 2000) -> Decision:
@@ -28,9 +29,10 @@ def decide(f, search_bound: int = 2000) -> Decision:
         if obstruction is not None:
             return obstruction
 
+    caps = scaled(size(poly))
     per_component = []
     for g in components(poly):
-        dec = _solve_component(g, search_bound)
+        dec = _solve_component(g, search_bound, caps)
         if dec.status is Status.YES:
             assert is_solution(poly, dec.certificate) if isinstance(dec.certificate, tuple) else True
             return dec
@@ -47,7 +49,7 @@ def decide(f, search_bound: int = 2000) -> Decision:
     return undecided("pipeline", bound=search_bound, detail=summary)
 
 
-def _solve_component(g: sp.Poly, H: int) -> Decision:
+def _solve_component(g: sp.Poly, H: int, caps) -> Decision:
     if g.degree(Y) == 0:
         return _univariate(g, X)
     if g.degree(X) == 0:
@@ -56,9 +58,13 @@ def _solve_component(g: sp.Poly, H: int) -> Decision:
     if d == 1:
         return linear.solve_linear(g)
     if d == 2:
-        return quadratic.solve_quadratic(g)
+        return quadratic.solve_quadratic(g, caps=caps)
     if g.degree(Y) == 1 or g.degree(X) == 1:
         dec = graph.solve_graph(g)
+        if dec is not None:
+            return dec
+    if g.degree(Y) == 2 or g.degree(X) == 2:
+        dec = deg2fiber.solve_deg2_fiber(g, caps=caps)
         if dec is not None:
             return dec
     ts = thue_shape(g)

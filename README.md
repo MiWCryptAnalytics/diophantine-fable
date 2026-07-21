@@ -88,6 +88,8 @@ member of our zoo where NO lives strictly beyond local reasons.
 |---|---|---|
 | linear | Bézout / extended gcd | complete |
 | all binary quadratics | ellipse window · parabola congruence classes · split-form divisors · **LMM/PQa class search + Pell orbit walk mod M** | complete (caps confessed) |
+| rational-function graphs (deg 1 in x or y) | pseudo-division + crossover window | complete |
+| deg-2 fibers, constant lead, square-class ≤ 2 | discriminant modulo squares → conic + divisibility as an orbit congruence | complete (caps confessed) |
 | Thue F(x,y) = m, deg ≥ 3 | PARI `thueinit(·,1)` — unconditional | complete |
 | univariate components | rational root theorem | complete |
 | everything else | obstructions (ℝ, prime powers ≤ 81) + bounded search | YES or honest UNDECIDED |
