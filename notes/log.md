@@ -373,6 +373,38 @@ Five verifiers, 176 tool calls, and every verdict moved us forward:
 - 57 citations archived (`notes/citations/2026-07-21-a1v2-verification
   .json`).
 
+## 2026-07-21 — the Census names the frontier; the war council's first find
+
+- **The smallest open problems have addresses now.** The Census cleared
+  s ≤ 9 completely (14,802 polynomials, zero escapes) and then hit the
+  wall at **s = 10: 76 undecided of 43,439** — and triage says **75 of
+  the 76 are certified genus-1 curves**. The elliptic wall is empirically
+  exactly where the theory put it: decidable in principle (Baker–Coates),
+  not yet in the toolkit. Specimen zero of the expedition:
+  x³ − x² + xy² + y² + 1 = 0. And one glorious outlier — a cubic the
+  classifier can't even pin (x³ − x²y − x² − xy² + xy + x + y³ + y + 1),
+  the smallest mystery object in the census. s = 11 adds 2,755 more;
+  s = 12 still grinding in the background.
+- **The war council starved again** (three attackers + skeptic hit the
+  session limit — second panel casualty of the expedition; resumption
+  queued), but the landscape surveyor returned heavy: **Baker conjectured
+  two-variable H10 over ℤ is decidable** (Jones 1981 §5); nobody has ever
+  claimed NP-hardness; Tung's ∀∃ class is coNP-complete via covering
+  congruences; **our DIVIS problem is in NP** (two proofs — one is our
+  own window bound, one via 2025 one-parametric Presburger — and nobody
+  has studied its hardness); and the single most promising pathway found:
+  **Adleman–Manders' γ-complete linear divisibility problem transfers to
+  the one equation (ax+1)y = c over ℤ if a CRT sign-rigidification
+  closes the ± gap** — randomized NP-hardness of two-variable H10 as a
+  concrete target, colliding productively with Baker's decidability
+  conjecture. All agent-reported citations flagged [P] pending our own
+  verification (`notes/trackB-hardness.md`).
+- **A second citable-gap theorem target logged**: "HBH ⟹ two-variable
+  H10 ∈ NP" — Smale posed the hypothesis, nobody assembled the theorem;
+  the pieces (Silverman's refined Siegel + Lagarias certificates + HBH)
+  are all on our bench. Also: Silverman TCS 2000 gives a sharper
+  infinitude criterion than classify.py encodes — upgrade queued.
+
 ## 2026-07-21 — the Census and the war council
 
 Two creative engines launched while the A1-v2 citations verify:
