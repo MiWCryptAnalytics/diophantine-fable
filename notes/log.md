@@ -373,6 +373,25 @@ Five verifiers, 176 tool calls, and every verdict moved us forward:
 - 57 citations archived (`notes/citations/2026-07-21-a1v2-verification
   .json`).
 
+## 2026-07-22 — HBH⟹NP assembled honestly; a mini-theorem falls out
+
+- `notes/HBH-NP-assembly.md`: the citable-gap-#2 note structured. The
+  bookkeeping surfaced two things Smale's one-liner hides: (1) an
+  **unconditional mini-theorem** — the whole A1-v1 fragment is in NP,
+  because every stratum's witness is either O(s)-bit directly (windows)
+  or an orbit triple (rep, signs, k) verified by fast matrix
+  exponentiation of σ mod M — Lagarias's trick, generalized by our
+  machinery, ExtraCong riders included; (2) Smale's HBH covers only
+  positive genus — the genus-0-sporadic stratum (≥3 places) needs its
+  own hypothesis **HBH₀**, effective-Roth-flavored, which the assembly
+  must state rather than smuggle. Honest slogan: DIOPH2 ∈ NP ⟺ every
+  sporadic stratum admits SOME poly-bit certificate scheme — with
+  point-guessing (HBH+HBH₀) the natural instantiation and the
+  Pell/cubic orbit compressions proof that smarter schemes are
+  sometimes forced. If the assembly lands: NP ∩ γ-hard + Baker's
+  decidability conjecture = factoring-flavored NP-intermediate texture.
+  Fully Smale-shaped.
+
 ## 2026-07-22 — the errata note drafted, machine-checked
 
 - `notes/AM-errata.md`: the citable-gap-#3 note in paper shape — E1 (the
