@@ -264,3 +264,40 @@ exactly the asymmetry you want to discover before anyone else does.
   and reordered. Even the log gets the honesty discipline.
 - Next targets unchanged: G1 general parametrization; A1-v2
   compact-representation cubic Thue.
+
+## 2026-07-21 — the Pell walk climbs a rung: cubic Thue via unit orbits
+
+The best session yet. The citation pass's sharpest sting was that even
+degree-3 Thue equations aren't known decidable in exponential time — height
+bounds are hopeless. Today the program answered with a *reduction*:
+
+- **The idea.** For x³ − d·y³ = m, K = ℚ(∛d) is a complex cubic field:
+  unit rank 1. A solution is γ = x − y·α of norm m; all norm-m elements are
+  (class rep)·(±ε^k); and "being of Thue shape" is the **vanishing of the
+  α²-coordinate of γ·ε^k** — a zero of an order-3 linear recurrence with
+  dominant root. Deciding that is a Skolem instance of the classically
+  decidable kind, and the modulus gap (3/2)·regulator per step means the
+  last vanishing index should be O(1 + log|m|/R).
+- **The prototype** (`experiments/cubic_orbit_prototype.py`): class reps
+  via bnfisintnorm, walk the unit orbit, harvest coordinate-vanishing
+  points. Validated against PARI's certified thue on 14 fields × 80 values
+  of m: **1120/1120 exact solution-set agreements, zero mismatches, 2.5
+  seconds — and the maximum vanishing index across the entire grid is 3.**
+  The window-bound conjecture is now data-backed; its proof plan is
+  elementary embedding inequalities, *no linear forms in logarithms* —
+  which is the whole point.
+- **The envelope, one rung up** (`experiments/thue_unit_growth.py`): the
+  fundamental unit of ℚ(∛d) reaches 1593-digit coefficients by s = 20
+  (Pell managed ~145 at the same size), every record bnfcertify'd
+  unconditionally. Search is deader than ever; the walk doesn't care —
+  it materializes at most ε^±4.
+- **Where the wall moved** (`notes/A1v2-cubic-thue.md`): cubic Thue in EXP
+  now *follows from* (a) the window bound (elementary, conjectured, max
+  observed 3) and (b) certified bnf data in exponential time — the
+  compact-representations kernel where Buchmann-school methods live. The
+  G2 wall transformed from "height bounds are doubly exponential" into a
+  concrete computational-algebraic-number-theory question. Totally real
+  cubics (rank 2, no dominant root) deferred with eyes open.
+- Next: prove the window bound for pure cubics; citation pass on Skolem
+  order-3 attribution and certified-bnfinit complexity; then promote the
+  prototype into `smale5/solvers/` as A1 clause (v).
