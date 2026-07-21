@@ -1,0 +1,268 @@
+[
+  {
+    "id": "skolem-low-order",
+    "verdict": "corrected",
+    "corrected_statement": "The Skolem Problem — given a linear recurrence sequence (LRS), decide whether it has a zero term — is decidable for integer (indeed, real algebraic) LRS of order at most 4. This was proved independently by Mignotte, Shorey and Tijdeman (J. reine angew. Math. (Crelle) 349 (1984), 63–76) and by Vereshchagin (Math. Notes Acad. Sci. USSR 38:2 (1985), 609–615; Russian original in Mat. Zametki 38:2 (1985)), via Baker-type lower bounds for linear forms in logarithms together with p-adic methods (van der Poorten's and later Yu's p-adic analogues). Precisely, the 1980s results establish decidability for the \"MSTV class\" — non-degenerate LRS with at most 3 dominant characteristic roots with respect to an Archimedean absolute value, or at most 2 dominant roots with respect to a non-Archimedean one — which yields decidability for algebraic (Q̄-coefficient) LRS of order ≤ 3 and real algebraic LRS of order ≤ 4; the last order-4 case, non-real algebraic LRS, remained open until Bacik (arXiv:2409.01221, Sept 2024; TheoretiCS 4 (2025), art. 28) — for the standard integer-LRS formulation, however, order ≤ 4 has been fully settled since 1984–85. Decidability at order 5 remains open even for integer LRS, and the problem is NP-hard (Blondel–Portier, Linear Algebra Appl. 351–352 (2002), 91–98). The order-≤4 procedures are effective: they exhibit a computable bound N = 2^poly(||u||) on the largest zero index (made complexity-theoretic as NP^RP in Chonev–Ouaknine–Worrell, J. ACM 63 (2016), Appendix C, and improved to coRP by Bacik–Ouaknine–Worrell, SODA 2026, arXiv:2507.11234). The case of a unique dominant (real) root — the generic order-3 situation — admits a genuinely simpler effective treatment via Archimedean Baker bounds alone, with fully explicit zero-free index thresholds for simple LRS with one dominant root or two roots of maximal modulus (Min Sha, J. Number Theory 197 (2019), 228–249); detailed elementary proofs of the order-≤4 cases appear in Halava–Harju–Hirvensalo–Karhumäki (TUCS TR 683, 2005). Recent conditional/related advances: \"Skolem Meets Schanuel\" (Bilu, Luca, Nieuwveld, Ouaknine, Purser, Worrell, MFCS 2022) — an algorithm for simple LRS of arbitrary order, terminating subject to the Skolem Conjecture and the p-adic Schanuel Conjecture; \"On the Skolem Problem and the Skolem Conjecture\" (Lipton, Luca, Nieuwveld, Ouaknine, Purser, Worrell, LICS 2022) — unconditional decidability for reversible integer LRS of order ≤ 7; Universal Skolem Sets (Luca–Ouaknine–Worrell, LICS 2021, and later works): \"Skolem Meets Bateman–Horn\" (Luca, Maynard, Noubissie, Ouaknine, Worrell, arXiv:2308.01152, v2 2024) gives a Universal Skolem Set of lower density ≥ 0.29 unconditionally and density one under the Bateman–Horn conjecture, while \"On Large Zeros of Linear Recurrence Sequences\" (Luca–Ouaknine–Worrell, MFCS 2025) unconditionally yields a Universal Skolem Set of density one by showing the possible \"large\" zeros (beyond a six-fold exponential bound) have null density.",
+    "notes": "Core claim CONFIRMED but several precise details needed correction, hence verdict \"corrected\". (1) Years/attribution/venues check out: MST = Crelle 349 (1984), 63–76 (DOI 10.1515/crll.1984.349.63; note some bibliographies, including Bacik's and the SODA 2026 paper's, list author order Tijdeman–Mignotte–Shorey, but the standard abbreviation is MST(V)); Vereshchagin = Math. Notes 38:2 (1985), 609–615 (DOI 10.1007/BF01156238), independent proof. Methods (Baker's theorem + p-adic analysis) confirmed. Order 5 open confirmed (\"even in the simplest case of integer sequences, decidability is not yet known for order-5 LRS\" — Bacik, TheoretiCS 2025). (2) IMPORTANT NUANCE the claim missed: per Bacik (TheoretiCS 4 (2025), art. 28), the 1980s results cover algebraic LRS of order ≤ 3 and only REAL algebraic LRS of order ≤ 4; the non-real algebraic order-4 case was open until Bacik 2024. For integer/rational LRS (the usual formulation, and the one relevant to a Thue-equation note) the folklore \"order ≤ 4 since 1984/85\" is accurate. (3) \"Skolem meets Bayes\" DOES NOT EXIST — no such paper. The intended references are \"Skolem Meets Schanuel\" (MFCS 2022; authors Bilu, Luca, Nieuwveld, Ouaknine, Purser, Worrell) and/or \"Skolem Meets Bateman–Horn\" (Luca, Maynard, Noubissie, Ouaknine, Worrell). The author list quoted in the claim (Lipton, Luca, Nieuwveld, Ouaknine, Purser, Worrell) is that of the LICS 2022 paper \"On the Skolem Problem and the Skolem Conjecture\" (reversible LRS of order ≤ 7); the Universal Skolem Sets line is by Luca–Ouaknine–Worrell (LICS 2021, Distinguished Paper). (4) Order-3/dominant-real-root: yes, simpler effective treatment exists — confirmed via three routes: the SODA 2026 paper states the order-≤4 breakthrough papers already exhibit an effective bound N (magnitude 2^poly) on the largest zero; Min Sha (J. Number Theory 197 (2019); arXiv:1505.07147) gives fully explicit bounds for simple LRS with a dominant root or exactly two maximal-modulus roots; Halava et al. (TUCS 2005) give detailed elementary proofs for depth ≤ 4. Caveat: effectiveness is NOT special to order 3 — the whole order-≤4 procedure is effective. (5) 2024–2026 progress verified: Bacik order-4 completion (arXiv Sep 2024, TheoretiCS 2025); Bilu's exposition arXiv:2501.16290 (2025); Luca–Ouaknine–Worrell MFCS 2025 (LIPIcs 345, 71:1–71:11) — unconditional density-one Universal Skolem Set; Bacik–Ouaknine–Worrell SODA 2026 (arXiv:2507.11234) — Bounded Skolem in coRP for each fixed order, Skolem at order ≤ 4 in coRP (previously NP^RP); Bacik–Ouaknine–Purser–Worrell \"On the p-adic Skolem Problem\" STACS 2026 (LIPIcs 364); Luca–Ouaknine–Worrell \"Conjectural decidability of the Skolem Problem\" listed as submitted (2026) on Ouaknine's publications page. All statements above traced to primary sources (arXiv full texts of Bacik TheoretiCS and SODA 2026 papers were downloaded and read directly).",
+    "citations": [
+      {
+        "ref": "M. Mignotte, T. N. Shorey, R. Tijdeman, The distance between terms of an algebraic recurrence sequence, J. reine angew. Math. 349 (1984), 63–76",
+        "url": "https://doi.org/10.1515/crll.1984.349.63"
+      },
+      {
+        "ref": "N. K. Vereshchagin, Occurrence of zero in a linear recursive sequence, Math. Notes Acad. Sci. USSR 38:2 (1985), 609–615",
+        "url": "https://doi.org/10.1007/BF01156238"
+      },
+      {
+        "ref": "P. Bacik, Completing the picture for the Skolem Problem on order-4 linear recurrence sequences, TheoretiCS 4 (2025), art. 28",
+        "url": "https://arxiv.org/abs/2409.01221"
+      },
+      {
+        "ref": "Y. Bilu, Skolem Problem for Linear Recurrence Sequences with 4 Dominant Roots (after Mignotte, Shorey, Tijdeman, Vereshchagin and Bacik), arXiv preprint 2025",
+        "url": "https://arxiv.org/abs/2501.16290"
+      },
+      {
+        "ref": "P. Bacik, J. Ouaknine, J. Worrell, On the Complexity of the Skolem Problem at Low Orders, Proc. SODA 2026",
+        "url": "https://arxiv.org/abs/2507.11234"
+      },
+      {
+        "ref": "V. Chonev, J. Ouaknine, J. Worrell, On the complexity of the orbit problem, J. ACM 63 (2016)",
+        "url": "https://doi.org/10.1145/2857050"
+      },
+      {
+        "ref": "V. D. Blondel, N. Portier, The presence of a zero in an integer linear recurrent sequence is NP-hard to decide, Linear Algebra Appl. 351–352 (2002), 91–98",
+        "url": "https://doi.org/10.1016/S0024-3795(01)00466-9"
+      },
+      {
+        "ref": "M. Sha, Effective results on the Skolem Problem for linear recurrence sequences, J. Number Theory 197 (2019), 228–249",
+        "url": "https://arxiv.org/abs/1505.07147"
+      },
+      {
+        "ref": "Y. Bilu, F. Luca, J. Nieuwveld, J. Ouaknine, D. Purser, J. Worrell, Skolem Meets Schanuel, MFCS 2022, LIPIcs 241, 20:1–20:15",
+        "url": "https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.MFCS.2022.20"
+      },
+      {
+        "ref": "R. J. Lipton, F. Luca, J. Nieuwveld, J. Ouaknine, D. Purser, J. Worrell, On the Skolem Problem and the Skolem Conjecture, LICS 2022",
+        "url": "https://dl.acm.org/doi/10.1145/3531130.3533328"
+      },
+      {
+        "ref": "F. Luca, J. Ouaknine, J. Worrell, Universal Skolem Sets, LICS 2021",
+        "url": "https://people.mpi-sws.org/~joel/publications/skolem_sets21abs.html"
+      },
+      {
+        "ref": "F. Luca, J. Maynard, A. Noubissie, J. Ouaknine, J. Worrell, Skolem Meets Bateman-Horn, arXiv:2308.01152 (v2, 2024)",
+        "url": "https://arxiv.org/abs/2308.01152"
+      },
+      {
+        "ref": "F. Luca, J. Ouaknine, J. Worrell, On Large Zeros of Linear Recurrence Sequences, MFCS 2025, LIPIcs 345, 71:1–71:11",
+        "url": "https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.MFCS.2025.71"
+      },
+      {
+        "ref": "P. Bacik, J. Ouaknine, D. Purser, J. Worrell, On the p-adic Skolem Problem, STACS 2026, LIPIcs 364",
+        "url": "https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.STACS.2026.8"
+      },
+      {
+        "ref": "V. Halava, T. Harju, M. Hirvensalo, J. Karhumäki, Skolem's Problem — On the Border between Decidability and Undecidability, TUCS Technical Report 683, 2005",
+        "url": "http://oldtucs.abo.fi/publications/view/?pub_id=tHaHaHiKa05a"
+      },
+      {
+        "ref": "J. Ouaknine, Publications page (listing Conjectural decidability of the Skolem Problem, submitted 2026)",
+        "url": "https://people.mpi-sws.org/~joel/pubs.html"
+      }
+    ]
+  },
+  {
+    "id": "bnf-complexity",
+    "verdict": "corrected",
+    "corrected_statement": "Complexity of certified bnf data (class group + regulator/fundamental units) of a number field K, discriminant Δ, input a defining polynomial of bit-size s. (1) Subexponential: Buchmann's algorithm (Sém. Théorie des Nombres Paris 1988-1989, publ. 1990) has EXPECTED time L_Δ(1/2, 1.7+o(1)) for fixed degree, but its analysis is conditional on GRH AND unproven smoothness heuristics, not GRH alone; it is rigorous under GRH/ERH only in the quadratic case (Hafner-McCurley 1989 for imaginary quadratic, L(1/2, sqrt(2)); Vollmer 2002 for real quadratic regulators). For varying degree, Biasse-Fieker (2014) obtain, again under GRH + smoothness heuristics, L_Δ(2/3+ε) for arbitrary degree and L_Δ(1/2) when the degree grows slowly relative to log|Δ|. (2) Unconditional (no GRH, no heuristics), fixed degree n: YES, single-exponential algorithms exist. Lenstra's survey (Bull. AMS 26 (1992), Thm 5.5, drawing on Buchmann's CNTA-Banff 1988/1990 survey) records a deterministic algorithm in time (2+log|Δ|)^{O(n^5)}|Δ|^{3/4} and a probabilistic (Las Vegas) algorithm in expected time (2+log|Δ|)^{O(n^5)}|Δ|^{1/2}; the fixed-degree version is proved, the uniform-in-n version is stated by Lenstra only as 'appears to be true'. Schoof (MSRI Publ. 44, 2008, §11) describes a deterministic algorithm (attributed to folklore/H.W. Lenstra) computing the full Arakelov class group — hence certified class group AND units — in time |Δ|^{1/2}(log|Δ|)^{O(1)} for fixed degree. Since for a cubic field |Δ_K| ≤ |disc f| = 2^{O(s)}, certified class group + units of a cubic field are unconditionally computable in deterministic time 2^{O(s)}, i.e. |Δ|^{1/2+o(1)}; caveat: units must be output in compact representation, since the standard representation of a fundamental unit can occupy Θ̃(R) = Θ̃(|Δ|^{1/2}) bits. (3) GRH-free certification of a GRH-computed bnf (PARI's bnfcertify): the manual states only that it 'removes the assumption of GRH' and gives no runtime bound; the implementation checks all primes up to Zimmert's bound ≍ c_{r1,r2}·|Δ|^{1/2} (warning message: 'Zimmert's bound is large, certification will take a long time'), so it runs in time |Δ|^{1/2+o(1)} for fixed degree — 'roughly O(sqrt|disc|)' is the right shape, 'or worse' is unsupported at fixed degree. The unit-group part alone can be certified unconditionally faster: expected O(Δ^{r/(4r+2)+ε}), r = unit rank (Fontein-Jacobson 2010), i.e. Δ^{1/6+ε} for complex cubics (r=1) and Δ^{1/5+ε} for totally real cubics (r=2); the |Δ|^{1/2} bottleneck is certifying that the factor base generates the class group. Under GRH, the entire bnf data admits polynomial-size certificates verifiable in polynomial time (Thiel, ANTS-I 1994). (4) 2024-2026: no known classical result improves the unconditional |Δ|^{1/2+o(1)} exponent for generic (subfield-free, e.g. non-Galois cubic) fields; recent unconditional/certification advances use norm relations between subfields (Biasse-Fieker-Hofmann-Page, arXiv:2002.12332 v4, Apr 2025; Etienne, arXiv:2411.13124, 2024/2025) and do not apply to a generic cubic field.",
+    "notes": "Verified against primary sources. Corrections to the original claim: (a) 'Buchmann's subexponential algorithm is GRH-conditional' is imprecise — Biasse-Fieker 2014 (p.385-386) explicitly call Buchmann's L(1/2, 1.7+o(1)) bound a 'heuristic complexity' valid for fixed degree, and their own method 'relies on the generalized Riemann hypothesis and other usual heuristics concerning the smoothness of ideals'; Lenstra 1992 (Problem 5.8) lists a GRH-only rigorous subexponential algorithm as OPEN for general degree, citing Buchmann 1990 as only 'a partial solution'; rigorous-under-GRH L(1/2) is proven only for quadratic fields (Hafner-McCurley; Vollmer). (b) 'bnfcertify takes roughly O(sqrt|disc|)) or worse': confirmed in shape (Zimmert-bound prime enumeration, ≍ c·sqrt|Δ|), but the PARI manual itself asserts no runtime bound, and 'or worse' is unsupported for fixed degree; also sub-sqrt unconditional certification of the UNIT part exists (Fontein-Jacobson: Δ^{n/(4n+2)+ε}, n = unit rank). (c) The central question — unconditional 2^{poly(input)} algorithm for certified units/class group of a cubic (or any fixed-degree) field — is answered YES by proven results: deterministic |Δ|^{3/4+o(1)} and Las Vegas expected |Δ|^{1/2+o(1)} (Lenstra 1992 Thm 5.5, fixed-degree case proved via Buchmann's CNTA 1990 survey), and deterministic |Δ|^{1/2}·polylog for the Arakelov class group at fixed degree (Schoof 2008 §11: 'It runs in time proportional to sqrt(|Δ_F|) times a power of log|Δ_F|'). Subtleties worth keeping in the note: uniform-in-degree versions are only 'appears to be true' per Lenstra; maximal-order computation needs the squarefree part of disc(f) (Chistov), but trial-division factoring stays within 2^{O(s)}; fundamental units need compact representations to avoid 2^{Θ(s)} output size (Biasse-Fieker give subexponential-size compact representations, earlier methods exponential in degree). Attribution warning: Buchmann-Williams, Math. Comp. 53 (1989) is GRH-CONDITIONAL (computes h in O(|d|^{1+ε}/(h*R)^2), i.e. O(|d|^{1/4+ε}) when h<|d|^{1/8}) — it is not an unconditional-certification reference; Buchmann-Williams, Math. Comp. 50 (1988) computes the regulator of unit-rank-1 fields (e.g. complex cubics) unconditionally in O(R^{1/2}D^ε) ⊆ O(D^{1/4+ε}). Quadratic baseline (Biasse-Fieker intro): Shanks O(|Δ|^{1/4+ε}), O(|Δ|^{1/5+ε}) under ERH. 2024-2026 search found no improvement to the unconditional sqrt-of-discriminant exponent for generic cubic fields; norm-relation certification (BFHP v4 2025; Etienne 2024) needs subfields, absent for non-Galois cubics. Arvind-Kurur (ANTS 2004) is a structural-complexity result (unit group in SPP for fixed degree), consistent with, but weaker than, the concrete bounds above.",
+    "citations": [
+      {
+        "ref": "J. Buchmann, A subexponential algorithm for the determination of class groups and regulators of algebraic number fields, Séminaire de Théorie des Nombres Paris 1988-1989, Progr. Math. 91, Birkhäuser 1990, 27-41",
+        "url": "https://tubiblio.ulb.tu-darmstadt.de/101189/"
+      },
+      {
+        "ref": "J. L. Hafner, K. S. McCurley, A rigorous subexponential algorithm for computation of class groups, J. Amer. Math. Soc. 2 (1989), 837-850",
+        "url": "https://www.ams.org/journals/jams/1989-02-04/S0894-0347-1989-1002631-0/"
+      },
+      {
+        "ref": "J.-F. Biasse, C. Fieker, Subexponential class group and unit group computation in large degree number fields, LMS J. Comput. Math. 17A (2014), 385-403",
+        "url": "https://doi.org/10.1112/S1461157014000345"
+      },
+      {
+        "ref": "H. W. Lenstra, Jr., Algorithms in algebraic number theory, Bull. Amer. Math. Soc. 26 (1992), 211-244 (Theorem 5.5, Problems 5.6/5.8)",
+        "url": "https://www.ams.org/journals/bull/1992-26-02/S0273-0979-1992-00284-7/S0273-0979-1992-00284-7.pdf"
+      },
+      {
+        "ref": "R. Schoof, Computing Arakelov class groups, in: Algorithmic Number Theory (Buhler, Stevenhagen eds.), MSRI Publ. 44, Cambridge Univ. Press 2008, 447-495 (§11)",
+        "url": "https://arxiv.org/abs/0801.3835"
+      },
+      {
+        "ref": "J. Buchmann, Complexity of algorithms in algebraic number theory, Proc. First Conf. Canadian Number Theory Assoc. (Banff 1988), de Gruyter 1990, 37-53",
+        "url": ""
+      },
+      {
+        "ref": "J. Buchmann, H. C. Williams, On the computation of the class number of an algebraic number field, Math. Comp. 53 (1989), 679-688",
+        "url": "https://www.ams.org/journals/mcom/1989-53-188/S0025-5718-1989-0979937-4/S0025-5718-1989-0979937-4.pdf"
+      },
+      {
+        "ref": "J. Buchmann, H. C. Williams, On the infrastructure of the principal ideal class of an algebraic number field of unit rank one, Math. Comp. 50 (1988), 569-579",
+        "url": "https://www.ams.org/journals/mcom/1988-50-182/S0025-5718-1988-0929554-6/"
+      },
+      {
+        "ref": "PARI/GP User's Guide (v2.15+), §3.13.9 bnfcertify and §3.13.11 bnfinit",
+        "url": "https://pari.math.u-bordeaux.fr/dochtml/html/General_number_fields.html"
+      },
+      {
+        "ref": "F. Fontein, M. J. Jacobson Jr., Rigorous computation of fundamental units in algebraic number fields, arXiv:1001.4187 (2010)",
+        "url": "https://arxiv.org/abs/1001.4187"
+      },
+      {
+        "ref": "U. Vollmer, An accelerated Buchmann algorithm for regulator computation in real quadratic fields, ANTS-V, LNCS 2369, Springer 2002, 148-162",
+        "url": "https://link.springer.com/chapter/10.1007/3-540-45455-1_12"
+      },
+      {
+        "ref": "C. Thiel, Under the assumption of the Generalized Riemann Hypothesis verifying the class number belongs to NP ∩ co-NP, ANTS-I, LNCS 877, Springer 1994, 234-247",
+        "url": "https://link.springer.com/chapter/10.1007/3-540-58691-1_58"
+      },
+      {
+        "ref": "J.-F. Biasse, C. Fieker, T. Hofmann, A. Page, Norm relations and computational problems in number fields, arXiv:2002.12332 v4 (Apr 2025); J. Lond. Math. Soc. 105 (2022), 2373-2414 (§4.6 Unconditional computations)",
+        "url": "https://arxiv.org/abs/2002.12332"
+      },
+      {
+        "ref": "F. Etienne, Computing class groups by induction with generalised norm relations, arXiv:2411.13124 (2024, rev. 2025)",
+        "url": "https://arxiv.org/abs/2411.13124"
+      },
+      {
+        "ref": "R. Zimmert, Ideale kleiner Norm in Idealklassen und eine Regulatorabschätzung, Invent. Math. 62 (1981), 367-380 (basis of PARI's certification bound; cf. PARI warning 'Zimmert's bound is large, certification will take a long time')",
+        "url": "https://ask.sagemath.org/question/10899/question-about-warning-zimmerts-bound-is-large-11032190-certification-will-take-a-long-time/"
+      },
+      {
+        "ref": "V. Arvind, P. P. Kurur, On the complexity of computing units in a number field, ANTS-VI, LNCS 3076, Springer 2004, 72-86",
+        "url": "https://link.springer.com/chapter/10.1007/978-3-540-24847-7_5"
+      }
+    ]
+  },
+  {
+    "id": "min-regulator",
+    "verdict": "corrected",
+    "corrected_statement": "Among complex cubic fields (signature (1,1), discriminant < 0) the minimal regulator is R = log(1.3247179572...) = 0.2811995743... (\"0.2812\" is correct to 4 places), attained uniquely by the cubic field of discriminant −23, defined by x^3 − x − 1 (equivalently x^3 − x^2 + 1, LMFDB 3.1.23.1); the fundamental unit is the real root itself (the plastic number, disc(x^3−x−1) = −23), so R = log of that root. A positive absolute lower bound is proven and sharp: Astudillo–Diaz y Diaz–Friedman (J. Number Theory 167 (2016), Theorem 7 and Table 1) prove every complex cubic field satisfies R_k ≥ 0.281199..., and moreover R_k > 0.79 with exactly three exceptions, the fields of discriminant −23, −31, −44 with regulators 0.281199..., 0.382245..., 0.609377.... The attribution is NOT Artin: ADF 2016 is the standard citable source for the sharp minimum, and they derive the complex cubic case from Remak's inequality (Compos. Math. 10 (1952), 245–285) plus the Delone–Faddeev lists of cubic fields of small discriminant; the classical inequality for complex cubics ε^3 > (|Δ|−27)/4 for |Δ| ≥ 33 (Alaca–Williams, Introductory Algebraic Number Theory, 2004, Theorem 13.6.1; folklore-attributed to Artin's Göttingen lectures, but modern authorities do not cite Artin) also gives positivity plus growth in |Δ|. Caution: the −23 cubic does NOT minimize the regulator over all number fields — Friedman (Invent. Math. 98 (1989), p. 599) proved the global minimum regulator is 0.205216..., attained by a totally complex sextic field (discriminant −10051), so the \"smallest regulator of any number field\" phrasing must be avoided; the −23 field is extremal only within its signature (and it does have the smallest absolute discriminant of any cubic field).",
+    "notes": "VERIFIED NUMERICALLY: real root of x^3−x−1 is 1.32471795724474602596..., log = 0.28119957432296184651...; LMFDB 3.1.23.1 lists regulator 0.281199574323, discriminant −23, class number 1, fundamental unit a^2−a for x^3−x^2+1. PRIMARY SOURCE (full text read, repositorio.uchile.cl PDF): ADF 2016 Theorem 7 (Cubics), quoted: \"With three exceptions, all complex cubic fields k satisfy Rk > 0.79. The exceptions are the unique cubic fields of discriminant −23, −31 and −44, with respective regulators 0.281199..., 0.382245... and 0.609377...\"; Table 1 sharp regulator lower bound (n=3, r=1) = 0.281199; abstract: \"Except in the totally complex case, in each signature we find that the field with the minimal discriminant has the minimal regulator.\" Their Section 4.2: \"the complex case is nearly as easy as the quadratic case given Remak's inequality (2) and the old lists by Delone and Faddeev\" — i.e., classical-in-spirit but the rigorous sharp statement is ADF 2016; no mention of Artin anywhere in ADF. ADF intro history: real quadratic easy; Pohst (Abh. Hamburg 1978) totally real cubic; Zimmert 1981 log((1+√5)/2) minimal among all totally real fields; \"Friedman [Fr1, p. 599] found the minimal regulator for totally complex sextic fields and showed that it was the smallest regulator among all number fields\" — global min 0.205216 (Table 1, n=6, r=2). The −10051 discriminant of the global minimizer comes from secondary sources (search summaries citing Friedman's k0, degree 6, disc −10051) — moderate confidence on that one digit-string, high confidence on 0.205216 (ADF Table 1). Artin attribution check: Wikipedia \"Fundamental unit (number theory)\" states ε^3 > (|Δ|−27)/4 for |Δ| ≥ 33 citing Alaca & Williams 2004 Thm 13.6.1, no Artin; I could not locate an authoritative source crediting Artin, so the note should not assert Artin without checking E. Artin, Theory of Algebraic Numbers (Göttingen 1959 notes) directly. 2024–2026 developments: Battistoni–Molteni, \"Generalized Pohst inequality and small regulators\" (Math. Comp., 2024/2025, arXiv:2211.16842) and Friedman–Ramirez-Raposo (arXiv:1810.03675) extend small-regulator classification to signatures (5,1), (6,1) etc. — none affect the complex cubic minimum. Degree-3 r=1 = complex cubic (totally real cubics have rank 2), so Table 1 entry applies exactly to the claimed class.",
+    "citations": [
+      {
+        "ref": "S. Astudillo, F. Diaz y Diaz, E. Friedman, Sharp lower bounds for regulators of small-degree number fields, J. Number Theory 167 (2016) 232-258, Theorem 7 and Table 1",
+        "url": "https://www.sciencedirect.com/science/article/pii/S0022314X1630049X"
+      },
+      {
+        "ref": "S. Astudillo, F. Diaz y Diaz, E. Friedman, Sharp lower bounds for regulators of small-degree number fields (open-access PDF, Univ. de Chile repository)",
+        "url": "https://repositorio.uchile.cl/bitstream/handle/2250/141392/Sharp-lower-bounds.pdf?sequence=1&isAllowed=y"
+      },
+      {
+        "ref": "E. Friedman, Analytic formulas for the regulator of a number field, Invent. Math. 98 (1989) 599-622",
+        "url": "https://link.springer.com/article/10.1007/BF01393839"
+      },
+      {
+        "ref": "LMFDB, Number field 3.1.23.1 (cubic field of discriminant -23, regulator 0.281199574323)",
+        "url": "https://www.lmfdb.org/NumberField/3.1.23.1"
+      },
+      {
+        "ref": "R. Remak, Über Grössenbeziehungen zwischen Diskriminante und Regulator eines algebraischen Zahlkörpers, Compos. Math. 10 (1952) 245-285"
+      },
+      {
+        "ref": "S. Alaca, K. S. Williams, Introductory Algebraic Number Theory, Cambridge Univ. Press 2004, Theorem 13.6.1 (cubic-field unit-discriminant inequality; via Wikipedia, Fundamental unit (number theory))",
+        "url": "https://en.wikipedia.org/wiki/Fundamental_unit_(number_theory)"
+      },
+      {
+        "ref": "E. Friedman, G. Ramirez-Raposo, The smallest regulator for number fields of degree 7 with five real places, arXiv:1810.03675 (2018)",
+        "url": "https://arxiv.org/abs/1810.03675"
+      },
+      {
+        "ref": "F. Battistoni, G. Molteni, Generalized Pohst inequality and small regulators, Math. Comp. (2024), arXiv:2211.16842",
+        "url": "https://arxiv.org/abs/2211.16842"
+      }
+    ]
+  },
+  {
+    "id": "bnfisintnorm",
+    "verdict": "confirmed",
+    "corrected_statement": "PARI/GP's bnfisintnorm(bnf, m) \"computes a complete system of solutions (modulo units of positive norm) of the absolute norm equation Norm(a) = m, where a is an integer in bnf\" (verbatim, PARI/GP User's Guide, v2.17). Since a unit's norm is +-1, \"units of positive norm\" means exactly the subgroup of units of norm +1, so the output is one representative per orbit of integral solutions under multiplication by norm-1 units; Norm(a) = -m must be solved by a separate call (the library-level variant bnfisintnormabs solves |Norm(a)| = |m|, both signs at once). Representatives are NOT guaranteed to be size-reduced: the documentation makes no minimality claim, and its own example (real quadratic bnf with regulator ~1.4e7) shows expanded representatives can overflow 100 GB of memory; since 2.17.0 (released Nov 2024, introduced in beta 2.16.2) an optional flag returns solutions in compact factored form instead (requires an exact bnf from bnfinit(,1)). Correctness is conditional on GRH for any bnfinit flag — \"If bnf has not been certified, the correctness of the result depends on the validity of GRH\" — and becomes unconditional only after bnfcertify(bnf) returns 1 (full certification needs the fundamental units, i.e. in practice bnfinit(,1)).",
+    "notes": "Verification against PRIMARY sources. (1) Verbatim doc text from locally installed PARI/GP 2.17.4 via gphelp -detex bnfisintnorm: \"Computes a complete system of solutions (modulo units of positive norm) of the absolute norm equation Norm(a) = x, where a is an integer in bnf. If bnf has not been certified, the correctness of the result depends on the validity of GRH.\" Identical wording in the online manual. (2) Empirical check in gp 2.17.4, bnf = bnfinit(x^3-2) (class number 1, fundamental unit 1-x of norm -1): bnfisintnorm(bnf,6) = [x^2+x], a single representative; brute-force enumeration of all a+b*t+c*t^2 (t = 2^(1/3), coefficients in [-8,8]) found 5 solutions of norm 6, every one equal to the returned representative times a unit of norm +1 — confirming completeness and the one-rep-per-norm-1-unit-orbit semantics; bnfisintnorm(bnf,-6) = [-x^2-x] is a separate call. (3) Nuances vs the claim as drafted: (a) PARI's exact phrase is \"units of positive norm\", mathematically identical to \"units of norm 1\" since unit norms are +-1 — no correction needed, but quote PARI's phrasing in the note; (b) size-reduction: NOT documented and effectively refuted by the doc's own example (bnf = bnfinit(x^2-2305843005992468481,1), bnf.reg ~ 1.4e7: flag=0 expansion overflows with 100GB parisize; flag=1 returns 31 solutions as t_MAT famat products of ~165 factors with 105-bit exponents) — a research note must not claim reduced/smallest representatives; (c) GRH: conditionality is tied to certification, not to the bnfinit flag — bnfinit doc says \"By default, the results are conditional on the GRH\" and this holds for flag=0 and flag=1 alike (flag=1 only stores exact algebraic data/compact units); only bnfcertify(bnf)=1 removes the GRH assumption, and bnfcertify with flag=0 requires the bnf to contain fundamental units (error \"precision too low in makeunits [use bnfinit(,1)]\" otherwise). (4) 2024-2026 development: the factored-form flag for bnfisintnorm (long flag in library function bnfisintnorm0) is new in the 2.16.2 beta -> 2.17.0 stable line (2024); base semantics unchanged. (5) bnfisintnormabs exists at library level only (GEN bnfisintnormabs(GEN bnf, GEN a)); it is not a GP-level function in 2.17.4 (tested: \"not a function in function call\"). No contradicting source found; verdict confirmed with the above precisions.",
+    "citations": [
+      {
+        "ref": "The PARI Group, User's Guide to PARI/GP (version 2.17), s.v. bnfisintnorm, bnfinit, bnfcertify, Univ. Bordeaux 2024",
+        "url": "https://pari.math.u-bordeaux.fr/dochtml/html/General_number_fields.html"
+      },
+      {
+        "ref": "The PARI Group, PARI 2.16.2 beta released (prerelease for PARI 2.17.0), pari-announce mailing list 2024 (bnfisintnorm factored-form flag)",
+        "url": "http://pari.math.u-bordeaux.fr/archives/pari-announce-24/msg00001.html"
+      },
+      {
+        "ref": "Local verification, GP/PARI Calculator Version 2.17.4 (released), gphelp text and empirical orbit/completeness tests in Q(2^(1/3)), 2026"
+      }
+    ]
+  },
+  {
+    "id": "thue-exp-modulo-bnf",
+    "verdict": "corrected",
+    "corrected_statement": "No source states the clean worst-case theorem \"Thue equations of fixed degree can be decided, with full solution list, in time exponential in the input size, given certified class-group and unit data\" — but the shape is materially anticipated and must be cited: N. P. Smart, \"How difficult is it to solve a Thue equation?\" (ANTS-II, LNCS 1122, 1996, pp. 363-373; Zbl 0896.11009) gives a complexity analysis of the Tzanakis-de Weger method for fixed degree d and monic F, measured in log|m| + log L(F) (L(F) = sum of |coefficients|): the small-solutions search costs O(|m|^{1/(d-2)}) (exponential in the input size; O(|m|) for cubics) and the Baker-bound-plus-LLL reduction phase costs O((R^2 + (1+R)(log|m| + log L(F)))^3) with R the regulator — i.e., polynomial in the unit data, exponential in the input overall — assuming fundamental units are supplied (via then-heuristic subexponential algorithms of Buchmann / Pohst-Zassenhaus); Smart concludes \"we seem to be a long way off from a 'good' algorithm\", and his analysis is a practical estimate for one method (with failure modes: large m, large regulator/class number, near-coincident roots of F(x,1)), not a rigorous worst-case decision theorem. Complementarily, the PARI/GP manual (thue/thueinit) states that when P(x) has no real root the equation F=a can be solved unconditionally in time |a|^{1/deg P}, and that in general thue's result is GRH-conditional unless the underlying bnf is certified (thueinit flag 1). Tzanakis-de Weger (J. Number Theory 31, 1989, 99-132) and Bilu-Hanrot (J. Number Theory 60, 1996, 373-392) state no complexity bound — only \"solve in reasonable time ... provided the necessary algebraic number theory data is available\" (units and the factorization of m in the field explicitly assumed known); all surveys and books checked (Smart 1998; Hanrot's LLL survey 2010; Evertse-Győry 2015; Waldschmidt 2017; Gaál 2002/2019; Kim 2017; Gherga-Siksek 2025) state effectivity or practicality only. A rigorous worst-case \"exponential modulo certified bnf\" theorem therefore appears to be absent from the literature and would be a citable gap — provided it is positioned against Smart 1996.",
+    "notes": "RAW FINDINGS. (1) KEY ANTICIPATING SOURCE: N.P. Smart, ANTS-II 1996, DOI 10.1007/3-540-61581-4_67. Abstract (Springer): \"an analysis of the difficulty of solving a Thue equation\" as \"a complexity estimate in terms of the size of the initial input data and also in terms of an invariant of the equation.\" zbMATH review by R.J. Stroeker (Zbl 0896.11009, fetched via api.zbmath.org): complexity measured for FIXED degree n in log|m|+log L(F); TdW algorithm breaks down when m too large, regulator and/or class number too large, or two roots of F(x,1)=0 very close (the last is Smart's new observation); results \"too technical to reproduce\"; Smart quoted: \"So although solving Thue equations is now considered trivial we seem to be a long way off from a 'good' algorithm.\" MSC includes 11Y16 (complexity). (2) EXACT BOUND SHAPES taken from a SECONDARY rendering (J. Stearn, Research Immersion Lab Report, Jan 2024, Lemma 18 citing [Sma96]): small solutions O(|m|^{1/(d-2)}); medium solutions O((R_K^2+(1+R_K)(log|m|+log L(F)))^3); F(x,1) monic assumed; units from \"conjectured subexponential algorithms of Buchmann [1988] or Pohst-Zassenhaus\". CAVEAT: primary PDF is paywalled (Springer); verify exact exponents against the paper before quoting them in print — I could not read the primary full text. (3) PIPELINE ATTRIBUTIONS in the claim are correct: Tzanakis-de Weger, J. Number Theory 31 (1989) 99-132 (Zbl 0657.10014; review confirms: Baker bound, LLL-based reduction, small-solutions search, and \"implicitly assumed ... the elementary units of the ... field are known, equally well as the prime factorization of m in this field\" = the modulo-bnf hypothesis, stated without any complexity bound). Bilu-Hanrot, J. Number Theory 60 (1996) 373-392 (Zbl 0867.11017): no complexity theorem; their innovation is replacing r-dimensional LLL reduction by continued-fraction reduction of two-term linear forms (so \"LLL reduction\" in the claim is TdW's tool; BH use CF) ; phrase \"solve in reasonable time ... provided necessary algebraic number theory data is available\". Hanrot Math. Comp. 69 (2000) 395-405 solves with only a finite-index subgroup of units (relaxes the bnf hypothesis; no complexity bound). (4) PARI/GP manual (Polynomials_and_power_series, thue/thueinit): \"If flag is nonzero, certify results unconditionally. Otherwise, assume GRH\"; general case uses \"Bilu-Hanrot's algorithm\"; totally imaginary case \"can be solved unconditionally in time |a|^{1/deg P}\" — a genuine printed exponential-in-input complexity statement, but only for the rank-limited case; no worst-case bound for the general case. (5) SOURCES CHECKED WITH NO COMPLEXITY BOUND: Smart's book (CUP 1998, Zbl 0907.11001, \"computational cookbook\"); Hanrot, \"LLL: A Tool for Effective Diophantine Approximation\", in The LLL Algorithm (Springer 2010) 215-263 (full text checked: pipeline description only); Waldschmidt, Thue Diophantine Equations survey (HRI Proc. 2017; full text checked: effectivity only); Kim, Math. Comp. 86 (2017) 1435-1471 §7 (qualitative comparison with TdW only, no complexity, does not cite Smart); Gherga-Siksek, Algebra & Number Theory 19:4 (2025) 667- (full text checked: practical only; cites Smart's book not the ANTS paper); Evertse-Győry (CUP 2015) per searches: effective height bounds + practical algorithmic sections only. Bugeaud-Győry (Acta Arith. 74, 1996) give height bounds max{log|x|,log|y|} <= C(r,N)·R·max{log R,1}·(R+log(HB)) — effectivity in terms of regulator, not running time. (6) 2024-2026: no paper states the claim. Adjacent: de Boer-Pellet-Mary-Wesolowski, arXiv:2512.01588 (Dec 2025), first PROVABLE probabilistic subexponential class-group+unit-group computation under ERH (full text grepped: zero Thue mentions) — strengthens the \"certified bnf data\" hypothesis story; Biasse-Song, arXiv:2510.02280, quantum poly-time S-units, solves relative NORM equations N_{L/K}(x)=theta in Galois case (grepped: no Thue) — norm equations here are single-solution-mod-units, NOT Thue full-solution-list. (7) ANTI-SOURCES: Grokipedia's Thue page asserts \"polynomial in the input size for fixed n\" / \"exponential in log|h| and degree n\" — AI-generated, internally inconsistent, unsourced; do NOT cite. (8) HONEST GAP ASSESSMENT: the reason no worst-case theorem exists is visible in the sources — the LLL/Baker-Davenport reduction step's success is per-instance certified but not a priori guaranteed, and Smart's analysis is explicitly an \"in practice\" estimate (Stroeker's review wording); a rigorous version (e.g., via unit-orbit enumeration for cubics) would be new, but novelty must be framed against Smart 1996 + the PARI |a|^{1/deg P} statement.",
+    "citations": [
+      {
+        "ref": "N. P. Smart, How difficult is it to solve a Thue equation?, Proc. ANTS-II, Springer LNCS 1122, 363-373, 1996",
+        "url": "https://doi.org/10.1007/3-540-61581-4_67"
+      },
+      {
+        "ref": "R. J. Stroeker, zbMATH review of Smart ANTS-II paper, Zbl 0896.11009, 1996",
+        "url": "https://zbmath.org/?q=an:0896.11009"
+      },
+      {
+        "ref": "J. Stearn, The Thue Equation, Research Immersion Lab Report (secondary rendering of Smart's Lemma), 2024",
+        "url": "https://james-stearn.com/wp-content/uploads/2024/06/RIL-Report.pdf"
+      },
+      {
+        "ref": "N. Tzanakis, B. M. M. de Weger, On the practical solution of the Thue equation, J. Number Theory 31, 99-132, 1989",
+        "url": "https://doi.org/10.1016/0022-314X(89)90014-0"
+      },
+      {
+        "ref": "Y. Bilu, G. Hanrot, Solving Thue equations of high degree, J. Number Theory 60, 373-392, 1996",
+        "url": "https://www.sciencedirect.com/science/article/pii/S0022314X96901298"
+      },
+      {
+        "ref": "The PARI Group, PARI/GP users manual, functions thue and thueinit (certification/GRH semantics; |a|^{1/deg P} bound in totally imaginary case)",
+        "url": "https://pari.math.u-bordeaux.fr/dochtml/html/Polynomials_and_power_series.html"
+      },
+      {
+        "ref": "G. Hanrot, Solving Thue equations without the full unit group, Math. Comp. 69, 395-405, 2000",
+        "url": "https://doi.org/10.1090/S0025-5718-99-01097-0"
+      },
+      {
+        "ref": "G. Hanrot, LLL: A Tool for Effective Diophantine Approximation, in The LLL Algorithm (Nguyen, Vallee eds.), Springer, 215-263, 2010",
+        "url": "https://doi.org/10.1007/978-3-642-02295-1_6"
+      },
+      {
+        "ref": "M. Waldschmidt, Thue Diophantine Equations: A survey, Proc. ICCGNFRT HRI Allahabad 2017",
+        "url": "https://webusers.imj-prg.fr/~michel.waldschmidt/articles/pdf/ProcHRI2017ThueEquations.pdf"
+      },
+      {
+        "ref": "A. Gherga, S. Siksek, Efficient resolution of Thue-Mahler equations, Algebra & Number Theory 19:4, 667-714, 2025",
+        "url": "https://doi.org/10.2140/ant.2025.19.667"
+      },
+      {
+        "ref": "D. Kim, A modular approach to cubic Thue-Mahler equations, Math. Comp. 86, 1435-1471, 2017",
+        "url": "https://www.math.snu.ac.kr/~dohyeongkim/2017-ThueMahler.pdf"
+      },
+      {
+        "ref": "K. de Boer, A. Pellet-Mary, B. Wesolowski, Rigorous methods for computational number theory, arXiv:2512.01588, 2025",
+        "url": "https://arxiv.org/abs/2512.01588"
+      },
+      {
+        "ref": "J.-F. Biasse, F. Song, An efficient quantum algorithm for computing S-units and its applications, arXiv:2510.02280, 2025",
+        "url": "https://arxiv.org/abs/2510.02280"
+      },
+      {
+        "ref": "J.-H. Evertse, K. Gyory, Unit Equations in Diophantine Number Theory, Cambridge Studies in Advanced Mathematics 146, CUP, 2015",
+        "url": "https://www.cambridge.org/core/books/unit-equations-in-diophantine-number-theory/12F79D4D2D65EC5D47A265DCCA82B62F"
+      }
+    ]
+  }
+]

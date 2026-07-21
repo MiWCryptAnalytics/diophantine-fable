@@ -343,6 +343,36 @@ where the analysis gets honest.* Twice now (Nagell's window, the elementary
 window) the trap was an argument that worked beautifully in the direction
 where nothing interesting lives.
 
+## 2026-07-21 — the citation pass upgrades A1-v2 to a theorem program
+
+Five verifiers, 176 tool calls, and every verdict moved us forward:
+
+- **The "modulo bnf" hypothesis is dischargeable.** For fixed degree,
+  certified class group + units are unconditionally computable in
+  deterministic |Δ|^(1/2+o(1)) = 2^(O(s)) (Lenstra 1992 Thm 5.5; Schoof
+  2008 §11, Arakelov class group; units in compact representation). The
+  reduction's hypothesis was never a wall — it was already proven.
+- **The theorem is a citable gap.** Nobody states worst-case
+  "fixed-degree Thue in EXP" — not Tzanakis–de Weger, not Bilu–Hanrot,
+  not the books. Closest prior: Smart, ANTS-II 1996 ("we seem to be a
+  long way off from a 'good' algorithm"), a per-method practical
+  estimate. So the assembly target — **pure-cubic Thue decidable in
+  2^(O(s)) unconditionally** — is real, new-as-stated, and must be
+  positioned against Smart. Three bookkeeping-hard items remain:
+  norm-equation step complexity, rep unit-reduction, explicit negative-
+  window constants (Min Sha 2019 supplies explicit dominant-root
+  thresholds — the exact missing tool).
+- **Corrections taken on the chin**: "Skolem meets Bayes" does not exist
+  (phantom memory; the real papers are Skolem-Meets-Schanuel and
+  Skolem-Meets-Bateman–Horn); the minimal-regulator attribution is
+  Astudillo–Díaz y Díaz–Friedman 2016, not Artin; bnfisintnorm reps are
+  NOT size-reduced (the docs' own example overflows 100 GB expanded —
+  unit-reduce before walking) and are GRH-conditional without
+  bnfcertify. The prototype's completeness survives: it walks ⟨±ε⟩ ⊇
+  the norm-positive unit orbits PARI quotients by.
+- 57 citations archived (`notes/citations/2026-07-21-a1v2-verification
+  .json`).
+
 ## 2026-07-21 — the Census and the war council
 
 Two creative engines launched while the A1-v2 citations verify:

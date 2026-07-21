@@ -1,9 +1,13 @@
 # A1-v2: cubic Thue via unit orbits — the Pell walk one rung up
 
-Draft v1 · 2026-07-21 · status: reduction designed, prototype validated
+Draft v2 · 2026-07-21 · status: reduction designed, prototype validated
 (1120/1120 exact solution-set agreement with PARI's certified `thue`),
-key bound conjectured with strong empirical support (max index 3), proof
-plan explicit. This attacks the sharpest gap the citation pass exposed:
+citation pass complete (5 verdicts, archived in
+`notes/citations/2026-07-21-a1v2-verification.json`) — and the citation
+pass UPGRADED the goal: the "modulo bnf" hypothesis is dischargeable
+unconditionally, and the assembled theorem appears to be a citable gap
+in the literature (closest prior: Smart, ANTS-II 1996). See "After the
+citation pass" below. This attacks the sharpest gap the citation pass exposed:
 **even fixed-degree-3 Thue equations are not known decidable in time
 2^(s^c)** — height bounds are exponential in coefficient bit-size, so
 enumeration is doubly exponential (`notes/frontier.md`, "the Thue sting").
@@ -118,3 +122,58 @@ envelope (~145 digits at the same size).
 - **Promotion path**: once the window bound is proved, port the prototype
   from `experiments/` into `smale5/solvers/` with certified caps and the
   never-overclaim contract, and A1 gains clause (v).
+
+## After the citation pass (2026-07-21, five verdicts)
+
+1. **Skolem attributions pinned.** Order ≤ 4 decidable: Mignotte–Shorey–
+   Tijdeman (Crelle 349, 1984) + Vereshchagin (Math. Notes 38, 1985), via
+   Baker + p-adic methods; effective zero-index bounds of magnitude
+   2^poly exist (Chonev–Ouaknine–Worrell JACM 2016 App. C; coRP at order
+   ≤ 4: Bacik–Ouaknine–Worrell SODA 2026). For our dominant-real-root
+   order-3 case, **Min Sha (J. Number Theory 197, 2019) gives fully
+   explicit zero-free thresholds** — the exact tool for the window
+   constants. ("Skolem meets Bayes" does not exist; the real papers are
+   Skolem-Meets-Schanuel and Skolem-Meets-Bateman–Horn. Corrected.)
+2. **The bnf hypothesis is dischargeable — unconditionally.** For FIXED
+   degree, certified class group + units are computable in deterministic
+   time |Δ|^(1/2+o(1)) = 2^(O(s)) with units in compact representation
+   (Lenstra, Bull. AMS 26 (1992), Thm 5.5; Schoof, MSRI 44 (2008), §11 —
+   Arakelov class group). Buchmann's subexponential is heuristic-laden
+   (GRH + smoothness), rigorous-under-GRH only for quadratics — cite
+   carefully.
+3. **Minimal complex-cubic regulator**: R = log(plastic number) =
+   0.2811995743…, attained uniquely at disc −23 (x³−x−1); sharp bound
+   proven by Astudillo–Díaz y Díaz–Friedman (JNT 167, 2016) — NOT Artin;
+   only three fields (−23, −31, −44) lie below 0.79. Do not say "smallest
+   regulator of any number field" (that is 0.205216…, a sextic).
+4. **bnfisintnorm semantics confirmed** (PARI 2.17.4, verbatim + an
+   empirical orbit check): complete system modulo units of POSITIVE norm;
+   our ⟨±ε⟩ walk covers a superset of those orbits, so the prototype's
+   completeness stands. Two load-bearing caveats: representatives are NOT
+   size-reduced (the docs' own example overflows 100 GB when expanded —
+   the walk must unit-reduce reps first; since 2.17.0 a compact-form flag
+   exists), and results are GRH-conditional unless `bnfcertify(bnf) = 1`.
+5. **Priority verdict — the theorem is a citable gap.** No source states
+   a worst-case "fixed-degree Thue decidable in exponential time" theorem
+   (with or without bnf given). Closest prior, must be positioned
+   against: **N. P. Smart, "How difficult is it to solve a Thue
+   equation?", ANTS-II 1996** — a complexity estimate for the
+   Tzanakis–de Weger method (reduction phase polynomial in the regulator
+   and input; small-solutions phase O(|m|^(1/(d−2)))), heuristic-unit-
+   supply assumed, practical failure modes noted. Everything else
+   (TdW 1989, Bilu–Hanrot 1996, all books/surveys checked) states
+   effectivity only.
+
+**Upgraded target (assembly theorem).**
+> Pure-cubic Thue equations are decidable, with full solution list, in
+> deterministic time 2^(O(s)) — unconditionally.
+Assembly: certified bnf in 2^(O(s)) (Lenstra/Schoof) → norm-equation
+class representatives → unit-reduce → orbit walk with the two-sided
+window (elementary + one Baker/Skolem inequality with Sha-explicit
+constants). Remaining verification items before claiming it: (i) the
+complexity of the norm-equation representative step given certified bnf
+(ideal enumeration above divisors of m + principal-ideal generators —
+believed 2^(O(s)), needs a careful write-up); (ii) rep unit-reduction
+lemma; (iii) the explicit negative-window constants. None looks
+conceptually hard; all look bookkeeping-hard. This would be the
+expedition's first publishable increment, positioned against Smart 1996.

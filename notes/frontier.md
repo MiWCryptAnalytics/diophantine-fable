@@ -69,9 +69,15 @@ positive-genus case in NP.
   equations are not known decidable in time 2^(s^c) via height bounds** —
   enumeration to the bound is doubly exponential. **[V]** Program response
   (2026-07-21): for complex cubic forms the decision reduces to certified
-  unit/class data plus an O(1)-window Skolem check — prototype validated
-  1120/1120 against PARI's certified thue, max vanishing index 3
-  (`notes/A1v2-cubic-thue.md`). Genus 1: Baker–Coates 1970
+  unit/class data plus a two-sided orbit window (elementary + one Baker/
+  Skolem inequality) — prototype validated 1120/1120 against PARI's
+  certified thue, max vanishing index 3. **[C]** And the citation pass
+  upgraded it: certified bnf data for fixed degree is unconditionally
+  computable in 2^(O(s)) (Lenstra 1992; Schoof 2008), no worst-case
+  "fixed-degree Thue in EXP" theorem exists in the literature (closest:
+  Smart, ANTS-II 1996), so the assembled theorem — *pure-cubic Thue
+  decidable in 2^(O(s)) unconditionally* — is a citable gap and the
+  program's first publishable target (`notes/A1v2-cubic-thue.md`). Genus 1: Baker–Coates 1970
   is triple-exponential in H; Schmidt (Compositio 81 (1992)) single-exp.
   Mordell y² = x³+k: Baker's exp{(10¹⁰|k|)^(10⁴)} (parenthesized — secondary
   sources misquote it), Stark 1973: exp(C_ε|k|^(1+ε)).
