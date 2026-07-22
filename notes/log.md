@@ -373,6 +373,19 @@ Five verifiers, 176 tool calls, and every verdict moved us forward:
 - 57 citations archived (`notes/citations/2026-07-21-a1v2-verification
   .json`).
 
+## 2026-07-22 — the constant has a name; the manuscript has LaTeX
+
+- Remark 7.3 evaluated: C₀ = 2⁴⁰·36·log(6e) ≈ 1.105×10¹⁴,
+  K = 2⁴⁰·96·π·(1+log 6) ≈ 9.258×10¹⁴, and the resolved backward window
+  N_C ≤ max(16H₁/R, 4K(12H₁+π)·log(2eK(12H₁+π))) — coefficient of order
+  10¹⁷. One flagged footnote retired; two honest flags remain (the Smart
+  exponent check against the paywalled primary, and the factor-4 display
+  slack).
+- `papers/cubic-thue-exp.tex`: 1278 lines of amsart, zero unicode,
+  balanced environments, all refs/cites resolving, 20-entry bibliography
+  — ready for a TeX toolchain we don't have installed (deliberately not
+  installed tonight). The .md remains the source of truth.
+
 ## 2026-07-22 — the manuscript exists
 
 `papers/cubic-thue-exp.md` (996 lines): abstract, introduction with the

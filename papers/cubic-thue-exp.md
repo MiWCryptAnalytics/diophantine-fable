@@ -688,7 +688,7 @@ notes:* the absolute constant $c$ is traced through the chain
 $2^{40}\cdot 36\cdot\log(6e)\cdot\pi\cdot(12H_1+\pi)\cdot 4R$ (before the
 $R$-cancellation), with $D_0 = 6$ throughout, and the branch conventions
 for $\log(-1)$ absorbed into $|a| \le n + 2$ — all mechanical; the
-numeric evaluation is deferred.[^cchain]
+numeric evaluation is carried out in Remark 7.3.
 
 ### 4.6 Remark: why the black-box window does not suffice (a preserved lesson)
 
@@ -862,19 +862,35 @@ equations rather than of a one-dimensional Skolem instance. We know of no
 route to a $2^{O(s)}$ bound there and explicitly defer it; nothing in
 this paper's method addresses it.
 
-### 7.3 The constant chain (flagged)
+### 7.3 The constant chain (evaluated)
 
-The constants of Lemma C are semi-explicit, and we flag precisely what
-remains. With $D_0 = 6$ (exact: $\mathbb{Q}(\sqrt[3]{d}, \omega)$ *is*
-the Galois closure, Section 4.5), the absolute constant $c$ in $N_C$ is
-traced through
+The constants of Lemma C are now fully explicit; we record the
+evaluation. With $D_0 = 6$ (exact: $\mathbb{Q}(\sqrt[3]{d}, \omega)$
+*is* the Galois closure, Section 4.5), the absolute constant $c$ in
+$N_C$ is traced through
 $$2^{40}\cdot 36\cdot\log(6e)\cdot\pi\cdot(12H_1 + \pi)\cdot 4R$$
-— i.e. $C_0 = 2^{40}D_0^2\log(eD_0)$ against $A_1 = \pi$,
-$A_2 = 12H_1 + \pi$, $A_3 = 4R$ — before the $R$-cancellation, together
-with the elementary constants of Lemma U and Proposition F and the branch
-conventions for $\log(-1)$ absorbed into $|a| \le n+2$. Producing the
-single numeric value of $c$ is mechanical and is future work; the shape,
-and everything the proof needs from it, is fixed here.[^cchain] Sha
+— i.e. $C_0 = 2^{40}D_0^2\log(eD_0) = 2^{40}\cdot 36\,(1 + \log 6)
+\approx 1.105\times 10^{14}$ against $A_1 = \pi$, $A_2 = 12H_1 + \pi$,
+$A_3 = 4R$ — before the $R$-cancellation. Dividing the zero inequality
+$\tfrac{3R}{2}\,n \le 12H_1 + \log\tfrac{\pi}{4} + C_0\,\pi\,(12H_1 +
+\pi)(4R)\log(e(n+2))$ by $3R/2$ cancels the $R$ in the Matveev term and
+leaves
+$$n \;\le\; \frac{8H_1}{R} \;+\; K\,(12H_1 + \pi)\,\log\bigl(e(n+2)\bigr),
+\qquad K \;:=\; \tfrac{2}{3}\,C_0\,\pi\cdot 4 \;=\; 2^{40}\cdot 96\,\pi\,(1 + \log 6)
+\;\approx\; 9.258\times 10^{14}.$$
+Resolving $n$ against $\log n$ exactly as in the proof of Lemma C (via
+$x \ge 2A\log A \Rightarrow x/\log x \ge A$; the term $8H_1/R$ is
+$O(H_1)$ by the regulator floor) yields the explicit window
+$$N_C \;\le\; \max\Bigl(\frac{16H_1}{R},\ 4K\,(12H_1 + \pi)\,\log\bigl(2eK\,(12H_1 + \pi)\bigr)\Bigr),$$
+whose leading coefficient $48K \approx 4.44\times 10^{16}$ multiplies
+$H_1\log(\cdot)$; under the factor-4 safety slack of the displayed
+combined inequality in the proof of Lemma C (parameters $24H_1 + \pi$
+and $8R$), $K$ is replaced by $4K \approx 3.703\times 10^{15}$ and the
+leading coefficient by $\approx 1.78\times 10^{17}$. Either way the
+coefficient governing $N_C$ is of order $10^{17}$, and the numeric value
+of $c$ is thereby fixed; the elementary constants of Lemma U and
+Proposition F and the branch conventions for $\log(-1)$ remain absorbed
+into $|a| \le n+2$. Sha
 remarks [Sha19, §2.4] that sharper three-logarithm bounds (Mignotte's
 kit) carry side conditions that need not hold, so no off-the-shelf
 improvement to the $2^{40}$ is available.
@@ -985,12 +1001,3 @@ direction we leave open.
     $A_3 = 4R$ listed above; the slack is absorbed into the final
     constant evaluation flagged in Remark 7.3 and does not affect the
     shape of $N_C$.
-
-[^cchain]: Constant to be evaluated. Carried forward from the verified
-    notes as final write-up bookkeeping: trace
-    $C_0 = 2^{40}\cdot 36\cdot\log(6e)$ through the combined inequality
-    of Lemma C (shape
-    $2^{40}\cdot 36\cdot\log(6e)\cdot\pi\cdot(12H_1+\pi)\cdot 4R$ before
-    the $R$-cancellation), together with the branch conventions for
-    $\log(-1)$ absorbed into $|a| \le n+2$; all mechanical, none of it
-    affecting the statement of Theorem 1 beyond the numeric value of $c$.
