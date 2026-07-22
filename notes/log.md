@@ -1,5 +1,26 @@
 # Research log
 
+## 2026-07-22 — paper two exists; paper one reaches submission polish
+
+- **`papers/cubic-thue-certificates.md`** (669 lines): the sequel —
+  certificate collapse, the MA proposition with explicit prime-range
+  write-up, CVP with its three faces (incl. the Arakelov-pinning lemma),
+  the vacuity remark, the five-part impossibility ledger, the bounded-CVP
+  positive fragment, four open problems. Its complexity-literature
+  references need their own verification pass (flagged in its ledger).
+- **Paper one, five review fixes applied** (the most useful outside pass
+  yet): (1) Smart's primary text partially obtained — pp. 363–364
+  verbatim via the publisher preview + the full Stroeker review; §1.2 now
+  quotes the primary directly and the positioning rests only on verified
+  content; (2) a genuine catch: the algorithm needed b from d = ab² and
+  never said how — Step 1 now factors d by trial division, cost
+  accounted; (3) §6.1 states the prototype runs under the empirical
+  window conjecture, not the proven ~10¹⁷·H₁ log H₁ bound; (4) the
+  review-process rhetoric neutralized for journal readers (the battle
+  scars live here in the log, where they belong); (5) "always ask
+  exponential in what" promoted to a named guiding principle in §1.4.
+  Both .md and .tex consistent.
+
 ## 2026-07-22 — the greenlight, and the hyperplane that closes a door
 
 The outside reviewer accepted the revised manuscript in full ("the

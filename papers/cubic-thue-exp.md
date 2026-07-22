@@ -2,9 +2,9 @@
 
 **The diophantine-fable expedition** (draft — authorship placeholder)
 
-Draft of 2026-07-22, assembled from the post-referee notes (v2); all
-referee-mandated corrections applied; the numeric evaluation of one
-absolute constant is deferred and flagged (Remark 7.3).
+Draft of 2026-07-22 (v2); all corrections from the independent
+verification passes applied; the numeric evaluation of one absolute
+constant is deferred and flagged (Remark 7.3).
 
 ---
 
@@ -17,16 +17,16 @@ unconditional algorithm in time $2^{O(s)}$. No worst-case bound of this
 shape appears in the literature: the best effective height bounds
 (Bugeaud–Győry) are exponential in the coefficient *bit-size*, so
 enumeration is doubly exponential, and the closest prior (Smart, ANTS-II
-1996) is a per-method practical estimate with heuristic unit supply. The
-method walks the rank-one unit orbit of norm-$m$ representatives from the
-Buchmann–Williams infrastructure and confines Thue-shape indices to a
+1996) is an explicitly practical per-method estimate, not a worst-case
+bound. The method walks the rank-one unit orbit of norm-$m$
+representatives from the Buchmann–Williams infrastructure and confines Thue-shape indices to a
 two-sided window: an elementary $O(1)$ forward bound, and a backward
 bound quasi-linear in the regulator $R$, via Sha's Matveev-based endgame
 re-run with the true root-ratio gap $3R/2$, against which the $R$ in
 Matveev's height parameter cancels. A prototype matches PARI's certified
-`thue` on 1120/1120 grid instances; an independent referee
-reimplementation matches 13/13, including three high-index fields. All
-constants are explicit modulo one flagged final evaluation.
+`thue` on 1120/1120 grid instances; an independent reimplementation
+matches 13/13, including three high-index fields. All constants are
+explicit modulo one flagged final evaluation.
 
 ---
 
@@ -77,23 +77,30 @@ theorem of the shape we prove.
   reasonable time ... provided the necessary algebraic number theory data
   is available".
 - **Smart** [Sma96] is the closest prior and the work we position against.
-  It is a complexity *estimate* for the Tzanakis–de Weger method at fixed
-  degree $d$, measured in $\log|m| + \log L(F)$: a small-solutions phase of
-  cost $O(|m|^{1/(d-2)})$ (exponential in the input size; $O(|m|)$ for
-  cubics) and a reduction phase polynomial in the regulator and the input
-  — with fundamental units supplied by then-heuristic subexponential
-  algorithms, and with explicitly noted practical failure modes (large
-  $m$, large regulator or class number, near-coincident roots).[^smart]
-  Smart's own conclusion: "we seem to be a long way off from a 'good'
-  algorithm". It is a per-method, heuristic-unit-supply, practical
-  estimate — not a rigorous worst-case decision theorem.
+  It is a complexity analysis of the Tzanakis–de Weger method at fixed
+  degree $n$, measured in $\log|m| + \log L(F)$ ($L(F)$ the sum of the
+  coefficient moduli), and it is explicitly an analysis of practical
+  difficulty — "I know of no analysis as to how difficult it is in
+  practice to actually find all the solutions" [Sma96, p. 363]. The
+  solution space is divided into small solutions (direct search), medium
+  solutions (continued-fraction reduction), and large solutions
+  (eliminated by linear forms in logarithms), and the announced outcome
+  is "an overall exponential complexity bound in terms of $\log L(F)$"
+  [Sma96, p. 364] — exponential in the input size — with the practical
+  failure modes stated explicitly: large $m$, large regulator or class
+  number, near-coincident roots of $F(x,1)$.[^smart] Smart's conclusion,
+  quoted verbatim in Stroeker's review of the paper (Zbl 0896.11009):
+  "So although solving Thue equations is now considered trivial we seem
+  to be a long way off from a 'good' algorithm". It is a per-method
+  practical estimate — not a rigorous worst-case decision theorem, and
+  no bound of the shape of Theorem 1 appears there.
 - **PARI/GP** [PARI] prints one genuine unconditional complexity
   statement for `thue`: when $F(x,1)$ has *no real root* the equation can
   be solved unconditionally in time $|m|^{1/\deg F}$. Every pure cubic
   has a real root, so even this rank-limited printed bound does not cover
   our family; and `thue`'s output is GRH-conditional unless certified.
 
-An adversarial citation pass across the books and surveys (Smart's 1998
+A systematic literature verification across the books and surveys (Smart's 1998
 book, Hanrot's LLL survey, Evertse–Győry, Waldschmidt, Gaál, Kim,
 Gherga–Siksek) found effectivity or practicality statements only. The
 theorem below therefore appears to be a citable gap in the literature,
@@ -142,13 +149,18 @@ recurrence of order 3 in the orbit index $k$. The algorithm (Section 3):
    recover $(x,y)$, and apply the mandatory final filter
    $x^3 - dy^3 = m$.
 
-The technical heart is Step 6. A black-box application of Sha's explicit
-Skolem-type theorems [Sha19] gives a window of size $e^{22.5R}$ — which is
-$2^{O(s)}$ only under a *redefined* size measure containing $R$ itself;
-in true input size it is doubly exponential, since $R = 2^{\Theta(s)}$
-(Remark 4.6 preserves this near-miss as a cautionary lesson). The repair
-is not a new theorem of transcendence theory but a re-run of Sha's own
-endgame with the instance's true data: the two maximal-modulus roots of
+The technical heart is Step 6, and it turns on the guiding principle of
+this program, stated here once and referred forward to Remark 4.6:
+**always ask exponential in what** — every bound must be calibrated
+against the *input* size $s$, never against an auxiliary quantity such
+as the regulator, for the regulator itself is exponential in the input,
+$R = 2^{\Theta(s)}$ (Section 2.3). A black-box application of Sha's
+explicit Skolem-type theorems [Sha19] gives a window of size
+$e^{22.5R}$ — which is $2^{O(s)}$ only under a *redefined* size measure
+containing $R$ itself; calibrated against the input it is doubly
+exponential (Remark 4.6 preserves this near-miss as a cautionary
+lesson). The repair is not a new theorem of transcendence theory but a
+re-run of Sha's own endgame with the instance's true data: the two maximal-modulus roots of
 the reversed recurrence are the conjugate complex pair, the third root is
 smaller by the exact factor $e^{3R/2}$, and in the resulting inequality
 the $R$ inside Matveev's height parameter $A_3 = 4R$ **cancels** against
@@ -185,7 +197,8 @@ discussed in Remark 7.5.
 Section 2 fixes notation and collects the field-theoretic preliminaries,
 including the two regulator floors the proof leans on. Section 3 states
 the algorithm. Section 4 proves the four supporting results (Lemmas B, U,
-A′, C and Proposition F), with all referee-mandated corrections applied.
+A′, C and Proposition F), with all corrections from independent
+verification applied.
 Section 5 assembles the proof of Theorem 1. Section 6 reports the
 computational companions. Section 7 collects remarks and open problems.
 
@@ -237,9 +250,10 @@ writing $g = c_0(g) + c_1(g)\alpha + c_2(g)\alpha^2$ with
 $c_i(g) \in \mathbb{Q}$, the cleared coordinates $3b\,c_i(g)$ are rational
 integers. All integer recurrences below are stated for the $3b$-cleared
 $\alpha^2$-coordinate. We emphasize — because a draft of this work got it
-wrong, and an adversarial referee falsified the naive "clear by 3" claim
-at 91 values of $d < 500$ (e.g. $d = 12, 45, 175$) — that clearing by $3$
-alone is **not** sufficient: the correct clearing constant is $3b$.
+wrong, and empirical testing reveals that the naive "clear by 3" recipe
+fails at 91 values of $d < 500$ (e.g. $d = 12, 45, 175$) — that clearing
+by $3$ alone is **not** sufficient: the correct clearing constant is
+$3b$.
 
 ### 2.3 Regulator bounds, above and below
 
@@ -330,7 +344,10 @@ stated and proved in Section 4.
 Input:  cube-free d >= 2 (not a cube), m != 0, in binary; s = O(log d + log|m|).
 Output: the complete list of (x, y) in Z^2 with x^3 - d y^3 = m.
 
-Step 1  (Infrastructure; no class group.)
+Step 1  (Field data and infrastructure; no class group.)
+        Factor d by trial division (cost O(d^{1/2}) poly = 2^{O(s)});
+        write d = a b^2 with a, b coprime squarefree; extract the
+        clearing constant 3b.
         Run BW88 Algorithm 2.13 on O_K: compute the Voronoi cycle of
         reduced principal ideals, the neighbor minima x_1, ..., x_p, the
         exact incremental products gamma_k = x_1 ... x_k, the fundamental
@@ -372,7 +389,11 @@ Step 7  (The walk and the filter.)
 
 ### 3.2 Step 1 — regulator and unit, no class group
 
-At unit rank one the class group is never needed: principality of ideals
+The step opens by factoring $d$ by trial division — cost
+$O(d^{1/2})\,\mathrm{poly}(s) = 2^{O(s)}$ — which yields the
+decomposition $d = ab^2$ and with it the clearing constant $3b$
+consumed by Steps 2 and 4 (Section 2.2). At unit rank one the class
+group is never needed: principality of ideals
 is decided directly on the cycle of reduced principal ideals, so no
 certification burden attaches to $\mathrm{Cl}_K$ at all. We compute $R$
 and the cycle by Buchmann–Williams Algorithm 2.13 [BW88, Prop. 2.14]:
@@ -404,7 +425,7 @@ not used.)
 ### 3.4 Step 3 — unit reduction
 
 Each generator is reduced along the one-dimensional log-unit lattice
-(Lemma U, referee-sharpened form): the reduced representative $\gamma'$
+(Lemma U, sharpened form): the reduced representative $\gamma'$
 satisfies
 $$\bigl|\log|\sigma_1(\gamma')| - \tfrac13\log|m|\bigr| \le \tfrac{R}{2},
 \qquad\text{hence}\qquad
@@ -526,7 +547,7 @@ forward window by 1 — a slack already accounted for in Proposition F.
 > in deterministic total time $2^{O(s)}$, with exact HNF verification of
 > each ideal identity.
 
-*Proof (with the referee-corrected orientation and certification).* The
+*Proof (with the corrected orientation and certification).* The
 Voronoi chain at rank one is $I_1 = O_K$ and
 $I_{k+1} = (1/x_k)\,I_k$, where $x_k$ is the neighbor minimum of $I_k$,
 **computed exactly by BW88 Algorithm 2.13 / Williams [Wil85]**. Exactness
@@ -565,8 +586,8 @@ primary sources.
    number-theoretic computations* is Rocky Mountain J. Math. 15 (1985)
    [Wil85], not Pacific J. Math.; the Pacific J. Math. paper is [Wil86].
 2. **Why plain products.** An earlier plan routed height bounds through
-   composition-then-reduce distance-slip estimates. The referee's
-   simplification, adopted here: at the $2^{O(s)}$ budget one simply
+   composition-then-reduce distance-slip estimates. The simplification
+   adopted here: at the $2^{O(s)}$ budget one simply
    takes the plain incremental exact products of the at most
    $7R/\log 4$ neighbor minima along the cycle. Compact representations
    (Thiel) are a luxury needed only for $\mathrm{poly}$-size
@@ -600,7 +621,7 @@ $R \ge 0.28119$ the right side is $\le 2.15$, so $k \le 2$; the possible
 half-integer rounding in Lemma U widens the admissible window by at most
 one index. $\blacksquare$
 
-Note the phenomenon the referee flagged and the empirical data confirm:
+Note the phenomenon the empirical data confirm:
 after unit reduction the $R$'s cancel — the forward window is not merely
 $\mathrm{poly}(s)$, it is *bounded by an absolute constant*.
 
@@ -631,7 +652,7 @@ $$\mathrm{dist}\Bigl(\varphi + n\theta,\ \tfrac{\pi}{2} + \pi\mathbb{Z}\Bigr)
 \tag{$\dagger$}$$
 
 The distance on the left is measured exactly by the linear form in
-logarithms (with the second referee's corrected conjugation and exact
+logarithms (with the corrected conjugation and exact
 factor 2, both verified numerically on two fields):
 $$\Lambda_n \;=\; a\,\log(-1) \;+\; \log\!\frac{b_2}{\bar b_2} \;+\; n\,\log\!\frac{\bar\mu}{\mu},
 \qquad a \in \mathbb{Z} \text{ odd},\ |a| \le n + 2,$$
@@ -758,7 +779,9 @@ solver; completeness is purely ideal-theoretic.
 **Cost accounting.** Write $D = |\Delta| \le 27d^2 = 2^{O(s)}$ and recall
 $R \le hR = 2^{O(s)}$ (Section 2.3).
 
-- *Step 1:* $O(R\,D^\epsilon) = 2^{O(s)}$ bit-operations [BW88,
+- *Step 1:* trial-division factorization of $d$,
+  $O(d^{1/2})\,\mathrm{poly}(s) = 2^{O(s)}$; then
+  $O(R\,D^\epsilon) = 2^{O(s)}$ bit-operations [BW88,
   Alg. 2.13, Prop. 2.14]; expanding $\varepsilon$ costs $2^{O(s)}$
   digits (Lemma A′).
 - *Step 2:* trial division $2^{s/2}\mathrm{poly}(s)$; at most
@@ -787,8 +810,8 @@ semi-explicit — explicit modulo final constant evaluation.
 
 ## 6. Computational companion
 
-Two experiments and one independent adversarial reimplementation
-accompany the proof. Neither is part of the logical argument; both
+Two experiments and one independent reimplementation accompany the
+proof. Neither is part of the logical argument; both
 shaped it.
 
 ### 6.1 The orbit-walk prototype: 1120/1120
@@ -808,8 +831,14 @@ agreement**, and across all hits the maximum vanishing index was
 $$\max |k| = 3$$
 — exactly the bound $k_+ \le 3$ that Proposition F later proved
 (the prototype's fixed cutoff $K_0 = 60$ was the honest gap between
-prototype and theorem; the two windows of Section 4 close it). For
-completeness: `bnfisintnorm` returns a complete system modulo units of
+prototype and theorem; the two windows of Section 4 close it). We
+stress the boundary between the proven algorithm and this practical
+code: the cutoff $K_0 = 60$ operates under the strong empirical window
+conjecture of Remark 7.4, not under the proven bound of Lemma C; the
+proven window $N_C$ — of order $10^{17}\cdot H_1\log H_1$ steps once
+the constants of Remark 7.3 are inserted — is $2^{O(s)}$ in theory but
+is not what the prototype executes. For completeness: `bnfisintnorm`
+returns a complete system modulo units of
 *positive* norm, and the $\langle -1, \varepsilon \rangle$ walk covers a
 superset of those orbits.
 
@@ -828,16 +857,15 @@ obstruction the infrastructure route dodges: the algorithm expands
 $\varepsilon$ only inside its stated $2^{O(s)}$ budget, and every
 per-step object it manipulates is polynomially sized (Lemma A′).
 
-### 6.3 The referee's independent reimplementation: 13/13
+### 6.3 An independent reimplementation: 13/13
 
-The hostile-referee pass that produced the corrections recorded in
-Section 4 also built its **own from-scratch mini-implementation** of the
-algorithm and validated it against certified `thue`: **13/13 exact
-agreements**, including the high-index fields
+An independent **from-scratch mini-implementation** of the algorithm,
+written separately from the prototype, was validated against certified
+`thue`: **13/13 exact agreements**, including the high-index fields
 $$d = 12,\ 45,\ 175 \qquad ([\,O_K : \mathbb{Z}[\alpha]\,] = 2,\ 3,\ 5),$$
-precisely the fields at which the referee had falsified the earlier
-"clear by 3" claim (Section 2.2) — so the validation deliberately covers
-the corrected code path. The same pass verified the linear-form analysis
+precisely the fields at which the naive "clear by 3" recipe fails
+(Section 2.2) — so the validation deliberately covers the corrected
+code path. The same reimplementation verified the linear-form analysis
 of Lemma C numerically on two fields and validated the Binet integer
 sequence against a Thue-shape zero.
 
@@ -1028,10 +1056,19 @@ conjecture is the enabler.
 
 ---
 
-[^smart]: The exponent shapes attributed to [Sma96] are quoted from the
-    zbMATH review (Zbl 0896.11009) and a secondary rendering; the primary
-    text is paywalled, and the exact exponents should be re-verified
-    against it before submission.
+[^smart]: Verified against the openly available portion of the primary
+    text: the publisher's two-page preview of [Sma96] (pp. 363–364)
+    confirms the fixed-degree setting, the complexity measure
+    $\log|m| + \log L(F)$, the three-phase division of the solution
+    space, the failure modes, and the announced "overall exponential
+    complexity bound in terms of $\log L(F)$"; the concluding quotation
+    is reproduced verbatim in R. J. Stroeker's zbMATH review
+    (Zbl 0896.11009). The remainder of the text (pp. 365–373) is
+    paywalled; per-phase exponent shapes reported in secondary sources —
+    e.g. a small-solutions cost of $O(|m|^{1/(n-2)})$ — are therefore
+    not quoted above, and nothing in Section 1.2 depends on them: the
+    gap claim rests on the sweep of the books and surveys, not on the
+    exact exponents of [Sma96].
 
 [^slack]: The displayed combined inequality retains the verified notes'
     doubled parameters $24H_1 + \pi$ and $8R$, a factor-4 safety slack
