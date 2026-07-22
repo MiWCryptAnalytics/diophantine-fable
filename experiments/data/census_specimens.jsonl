@@ -12916,3 +12916,43 @@
 {"s": 12, "f": "-3*x**2*y + x*y**2 - 3*x*y - y**2 - y - 1", "status": "TIMEOUT"}
 {"s": 12, "f": "2*x**3 + x**2*y + x**2 + x*y**2 - 3*x*y - y**2 - y - 1", "status": "TIMEOUT"}
 {"s": 12, "f": "2*x**3 - x**2*y + x**2 + x*y**2 - 3*x*y - y**2 - y - 1", "status": "TIMEOUT"}
+{"s": 12, "f": "3*x**3 - x**2*y + x**2 + x*y**2 - 3*x*y - y**2 - y - 1", "status": "TIMEOUT"}
+{"s": 12, "f": "3*x**3 + x**2*y - x**2 + x*y**2 - 3*x*y - y**2 - y - 1", "status": "TIMEOUT"}
+{"s": 12, "f": "3*x**3 - x**2*y - x**2 + x*y**2 - 3*x*y - y**2 - y - 1", "status": "TIMEOUT"}
+{"s": 12, "f": "-2*x**2*y - x**2 + x*y**2 - 3*x*y - y**2 - y - 1", "status": "TIMEOUT"}
+{"s": 12, "f": "-3*x**2*y - x**2 + x*y**2 - 3*x*y - y**2 - y - 1", "status": "TIMEOUT"}
+{"s": 12, "f": "x**3 - 3*x**2*y - x**2 + x*y**2 - 3*x*y - y**2 - y - 1", "status": "TIMEOUT"}
+{"s": 12, "f": "-x**3 - 3*x**2*y - x**2 + x*y**2 - 3*x*y - y**2 - y - 1", "status": "TIMEOUT"}
+{"s": 12, "f": "x**2*y + 2*x**2 + x*y**2 - 3*x*y - y**2 - y - 1", "status": "TIMEOUT"}
+{"s": 12, "f": "x**3 + x**2*y - 2*x**2 + x*y**2 - 3*x*y - y**2 - y - 1", "status": "TIMEOUT"}
+{"s": 12, "f": "-x**3 + x**2*y - 2*x**2 + x*y**2 - 3*x*y - y**2 - y - 1", "status": "TIMEOUT"}
+{"s": 12, "f": "x**3 - x**2*y - 2*x**2 + x*y**2 - 3*x*y - y**2 - y - 1", "status": "TIMEOUT"}
+{"s": 12, "f": "-x**2*y - 3*x**2 + x*y**2 - 3*x*y - y**2 - y - 1", "status": "TIMEOUT"}
+{"s": 12, "f": "x**3 - x**2*y - 3*x**2 + x*y**2 - 3*x*y - y**2 - y - 1", "status": "TIMEOUT"}
+{"s": 12, "f": "-2*x**3 + x**2*y - x*y**2 - 3*x*y - y**2 - y - 1", "status": "TIMEOUT"}
+{"s": 12, "f": "-3*x**3 + x**2*y - x*y**2 - 3*x*y - y**2 - y - 1", "status": "TIMEOUT"}
+{"s": 12, "f": "-2*x**3 + x**2*y + x**2 - x*y**2 - 3*x*y - y**2 - y - 1", "status": "TIMEOUT"}
+{"s": 12, "f": "-x**3 + 3*x**2*y + x**2 - x*y**2 - 3*x*y - y**2 - y - 1", "status": "TIMEOUT"}
+{"s": 12, "f": "3*x**3 + x**2*y - x**2 - x*y**2 - 3*x*y - y**2 - y - 1", "status": "TIMEOUT"}
+{"s": 12, "f": "-3*x**3 + x**2*y - x**2 - x*y**2 - 3*x*y - y**2 - y - 1", "status": "TIMEOUT"}
+{"s": 12, "f": "3*x**2*y - x**2 - x*y**2 - 3*x*y - y**2 - y - 1", "status": "TIMEOUT"}
+{"s": 12, "f": "x**2*y + 2*x**2 - x*y**2 - 3*x*y - y**2 - y - 1", "status": "TIMEOUT"}
+{"s": 12, "f": "x**3 + x**2*y - 2*x**2 - x*y**2 - 3*x*y - y**2 - y - 1", "status": "TIMEOUT"}
+{"s": 12, "f": "x**3 + x**2*y + 3*x**2 - x*y**2 - 3*x*y - y**2 - y - 1", "status": "TIMEOUT"}
+{"s": 12, "f": "x**2*y - 3*x**2 - x*y**2 - 3*x*y - y**2 - y - 1", "status": "TIMEOUT"}
+{"s": 12, "f": "x**3 - x**2 + 2*x*y**2 - 3*x*y - y**2 - y - 1", "status": "TIMEOUT"}
+{"s": 12, "f": "-x**2*y - x**2 + 2*x*y**2 - 3*x*y - y**2 - y - 1", "status": "TIMEOUT"}
+{"s": 12, "f": "x**2*y - x**2 - 2*x*y**2 - 3*x*y - y**2 - y - 1", "status": "TIMEOUT"}
+{"s": 12, "f": "-x**2*y + 3*x*y**2 - 3*x*y - y**2 - y - 1", "status": "TIMEOUT"}
+{"s": 12, "f": "x**3 - x**2*y + x**2 + 3*x*y**2 - 3*x*y - y**2 - y - 1", "status": "TIMEOUT"}
+{"s": 12, "f": "-x**3 - x**2*y + x**2 + 3*x*y**2 - 3*x*y - y**2 - y - 1", "status": "TIMEOUT"}
+{"s": 12, "f": "x**3 + x**2*y - x**2 + 3*x*y**2 - 3*x*y - y**2 - y - 1", "status": "TIMEOUT"}
+{"s": 12, "f": "-x**3 + x**2*y - x**2 + 3*x*y**2 - 3*x*y - y**2 - y - 1", "status": "TIMEOUT"}
+{"s": 12, "f": "x**3 - x**2*y - x**2 + 3*x*y**2 - 3*x*y - y**2 - y - 1", "status": "TIMEOUT"}
+{"s": 12, "f": "x**3 + x**2*y - x**2 - 3*x*y**2 - 3*x*y - y**2 - y - 1", "status": "TIMEOUT"}
+{"s": 12, "f": "-x**3 + x**2*y - x**2 - 3*x*y**2 - 3*x*y - y**2 - y - 1", "status": "TIMEOUT"}
+{"s": 12, "f": "-x**3 + x**2*y + x**2 - 4*x*y - y**2 - y - 1", "status": "TIMEOUT"}
+{"s": 12, "f": "x**3 - x**2*y - x**2 - 4*x*y - y**2 - y - 1", "status": "TIMEOUT"}
+{"s": 12, "f": "-x**2 + x*y**2 - 4*x*y - y**2 - y - 1", "status": "TIMEOUT"}
+{"s": 12, "f": "x**3 - x**2 + x*y**2 - 4*x*y - y**2 - y - 1", "status": "TIMEOUT"}
+{"s": 12, "f": "-x**3 + x**2 - x*y**2 - 4*x*y - y**2 - y - 1", "status": "TIMEOUT"}

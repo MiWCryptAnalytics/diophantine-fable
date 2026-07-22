@@ -250,6 +250,13 @@ widening the range to $2^{s^c}$, $c \ge 2$, already makes a single
 prime's error exponentially small, since $\omega(W)/\pi(2^{s^c}) \le
 2^{c_4 s - s^c}\,\mathrm{poly}(s)$. $\blacksquare$
 
+*Complexity-class bookkeeping.* Step V3 alone is a coRP test:
+vanishing instances are accepted with probability 1, non-vanishing
+instances rejected with high probability. The outer existential
+quantifier over certificates therefore places the decision problem in
+$\exists\cdot\mathrm{coRP} = \mathrm{MA}$ — which is the precise sense
+of Proposition 3.1.
+
 *(Provenance: the notes' ledger listed this as "proposition-with-
 sketch, needs a careful write-up (height bound on $z(\beta)$ from the
 compact data; prime-range constants)". The bounds above discharge
@@ -311,7 +318,10 @@ notes' Ge-lattice attempt.
 > $\mathrm{poly}(s)$ precision. This data determines $\beta$ up to
 > sign.
 
-*Proof sketch.* The ideal: reduce the power product by repeated
+*Proof sketch.* The ideal: clear the format's denominators first and
+work with the numerator ideal of the compacted element — so that $I$
+is integral, as the HNF intersection $L = I \cap M$ of Section 4.3
+strictly requires — then reduce the power product by repeated
 squaring on reduced ideals with tracked distances — infrastructure
 arithmetic is precisely this machinery [BW88; Sch08] — every
 intermediate object staying $\mathrm{poly}$-size. The logs: interval
@@ -342,7 +352,13 @@ identity testing for width-3 algebraic branching programs — a highly
 structured, whitebox, repeated-squaring instance, and the right
 literature door: it connects the NP question for cubic Thue equations
 to bounded-width PIT derandomization by the shortest path we know of
-(Section 5.4).
+(Section 5.4). One structural advantage must be stated explicitly: the
+matrices $M_{\beta_i}$ all lie in the commutative subalgebra
+$\mathbb{Q}[M_\alpha] \cong K$ of $3\times 3$ matrices — the word is
+not a generic non-commutative width-3 ABP but one over a
+**commutative** matrix ring, a class significantly better understood
+in the PIT literature and correspondingly a more tempting target for
+derandomization.
 
 ### 4.5 Remark (Lagarias vacuity: why 1979 stopped at degree 2)
 
@@ -519,7 +535,10 @@ trace becomes a fixed short sum of conjugate power products in $O(1)$
 poly-height bases. (3) Zero-test via the Baker–Matveev machinery as
 in the dimension-3 matrix-power analysis of [GOW15]: with $O(1)$
 logarithms of poly-height numbers and binary exponents, Matveev's
-bounds [Mat00] are polynomial, so certified interval evaluation at
+bounds [Mat00] are polynomial — noting that Matveev's constant
+degrades exponentially in the number $k$ of logarithms, which is
+exactly why the $O(1)$ multiplicative-rank restriction is
+load-bearing and cannot be relaxed, so certified interval evaluation at
 $\mathrm{poly}(s)$ precision decides against the free integrality
 separation. Steps (2)–(3) need the same case-discipline GOW exercise
 at dimension 3 and are not written out here.
@@ -603,6 +622,11 @@ framing exists yet.
   owed.
 - CVP: open, named, isolated — the right-sized next mathematics.
 - coNP side: untouched here.
+- Pre-submission (per outside critique): pinpoint the exact theorem
+  extending Thiel-format size bounds to cubic fields (Thiel's thesis;
+  BW88; Sch08) — and only after that debt is paid, strip the ledger
+  flags from the final text. Flags come off when debts are paid, not
+  before.
 
 ---
 

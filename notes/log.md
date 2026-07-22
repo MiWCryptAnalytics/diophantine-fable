@@ -1,5 +1,23 @@
 # Research log
 
+## 2026-07-22 — paper two absorbs its critique; the commutative gift
+
+The outside critique of paper two accepted the architecture ("the
+vacuity remark is the crown jewel"; "sums of compacts are not compact
+... is the best sentence in the draft") and contributed four fixes, all
+applied: (1) **the commutative advantage** — a genuine strengthening I
+should have seen myself: the matrices M_{βᵢ} all lie in ℚ[M_α] ≅ K, so
+CVP's ABP face is COMMUTATIVE bounded-width PIT, a far better-studied
+class than generic non-commutative words — stated explicitly in §4.4;
+(2) the Arakelov-pinning proof now clears denominators first (the HNF
+intersection needs an integral ideal); (3) the ∃·coRP = MA chain stated
+precisely in §3; (4) the Matveev-constant degradation in k is named as
+the reason the O(1)-rank restriction in the bounded fragment is
+load-bearing. The critique's third ask — strip the honesty flags — is
+DEFERRED on principle: flags come off when the debts are paid (the
+Thiel-format cubic size-bound pinpoint), not before; recorded as an
+explicit pre-submission item in the status ledger.
+
 ## 2026-07-22 — paper two exists; paper one reaches submission polish
 
 - **`papers/cubic-thue-certificates.md`** (669 lines): the sequel —
