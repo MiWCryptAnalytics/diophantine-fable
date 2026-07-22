@@ -1,5 +1,30 @@
 # Research log
 
+## 2026-07-22 — the Thiel pinpoint: the last debt is paid
+
+The agent recovered **Thiel's 1995 Saarbrücken thesis itself** (Wayback,
+via the URL Eisenträger–Hallgren cite) and read it. The debt is paid in
+full and the ledger closes:
+
+- **Existence + size: unconditional, arbitrary degree** — Def. 6.3.1
+  with T ≤ log(log n + (n−1)log H) + 2 = O(log H) factors of
+  poly(log Δ) bits (Cors. 6.3.9–6.3.10 for units and principal-ideal
+  generators); exactly the shape our manuscript quotes, with two
+  cosmetic caveats now stated in-text (descending exponents, rational
+  factors, the leading factor's O(log|N|) extra bits). Bonus found:
+  Thm 6.4.1 — principal-ideal certificates in NP, unconditionally.
+- **Computation is a separate citation**: Thiel's own algorithm is
+  exponential; the efficient route is Biasse–Fieker 2014 (Alg. 7,
+  Prop. 5.1 — unconditional given its input). Added as [BF14].
+- **A mis-citation caught and fixed**: Schoof 2008 contains no compact
+  representations at all (verified against the source) — our prover
+  paragraph had cited it for compaction; corrected to [BF14], with
+  Sch08 retained only for the reduced-divisor arithmetic it actually
+  provides.
+- Status ledger updated: the format-bound dependence of the MA
+  proposition is DISCHARGED; the ledger flags may now be stripped at
+  final submission — because the debts are actually paid.
+
 ## 2026-07-22 — paper two absorbs its critique; the commutative gift
 
 The outside critique of paper two accepted the architecture ("the

@@ -135,17 +135,30 @@ A **compact representation** (Thiel format) of $\beta \in O_K$ is a
 power product
 $$\beta \;=\; \beta_0 \cdot \prod_{i=1}^{T} \beta_i^{2^i},$$
 with $T = O(\log h(\beta))$ factors, each $\beta_i \in K$ given by
-$\mathrm{poly}(s)$ bits of coordinate and denominator data. We quote
-the existence and size bounds as standard [Thi95; BTW95] *(ledger
-flag: quoted, not re-derived; a dedicated citation pass is owed)*.
+$\mathrm{poly}(s)$ bits of coordinate and denominator data. The
+existence and size bounds are Thiel's, **unconditional and in
+arbitrary degree** [Thi95, Def. 6.3.1, Cor. 6.3.9–6.3.10]: every unit
+and every generator of a principal ideal admits a compact
+representation with $T \le \log(\log n + (n-1)\log H) + 2 =
+O(\log h(\beta))$ factors of $\mathrm{poly}(\log|\Delta|)$ bits each.
+(Thiel's normal form uses descending exponents $2^{T-i}$ and rational
+factors $\alpha_i/d_i$, $d_i \le \sqrt{\Delta}$ — cosmetically, not
+mathematically, different from the form displayed above; the leading
+factor additionally carries $O(\log|N(\beta)|)$ bits, harmless here.)
+Efficient computation from power-product data and log-embedding
+approximations is Biasse–Fieker [BF14, Alg. 7, Prop. 5.1],
+unconditional given its input. The quadratic antecedent is [BTW95].
 
 For our instances a solution element has $\log$-height
 $O(R + \log|m|) = 2^{O(s)}$ (unit reduction and the two-sided window
 of [companion, Lemmas U and C]), so $T = O(s)$: the certificate has
 $\mathrm{poly}(s)$ size. Existence is *constructive*: the honest
 prover runs the companion's exponential algorithm once; the
-tracked-generator walk of [companion, Lemma A′], compacted by
-repeated-squaring doubling [BW88; Sch08], emits exactly this format.
+tracked-generator walk of [companion, Lemma A′], compacted into
+Thiel's normal form via [BF14, Alg. 7], emits exactly this format.
+(Schoof's Arakelov machinery [Sch08] supplies the reduced-divisor
+arithmetic used elsewhere but contains no compact-representation
+theorem — a citation-scope point verified against the source.)
 
 ### 2.3 The certificate is the solution element itself
 
@@ -615,18 +628,17 @@ framing exists yet.
 ### Status ledger (carried from the notes, unchanged in spirit)
 
 - MA membership: proposition with the height-bound and prime-range
-  write-up now supplied (Section 3); residual dependence on the
-  quoted compact-representation format bounds (Section 2.2).
-- Compact-representation existence and size for $\beta$: standard;
-  the precise citation pass (Thiel; Buchmann–Thiel–Williams) is still
-  owed.
+  write-up supplied (Section 3); the format-bound dependence is now
+  DISCHARGED by the pinned citations (Section 2.2).
+- Compact-representation existence and size: **debt paid** — Thiel's
+  thesis read in full (Def. 6.3.1, Cor. 6.3.9–6.3.10, unconditional,
+  arbitrary degree), efficient computation pinned to [BF14, Alg. 7,
+  Prop. 5.1]; the erroneous compaction citation to [Sch08] corrected
+  (it contains no compact representations — verified against the
+  source). The remaining ledger flags may now be stripped at final
+  submission.
 - CVP: open, named, isolated — the right-sized next mathematics.
 - coNP side: untouched here.
-- Pre-submission (per outside critique): pinpoint the exact theorem
-  extending Thiel-format size bounds to cubic fields (Thiel's thesis;
-  BW88; Sch08) — and only after that debt is paid, strip the ledger
-  flags from the final text. Flags come off when debts are paid, not
-  before.
 
 ---
 
@@ -636,6 +648,10 @@ framing exists yet.
   *On the complexity of numerical analysis*, SIAM J. Comput. 38:5 (2009) 1987–2006.
 - **[ADF16]** S. Astudillo, F. Díaz y Díaz, E. Friedman, *Sharp lower bounds for
   regulators of small-degree number fields*, J. Number Theory 167 (2016) 232–258.
+- **[BF14]** J.-F. Biasse, C. Fieker, *Subexponential class group and unit
+  group computation in large degree number fields*, LMS J. Comput. Math. 17
+  (2014) 385–403. (§5, Algorithm 7, Proposition 5.1: efficient computation
+  of compact representations; unconditional given its input.)
 - **[Blo91]** J. Blömer, *Computing sums of radicals in polynomial time*,
   Proc. 32nd IEEE FOCS (1991) 670–677.
 - **[Blo93]** J. Blömer, *Simplifying expressions involving radicals*, PhD thesis,
@@ -685,9 +701,13 @@ framing exists yet.
   recurrence sequences*, J. Number Theory 197 (2019) 228–249.
 - **[Sma98]** S. Smale, *Mathematical problems for the next century*, Math.
   Intelligencer 20:2 (1998) 7–15.
-- **[Thi95]** C. Thiel, *Short proofs using compact representations of algebraic
-  integers*, J. Complexity 11 (1995) 310–329; and PhD thesis, Universität des
-  Saarlandes, 1995.
+- **[Thi95]** C. Thiel, *On the complexity of some problems in algorithmic
+  algebraic number theory*, PhD thesis, Universität des Saarlandes,
+  Saarbrücken, 1995 (Definition 6.3.1, Corollaries 6.3.9–6.3.10; Theorem
+  6.4.1: principal-ideal certificates in NP, unconditional); journal
+  companion: *Short proofs using compact representations of algebraic
+  integers*, J. Complexity 11 (1995) 310–329; announcement: ANTS-I 1994,
+  LNCS 877, 234–247.
 - **[vG25]** D. M. H. van Gent (lectures by H. W. Lenstra), *Polynomial-time
   algorithms in algebraic number theory*, arXiv:2502.19036. (Thm. 165 = Ge's
   theorem; Lemma 166; coprime bases.)
