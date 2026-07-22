@@ -146,6 +146,44 @@ question to the derandomization frontier in the cleanest possible way.
   relation lattice plus unit-lattice geometry — has never been
   attempted. That is the door.
 
+## The Ge-lattice door: first attempt (2026-07-22)
+
+The attempt did not open the door, but it relocated it. The chain:
+
+1. **The verifier can pin β completely.** From the compact representation
+   it computes in poly time the full **Arakelov divisor** of β: the exact
+   ideal I = (β) (via reduced-ideal arithmetic with tracked distances —
+   infrastructure is precisely this) and the log-embeddings log|σᵢ(β)| to
+   any poly precision. An element of K is determined by (ideal, exact
+   logs) up to ±1. So the certificate pins a *unique* candidate element —
+   no ambiguity survives verification except the final question.
+2. **The final question is plane membership.** z(β) = 0 ⟺ β ∈ M = ℤ+ℤα,
+   and L := I ∩ M is an explicit rank-2 lattice with poly-size basis
+   (HNF intersection). So:
+   > **CVP (Thue instances) ⟺ does the element pinned by a given
+   > Arakelov divisor lie in an explicit rank-2 sublattice?**
+3. **Why each classical tool stops here.** The pinned element sits in a
+   thin multiplicative strip (|x − yα| ~ e^{ℓ₁} tiny at height
+   |y| ~ e^{ℓ₂} huge). Searching L ∩ strip is 2D lattice-point location
+   — poly *at poly scales* (Lenstra fixed-dimension) — but our scales
+   are e^{2^{O(s)}}, described only by their logs. The multiplicative
+   fix (rescale by ε^{−j} to bring the strip to bounded size) fails
+   because **M is not stable under units**: ε^{−j}M ≠ M. That
+   instability is the same fact, in its fourth costume, that has blocked
+   every route: trace non-multiplicativity, sums of compacts not
+   compact, the archimedean spread, and now plane non-stability. They
+   are one wall.
+4. **What a solution needs, stated once**: a *multiplicative-to-additive
+   bridge* — any theorem letting membership in a fixed rank-2 plane be
+   tested through data carried multiplicatively (relation lattices,
+   Arakelov classes, unit orbits). No such tool exists in the 1991–2026
+   literature (previous section); building one is the actual open
+   problem, and it now has a precise geometric formulation.
+
+Micro-yield: the Arakelov pinning (step 1) is itself a small clean
+result — "compact certificates verify everything about β except one
+plane membership" — worth a lemma in the eventual write-up.
+
 ## Honest status ledger
 
 - MA membership: proposition-with-sketch, needs a careful write-up

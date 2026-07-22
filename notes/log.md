@@ -1,5 +1,30 @@
 # Research log
 
+## 2026-07-22 — the Ge-lattice door: the wall shows its true face
+
+Attempted the unexplored door myself (no agents — this one wanted a
+single mind on it). Result: the door didn't open, but the attempt
+produced the cleanest formulation of the obstacle so far:
+
+- **The verifier can pin β completely**: from the compact certificate it
+  computes the full Arakelov divisor — exact ideal, poly-precision logs
+  — which determines β up to sign. Everything about the certificate
+  verifies in poly time EXCEPT one bit.
+- **That bit is plane membership**: CVP ⟺ "does the element pinned by a
+  given Arakelov divisor lie in an explicit rank-2 sublattice
+  L = I ∩ (ℤ+ℤα)?" — 2D lattice-point location in a multiplicative
+  strip, poly at poly scales, but our scales are e^{2^{O(s)}} and the
+  rescaling trick dies because **the plane M is not unit-stable**:
+  ε^{−j}M ≠ M.
+- The four failures are one wall in four costumes: trace
+  non-multiplicativity, sums-of-compacts-not-compact, archimedean
+  spread, plane instability. The needed tool has a name now: a
+  **multiplicative-to-additive bridge**. Nothing in 1991–2026 provides
+  one.
+- Micro-yield: the Arakelov-pinning lemma ("compact certificates verify
+  everything except one plane membership") is a small clean result for
+  the eventual write-up.
+
 ## 2026-07-22 — CVP meets the additive wall; and finds its true home
 
 The reviewer endorsed MA, flagged the p-adic trap (valuations under
