@@ -373,6 +373,25 @@ Five verifiers, 176 tool calls, and every verdict moved us forward:
 - 57 citations archived (`notes/citations/2026-07-21-a1v2-verification
   .json`).
 
+## 2026-07-22 — specimen zero falls: Runge slips past the elliptic wall
+
+Exploring the census specimens deeper (the user's nudge), specimen zero —
+x³ − x² + xy² + y² + 1 = 0, certified genus 1 — cracked **by hand in four
+lines**: y²(x+1) = −(x³−x²+1) forces (x+1) | 1, so x ∈ {0, −2}, giving
+y² ∈ {−1, −11}. NO. The generalization is theorem clause **(v)**: any
+irreducible component A(x)·y² + C(x) with A nonconstant decides
+completely — gcd(A,C) = 1 by irreducibility, so A(x) | C(x) pins x inside
+the pseudo-remainder window — **regardless of the curve's genus**. The
+"elliptic wall" is not a wall for these shapes; it's a divisibility
+turnstile. Implemented (`solve_pure_square_fiber`), 52 tests green.
+Frontier update from re-running the specimens: **3 of 76 fall at s = 10**
+(specimen zero among them), **56 of 2,755 at s = 11** — every clearance a
+certified NO on a genus-1 curve, unreachable by any search bound.
+Bookkeeping note: the census logged its escapees as TIMEOUT rather than
+UNDECIDED (the H=3000 fallback search outruns the per-poly alarm) —
+future census runs should escalate more cheaply; the running s=12 grind
+is untouched.
+
 ## 2026-07-22 — assembly phase opens: the lemma that explains "3"
 
 - Launched the two-extractor workflow for the cubic-Thue EXP theorem's

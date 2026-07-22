@@ -67,6 +67,9 @@ def _solve_component(g: sp.Poly, H: int, caps) -> Decision:
         dec = deg2fiber.solve_deg2_fiber(g, caps=caps)
         if dec is not None:
             return dec
+        dec = deg2fiber.solve_pure_square_fiber(g, caps=caps)
+        if dec is not None:
+            return dec
     ts = thue_shape(g)
     if ts is not None:
         F, m = ts

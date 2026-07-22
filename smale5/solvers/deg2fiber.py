@@ -117,6 +117,74 @@ def _solve(g, p, other, swap, caps) -> Decision | None:
     return undecided("deg2fiber", dec.certificate, dec.detail)
 
 
+def solve_pure_square_fiber(gpoly, caps: Caps = DEFAULT) -> Decision | None:
+    """Components A(x)·y² + C(x) = 0 (or mirrored) with A NONCONSTANT.
+
+    The census's "specimen zero" x³ − x² + xy² + y² + 1 = 0 revealed this
+    slice: y² = −C(x)/A(x) forces A(x) | C(x), and for an irreducible
+    component gcd(A, C) = 1, so A(x) divides the nonzero pseudo-remainder
+    and x is confined to an explicit window — a COMPLETE decision by the
+    graph-window argument, valid whatever the genus of the curve (Runge
+    slips past the elliptic wall). Returns None when not applicable."""
+    for main, other, swap in ((Y, X, False), (X, Y, True)):
+        if gpoly.degree(main) != 2:
+            continue
+        p = sp.Poly(gpoly.as_expr(), main)
+        lead, mid, const = p.all_coeffs()
+        if sp.expand(mid) != 0:
+            continue
+        Ap = sp.Poly(lead, other)
+        if Ap.total_degree() == 0:
+            continue  # constant lead: clause (iv) machinery handles it
+        return _pure_square(gpoly, Ap, sp.Poly(const, other), other, swap, caps)
+    return None
+
+
+_PS_WINDOW_CAP = 10**7
+
+
+def _pure_square(g, Ap, Cp, other, swap, caps) -> Decision | None:
+    common = sp.Poly(sp.gcd(Ap.as_expr(), Cp.as_expr()), other)
+    if common.total_degree() >= 1:
+        for r in common.ground_roots():
+            if r.is_integer:
+                return yes("pure-square-common-root", _witness(g, int(r), 0, swap),
+                           f"A and C vanish at {int(r)}: a line of solutions")
+    Aq = sp.Poly(Ap.as_expr(), other, domain="QQ")
+    Cq = sp.Poly(Cp.as_expr(), other, domain="QQ")
+    q, r = sp.div(Cq, Aq)
+    denoms = [sp.Rational(c).q for c in (list(q.coeffs()) + list(r.coeffs()))]
+    ell = 1
+    for d in denoms:
+        ell = ell * d // sp.igcd(ell, d)
+    Rh = sp.Poly((r * ell).as_expr(), other)
+    if Rh.is_zero:
+        return None  # A | C polynomially ⟹ g reducible; let factorization act
+    candidates = set()
+    for r0 in Rh.ground_roots():
+        if r0.is_integer:
+            candidates.add(int(r0))
+    a_coeffs = [abs(int(c)) for c in Ap.all_coeffs()]
+    r_coeffs = [abs(int(c)) for c in Rh.all_coeffs()]
+    window = 2 + (sum(a_coeffs[1:]) + sum(r_coeffs)) // a_coeffs[0]
+    if window > _PS_WINDOW_CAP:
+        return undecided("pure-square-window", bound=_PS_WINDOW_CAP,
+                         detail=f"crossover window {window} exceeds cap")
+    candidates.update(range(-window, window + 1))
+    for x0 in sorted(candidates, key=abs):
+        av, cv = int(Ap.eval(x0)), int(Cp.eval(x0))
+        if av == 0 or cv % av:
+            continue
+        v = -(cv // av)
+        if v < 0 or not is_square(v):
+            continue
+        y0 = int(sp.integer_nthroot(v, 2)[0])
+        return yes("pure-square-window", _witness(g, x0, y0, swap))
+    return no("pure-square-window", {"window": window},
+              f"A(x) | C(x) forces R̂(x) = 0 or |x| < {window}; no candidate "
+              "yields a nonnegative perfect square")
+
+
 def _square_class(D: sp.Poly, other):
     """D = E² · Q₀ with Q₀ = the square class (odd-multiplicity part times the
     squarefree part of the constant). None if the constant is too big to

@@ -5,7 +5,7 @@ import sympy as sp
 from smale5 import decide
 from smale5.decision import Status
 from smale5.poly import X, Y, is_solution, normalize, parse
-from smale5.solvers.deg2fiber import solve_deg2_fiber
+from smale5.solvers.deg2fiber import solve_deg2_fiber, solve_pure_square_fiber
 from smale5.solvers.search import bounded_search
 
 
@@ -47,6 +47,23 @@ def test_mordell_stays_out_of_scope():
 def test_through_pipeline():
     dec = decide("9*y^2 + 6*y + 1 - 2*x^4 - x^2")
     assert dec.status is Status.NO
+
+
+def test_specimen_zero_falls():
+    """The census's smallest undecided polynomial: (x+1)y² = −(x³−x²+1)
+    forces (x+1) | 1, so x ∈ {0,−2} — both fail the square test. NO,
+    despite genus 1: Runge slips past the elliptic wall."""
+    dec = solve_pure_square_fiber(parse("x^3 - x^2 + x*y^2 + y^2 + 1"))
+    assert dec is not None and dec.status is Status.NO
+    assert decide("x^3 - x^2 + x*y^2 + y^2 + 1").status is Status.NO
+
+
+def test_pure_square_yes_and_swap():
+    dec = solve_pure_square_fiber(parse("(x+2)*y^2 - x^3 - 1"))
+    assert dec is not None and dec.status is Status.YES
+    assert is_solution(parse("(x+2)*y^2 - x^3 - 1"), dec.certificate)
+    mirrored = solve_pure_square_fiber(parse("y^3 - y^2 + y*x^2 + x^2 + 1"))
+    assert mirrored is not None and mirrored.status is Status.NO
 
 
 def test_planted_fuzz_against_search_oracle():
