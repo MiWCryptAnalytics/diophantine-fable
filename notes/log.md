@@ -373,6 +373,30 @@ Five verifiers, 176 tool calls, and every verdict moved us forward:
 - 57 citations archived (`notes/citations/2026-07-21-a1v2-verification
   .json`).
 
+## 2026-07-22 — the flagship theorem is drafted end-to-end
+
+The two extractors returned everything: Min Sha's Thm 1.2 applies to our
+reversed recurrence **verbatim** (two maximal-modulus roots, quotient not
+a root of unity, all Binet coefficients nonzero since γ ≠ 0, and the
+lovely collapse d = 1 because our recurrence has rational integer
+coefficients) with explicit window 2^{O(s)} — black-box sufficient, with
+a quasi-linear upgrade available by re-running his endgame with our true
+ratio gap 3R/2. The norm-step agent assembled the full Buchmann–Williams
+rank-1 infrastructure chain (|Δ|^{1/2+o(1)} principality + generators)
+with exactly three bookkeeping items left, the biggest a one-page
+tracked-generator lemma. `notes/thue-exp-theorem.md` now holds the
+complete proof skeleton, every step citable or a named local lemma:
+
+> **Pure-cubic Thue equations decide, with full solution lists, in
+> deterministic 2^{O(s)} — unconditionally.**
+
+Certified bnf → BW walk representatives → unit-reduce (our lemma) →
+forward window O(1) (elementary) → backward window via Sha/Matveev →
+exact integer walk. The G2 wall, breached at its thinnest point, by the
+decide-without-exhibiting philosophy the Pell layer pioneered. Next: the
+two local lemmas, the BW-constant check, then a hostile referee in
+series before we call it a theorem.
+
 ## 2026-07-22 — specimen zero falls: Runge slips past the elliptic wall
 
 Exploring the census specimens deeper (the user's nudge), specimen zero —
