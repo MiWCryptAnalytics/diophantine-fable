@@ -388,7 +388,7 @@ representations is a **multiplicative** technology: $\beta = \gamma$
 reduces to the quotient being $1$, and units $\ne \pm1$ are separated
 from $1$ by Dobrowolski-type height lower bounds [Dob79] on the
 log-embedding lattice — polynomial precision suffices. Ge's theorem
-[Ge93] (see [vG25, Thm. 4.75]) extends this: *multiplicative
+[Ge93] (see [vG25, Thm. 165]) extends this: *multiplicative
 relations* among power products are decidable in deterministic
 polynomial time — exactly why the norm step V2 is easy. The
 compact-representation toolbox stops at the trace, precisely: [BTW95]
@@ -513,7 +513,7 @@ provides one; building it is the actual open problem, and by Section
 
 *Proof plan (honestly flagged: a plan, not a proof).* (1) Compute the
 relation lattice of the factors — deterministic polynomial time by Ge
-[Ge93; vG25, Thm. 4.75] — and rewrite the word over $O(1)$
+[Ge93; vG25, Thm. 165] — and rewrite the word over $O(1)$
 independent poly-height generators with binary exponents. (2) The
 trace becomes a fixed short sum of conjugate power products in $O(1)$
 poly-height bases. (3) Zero-test via the Baker–Matveev machinery as
@@ -572,7 +572,7 @@ tested through multiplicatively carried data (Section 5.5). The one
 unexplored asset, recorded in the notes' literature verdict: our
 three summands are Galois-conjugate, and the bases' full
 multiplicative relation lattice is *computable* (Ge). The additive
-analog of [vG25, Lemma 4.76] — detecting trace-zero from the relation
+analog of [vG25, Lemma 166] — detecting trace-zero from the relation
 lattice plus unit-lattice geometry — has never been attempted. That
 is the door.
 
@@ -618,7 +618,7 @@ framing exists yet.
   Freie Universität Berlin, 1993.
 - **[BTW95]** J. Buchmann, C. Thiel, H. C. Williams, *Short representation of
   quadratic integers*, in: Computational Algebra and Number Theory,
-  Math. Appl. 325, Springer, 1995, 159–185.
+  Math. Appl. 325, Kluwer, 1995, 159–185.
 - **[BW88]** J. Buchmann, H. C. Williams, *On the infrastructure of the principal
   ideal class of an algebraic number field of unit rank one*, Math. Comp. 50
   (1988) 569–579.
@@ -639,7 +639,7 @@ framing exists yet.
 - **[GOW15]** E. Galby, J. Ouaknine, J. Worrell, *On matrix powering in low
   dimensions*, Proc. STACS 2015, LIPIcs 30, 329–340.
 - **[Hal07]** S. Hallgren, *Polynomial-time quantum algorithms for Pell's equation
-  and the principal ideal problem*, J. ACM 54 (2007).
+  and the principal ideal problem*, J. ACM 54:1 (2007), art. 4.
 - **[HBMOW10]** P. Hunter, P. Bouyer, N. Markey, J. Ouaknine, J. Worrell,
   *Computing rational radical sums in uniform TC⁰*, Proc. FSTTCS 2010, LIPIcs 8,
   308–316.
@@ -665,5 +665,5 @@ framing exists yet.
   integers*, J. Complexity 11 (1995) 310–329; and PhD thesis, Universität des
   Saarlandes, 1995.
 - **[vG25]** D. M. H. van Gent (lectures by H. W. Lenstra), *Polynomial-time
-  algorithms in algebraic number theory*, arXiv:2502.19036. (Thm. 4.75 = Ge's
-  theorem; Lemma 4.76; coprime bases.)
+  algorithms in algebraic number theory*, arXiv:2502.19036. (Thm. 165 = Ge's
+  theorem; Lemma 166; coprime bases.)
