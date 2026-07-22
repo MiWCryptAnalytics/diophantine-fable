@@ -1,5 +1,31 @@
 # Research log
 
+## 2026-07-22 — the certificate collapses to one object; MA falls out
+
+The reviewer conceded the poly-time demand and asked for the certificate
+sketch. Working it out produced a structural surprise that SIMPLIFIES
+their proposed architecture (unit + representative + index): **the
+certificate is just the solution element β = x − yα itself, in Thiel
+compact representation.** Integrality verifies by format; the norm
+verifies by multiplicativity on power products (Lagarias's old magic);
+and the ENTIRE remaining difficulty isolates into one named problem —
+CVP, the Compact Vanishing Problem: deterministically test whether a
+fixed coordinate functional kills a compactly-represented algebraic
+integer. Consequences, written in
+`notes/cubic-thue-np-certificate.md`:
+
+- **Cubic Thue ∈ MA, unconditionally** (random-prime zero-testing of
+  z(β) with certified height bounds — one-sided error).
+- **∈ NP iff CVP yields** (and conditionally under MA = NP
+  derandomization).
+- **The Lagarias vacuity remark** — the reason Pell ∈ NP was 1979-easy:
+  in the quadratic case ℤ+ℤ√d is the whole ring, the shape condition is
+  vacuous, CVP never arises. The coordinate condition is genuinely new
+  at degree 3; CVP, not unit computation, is the honest frontier of the
+  NP question.
+- The strong window conjecture turns out NOT to be needed for
+  YES-certificates at all — prover-efficiency and coNP-side only.
+
 ## 2026-07-22 — an outside review arrives; what it gets right and wrong
 
 The user ran the .tex through another model (Gemini Pro Extended), which
