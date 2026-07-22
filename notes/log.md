@@ -373,6 +373,43 @@ Five verifiers, 176 tool calls, and every verdict moved us forward:
 - 57 citations archived (`notes/citations/2026-07-21-a1v2-verification
   .json`).
 
+## 2026-07-22 — the referee breaks the draft, in the best possible way
+
+Lemmas A and B written; hostile referee dispatched at the whole assembly
+(with the BW-constant check in its brief). Verdict: **not a theorem yet**
+— and every break repaired on the spot:
+
+- **The fatal catch is my third size-measure trap.** Sha's "black-box
+  window 2^{O(s)}" used the extraction's redefined s ⊇ R; in true input
+  size e^{22.5R} is DOUBLY exponential (measured: a 20-bit input with
+  R ≈ 2605 gives a 10^{25,454}-step window). The "optional" re-derivation
+  with the true ratio gap 3R/2 — where the R in Matveev's A₃ cancels —
+  was the load-bearing step all along. Now required **Lemma C** (~2
+  pages, ingredients verified). After the Nagell trap and the caps
+  claim, the lesson gets a name: *always ask exponential-in-what*.
+- **Step 4's integrality claim was flat wrong**: [O_K : ℤ[α]] = b·(3 if
+  d ≡ ±1 mod 9) for d = ab² (Dedekind 1900) — referee falsified my
+  "×3 fixes it" at 91 values below 500 (d = 12, 45, 175 live). Repair:
+  clear by 3b.
+- **Step 1 misquoted Lenstra** (deterministic is |Δ|^{3/4}, and hedged);
+  better architecture adopted: at rank 1 the class group was never
+  needed — BW88 Alg 2.13 computes the regulator deterministically in
+  O(R·D^ε), published with proof, no folklore.
+- **Verified and closed**: BW spacing constants (j, c₁) = (7, log 4)
+  correct, Williams 1986's scope is ALL complex cubic lattices; Lemma B
+  watertight; step 5 sharpened to k₊ ≤ 2 (+1 slack = 3 — exactly the
+  empirical max); N(ε) = +1 always in complex cubics; step 7's
+  completeness argument sound with two patches (norm-sign filter,
+  reduced-rep windows). The referee even built its own from-scratch
+  mini-implementation: **13/13 vs certified thue including the
+  high-index fields**.
+
+Draft v2 rewritten with every repair. The honest statement today:
+*theorem modulo Lemma A (~1 page, plan repaired via BW88 Props 2.11 and
+3.1) and Lemma C (~2 pages, the only load-bearing unwritten
+mathematics)*. Nothing conditional, nothing conceptually open — just two
+lemmas of writing between the expedition and its first theorem.
+
 ## 2026-07-22 — the flagship theorem is drafted end-to-end
 
 The two extractors returned everything: Min Sha's Thm 1.2 applies to our

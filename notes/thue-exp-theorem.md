@@ -1,120 +1,114 @@
-# Theorem draft: pure-cubic Thue equations decide in exponential time
+# Theorem draft v2: pure-cubic Thue equations decide in exponential time
 
-Draft v1 · 2026-07-22 · the expedition's flagship assembly. Positioning:
-no worst-case bound of this shape exists in the literature (closest prior:
-Smart, ANTS-II 1996 — per-method practical estimate); all ingredient
-extractions archived in `notes/citations/2026-07-22-assembly-extraction
-.json` and the two A1-v2 verification files.
+v2 · 2026-07-22 · post-referee. The hostile referee (report archived in
+the log; its from-scratch mini-implementation matched certified `thue`
+13/13 including the high-index fields d = 12, 45, 175) broke draft v1 in
+two places and repaired every break. All referee corrections applied.
 
-## Statement
+## Statement (minimal honest form, referee-endorsed)
 
-> **Theorem (assembly target).** There is a deterministic algorithm that,
-> given cube-free d ≥ 2 (not a cube) and m ≠ 0 in binary, input size
-> s = O(log d + log m), decides whether x³ − d·y³ = m has a solution in
-> ℤ² — and lists all solutions — in time 2^{O(s)}, unconditionally.
+> **Theorem (modulo Lemmas A and C).** There is a deterministic,
+> unconditional algorithm that, given cube-free d ≥ 2 (not a cube) and
+> m ≠ 0 in binary, input size s = O(log d + log m), decides whether
+> x³ − d·y³ = m has a solution in ℤ² — listing all solutions — in time
+> 2^{O(s)}.
+> Lemma A (~1 page) and Lemma C (~2 pages) have all ingredients verified
+> to exist; neither is conceptually open.
 
-## Proof skeleton (every step now citable or a named local lemma)
+**The v1 fatal flaw, preserved as a lesson**: v1 cited Sha's Thm 1.2
+"black-box, window 2^{O(s)}" — but that bound's s was the extraction's
+*redefined* size max(R, h(γ), log m, log d) ⊇ R, and R = 2^{Θ(s_input)}:
+in input size the black-box window e^{22.5R} is **doubly exponential**
+(measured: d = 9986 has R ≈ 2605, window ≥ 10^{25,454}). Third instance
+of the expedition's recurring trap — always ask *exponential in what*.
 
-1. **Certified bnf.** K = ℚ(∛d), |Δ_K| ≤ 27d² = 2^{O(s)}. Certified
-   class group + fundamental unit ε (compact representation), R = log λ:
-   deterministic |Δ|^{1/2+o(1)} = 2^{O(s)} [Lenstra 1992 Thm 5.5; Schoof
-   2008 §11 Arakelov; R = 2^{O(s)} via hR ≤ |Δ|^{1/2}·polylog].
-2. **Norm-equation representatives.** Factor m by trial division
-   (2^{O(s)}); ideals of norm |m|: ≤ d(|m|)³ candidates, assembled in HNF
-   poly-time each; principality + generator per candidate via
-   Buchmann–Williams baby-step walk in the rank-1 infrastructure:
-   deterministic |Δ|^{1/2+o(1)} + poly = 2^{O(s)} [BW87 Alg 1.1, BW88
-   Prop 4.5/Thm 4.7]. **Local Lemma A (tracked generators, ~1 page):**
-   augmenting Schoof's Alg 10.8 doubling with generator tracking yields
-   compact representations (O(s) factors of poly(s) bits) for each
-   generator — rank-1 case, direct proof.
-3. **Unit reduction.** Our one-dimensional log-lattice lemma (A1-v2 note):
-   representatives γ with h(γ) ≤ ⅓log|m| + R + O(1), computed rigorously
-   with interval arithmetic in 2^{O(s)}.
-4. **The orbit and its recurrence.** Solutions = coordinate-vanishing
-   points z_k = 0 along γ·(±ε^k); z_k ∈ (1/3)ℤ (multiply by 3 in the
-   index-3 case d ≡ ±1 mod 9) satisfies an order-3 integer linear
-   recurrence with characteristic polynomial = min poly of ε — simple
-   roots λ, μ, μ̄; Binet coefficients all nonzero since γ ≠ 0
-   (Vandermonde/DFT weights of equal modulus 1/(3d^{2/3})); **rational
-   integer coefficients ⟹ Sha's Galois parameter d = 1**.
-5. **Forward window (elementary).** After reduction, k₊ = O(1) absolutely
-   — the R's cancel; constant small via R ≥ 0.28119… [ADF 2016].
-6. **Backward window (Baker, black-box).** Reverse the recurrence
-   (legitimate: a₀ = ±N(ε) = ±1 keeps it integral); the reversed
-   sequence has exactly two maximal-modulus roots (1/μ, 1/μ̄) whose
-   quotient μ̄/μ is not a root of unity (else ε^j real for some j —
-   impossible in a complex cubic except ±1: **Local Lemma B**, three
-   lines). Apply Sha Thm 1.2 verbatim: zero indices ≤ N₂ = 2^{O(s)}
-   (explicitly ≤ e^{22.5R}·poly). *Optional upgrade (not needed for the
-   theorem): re-run Sha's endgame with the true ratio gap 3R/2 to get a
-   quasi-linear window k₋ = O((h(γ)+R)·log(·)) — our own theorem citing
-   his Lemma 2.8 + the Matveev step.*
-7. **The walk.** For each representative × sign × k in the two windows
-   (2^{O(s)} values), compute z_k by exact integer recurrence iteration —
-   each z_k has 2^{O(s)} digits, total 2^{O(s)} bit-ops — collect the
-   zeros, output (x, y) = (z-coordinates). Completeness: bnfisintnorm
-   semantics (all norm-solutions = reps × norm-positive units; our ⟨±ε⟩
-   walk covers the superset) [PARI docs verified + our empirical orbit
-   check; in the write-up, replace PARI by step 2's own representatives].
+## Proof skeleton (v2, all referee repairs applied)
 
-Total: deterministic 2^{O(s)}. ∎ (modulo Lemmas A, B and the BW-constant
-verification below)
+1. **Regulator and unit, no class group.** At rank 1 the class group is
+   never used: compute R and the cycle by Buchmann–Williams Alg 2.13
+   (Math. Comp. 50 (1988) 569–578, Prop 2.14): deterministic O(R·D^ε)
+   bit-ops, unconditional, published with proof; R = 2^{O(s)} via
+   hR ≤ |Δ|^{1/2}·polylog. ε in expanded form costs 2^{O(s)} digits —
+   affordable and needed in step 4 anyway. (Lenstra 1992 Thm 5.5's
+   deterministic |Δ|^{3/4} — not 1/2, and hedged "appears to be true" —
+   is a fallback citation only.)
+2. **Norm-equation representatives.** Trial-divide m; enumerate the
+   ≤ d₃(|m|) ideals of norm |m| **in O_K** (Dedekind basis; splitting at
+   p | 3b via O_K/pO_K); per candidate: principality + generator by the
+   BW baby-step cycle walk (Prop 4.5, O(R·D^ε); Thm 4.7's R^{1/2} rate
+   is decision-only). Generators via **Lemma A**.
+3. **Unit reduction** (our lemma, referee-sharpened): representatives
+   with |log|σ₂(γ')| − ⅓log|m|| ≤ R/4, so |σ₂/σ₁| ≤ e^{3R/4}.
+4. **Orbit and recurrence.** z_k = α²-coordinate of γ·(±ε^k), cleared by
+   **3b** (NOT 3: for d = ab² cube-free, [O_K : ℤ[α]] = b·(3 if d ≡ ±1
+   mod 9 else 1) — Dedekind 1900; referee falsified v1's claim at 91
+   values of d < 500, e.g. d = 12, 45, 175). Integer recurrence of order
+   3, char poly = min poly of ε; N(ε) = λ|μ|² > 0 forces **N(ε) = +1
+   always**. Simple roots; Binet coefficients nonzero (γ ≠ 0, DFT
+   weights of modulus 1/(3d^{2/3})); Sha's Galois parameter d = 1.
+   Expanding ε and z₀, z₁, z₂ to their 2^{O(s)} digits is part of this
+   step's stated cost.
+5. **Forward window (elementary, SOUND).** Vanishing at k > 0 forces
+   λ^{3k/2} ≤ 2e^{3R/4}, so k₊ ≤ ½ + (2log2)/(3R) ≤ 2 with
+   R ≥ 0.28119 (ADF 2016) — plus one rounding slack: **k₊ ≤ 3, exactly
+   the empirical maximum**.
+6. **Backward window = Lemma C (REQUIRED, to be written ~2 pages).**
+   Reverse the recurrence (integral since N(ε) = 1); two maximal-modulus
+   roots form the conjugate pair (quotient not a root of unity — Lemma
+   B), third root tiny. Re-run Sha's endgame with the TRUE ratio gap
+   3R/2 and direct height choices (A₁ = π, A₂ ≤ 12h(γ)+π, A₃ ≤ 4R —
+   the R cancels against the gap): k₋ = O((h(γ)+1)·log(h(γ)+2)) =
+   O((log|m| + R)·log(·)) = 2^{O(s)}. The Λ = 0 degenerate subcase is
+   trivial here: b₂ = b̄₁ exact cancellation leaves b₃λ^{−n} ≠ 0.
+   Ingredients: Sha's Lemma 2.8 + the Matveev application, both
+   extracted verbatim; the assembled statement is ours.
+7. **The walk.** For every representative × sign × k in the two windows:
+   exact integer recurrence iteration (2^{O(s)} digits each; 2^{O(s)}
+   total), collect z_k = 0 hits, recover (x, y), and apply the
+   **mandatory final filter x³ − d·y³ = m** (the walk also emits
+   norm-(−m) elements). Windows apply to the UNIT-REDUCED
+   representatives (stated). Completeness (ideal-theoretic, PARI-free):
+   any solution γ = x − yα ∈ ℤ[α] ⊆ O_K generates an ideal of norm |m|
+   among step 2's list; unit orbits under ⟨−1, ε⟩ (full unit group:
+   torsion {±1} by the real embedding) cover all generators; γ ↦ −γ
+   swaps ±m and the ±-walk covers it. ∎ (modulo A, C)
 
-## Lemma B (written): μ̄/μ is not a root of unity
+## Lemma B (root-of-unity exclusion): SOUND, referee-verified
 
-> **Lemma B.** K a cubic field of signature (1,1), ε a fundamental unit,
-> μ = σ₂(ε) its complex embedding. Then μ̄/μ is not a root of unity.
+(As in v1, with the cosmetic fix: the contradiction is "σ₂(ε^j) real",
+not "ε^j real" — σ₁(ε^j) is always real.)
 
-*Proof.* Suppose (μ̄/μ)^j = 1 for some j ≥ 1 and put η = ε^j. Then
-σ₃(η) = σ₂(η)̄ = σ₂(η), i.e. σ₂(η) ∈ ℝ, so all three conjugates of η are
-real. The degree [ℚ(η):ℚ] divides 3. If it is 3 then ℚ(η) = K is totally
-real, contradicting signature (1,1). Hence η ∈ ℚ, so η ∈ ℚ ∩ O_K^× =
-{±1}, making ε a root of unity — contradicting that ε is a fundamental
-unit of a field with unit rank 1. ∎
+## Lemma A (tracked generators): referee-repaired plan
 
-## Lemma A (written, proof sketch): tracked generators in rank 1
+The v1 sketch had one thin claim and one muddled claim. Repairs:
+- Height bounds come from **BW88 Prop 2.11** (minima are φ-represented
+  with poly-size data — explicitly contrasted with coordinates "as large
+  as exp √D") and **Prop 3.1(ii)** (composition-then-reduce distance slip
+  bounded by c₄ = 2log(D/3), c₅ = 0 at n = 3) — NOT Schoof Prop 7.1.
+- The terminal test: maintain the exact invariant I_i = (product so
+  far)·I₀ by construction — floats only steer; terminal equality is one
+  exact HNF test. Or simpler (referee's simplification, adopted): at the
+  2^{O(s)} budget, take the **plain incremental product of the ≤
+  7R/log 4 neighbor minima along the cycle** (Williams' sharper
+  ε₀ > τ^{p/2} gives p < 2R/log τ ≈ 4.16R) — compact representations are
+  a luxury needed only for poly-size *certificates*, not for the EXP
+  algorithm. Lemma A then also delivers ε for step 1.
 
-> **Lemma A.** Fixed degree, unit rank 1, certified bnf given. If the
-> Buchmann–Williams walk certifies that an ideal I (norm ≤ 2^{O(s)}) is
-> principal at cycle distance t ≤ R = 2^{O(s)}, then a generator of I is
-> computable deterministically in time 2^{O(s)} in **compact
-> representation**: γ = γ₀·∏_{i≤T} γ_i^{2^i} with T = O(s) and each γ_i
-> of poly(s) bit-size.
+## BW constants: VERIFIED, work item closed
 
-*Proof sketch (referee target).* Binary doubling along the cycle
-(Schoof 2008, Alg. 10.8 pattern): maintain reduced ideals I_i at
-distances t_i with t_{i+1} = 2t_i (± a reduction step), each doubling a
-composition I_{i+1} = I_i²/(x_i) followed by reduction; the relative
-elements x_i are shortest-vector-scale elements of reduced ideals, hence
-of poly(s) height (reduced ideals have inverse-norm ≤ d_F and their
-minima obey Prop-7.1-type bounds). T = O(log t) = O(s) doublings reach
-distance t; the generator is the tracked power product. Distances are
-carried in fixed-point with poly(s) bits — approximation only *guides*
-the walk; the terminal identity I = (γ) is verified **exactly** by HNF
-comparison of I against the ideal generated by the compact
-representative (computable without expansion via repeated
-square-and-reduce of ideals mod nothing — exact HNF arithmetic). At unit
-rank 1 the cycle is one-dimensional, so no lattice bookkeeping beyond
-the single distance coordinate is needed. ∎(sketch)
+(j, c₁) = (7, log 4) confirmed against the actual Math. Comp. scan and
+Williams, *The spacing of the minima in certain cubic lattices*, Pacific
+J. Math. 124 (1986) 483–496 — whose scope is ALL complex cubic fields
+and arbitrary reduced lattices. Sharper: θ₈ > 4 and ε₀ > τ^{p/2}. Venue
+correction: "Continued fractions and number-theoretic computations" is
+Rocky Mountain J. Math. 15 (1985) 621–656, not PJM.
 
-## Remaining work items
+## Remaining work
 
-- Referee the two lemmas above (A is a sketch; B should be watertight).
-- **BW constants at n = 3**: confirm Williams' spacing theorem (Pacific
-  J. Math. 124 (1986)) covers all complex cubic orders; only existence of
-  the constants matters.
-- Exactness bookkeeping: interval-arithmetic precision claims in steps 1,
-  3 (standard; cite Schoof's "polynomial in log|Δ|" algorithm statements).
-- Then: hostile referee pass (in series), and the write-up positioned
-  against Smart 1996 with the prototype (1120/1120 vs PARI) as the
-  computational companion.
-
-## Why this matters for Smale #5
-
-This is the first stratum with **certified genus-1 curves and unbounded
-coefficients decided in worst-case exponential time** by an assembled,
-fully-cited argument — the G2 wall breached at its thinnest point, using
-the orbit-compression philosophy (decide without exhibiting) that the
-quadratic layer pioneered. The same skeleton is the template for general
-complex cubic forms (rank 1) and, more distantly, the rank-2 frontier.
+- **Write Lemma C** (the backward window) — the only load-bearing
+  unwritten mathematics. ~2 pages, ingredients verified.
+- **Write Lemma A** to the repaired plan (~1 page).
+- Then a second referee pass on the completed manuscript, and the
+  write-up positioned against Smart (ANTS-II 1996), with the prototype
+  (1120/1120) and the referee's independent 13/13 as computational
+  companions.
