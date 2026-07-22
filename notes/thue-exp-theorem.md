@@ -103,12 +103,71 @@ and arbitrary reduced lattices. Sharper: θ₈ > 4 and ε₀ > τ^{p/2}. Venue
 correction: "Continued fractions and number-theoretic computations" is
 Rocky Mountain J. Math. 15 (1985) 621–656, not PJM.
 
+## Lemma C (written): the backward window, quasi-linear in R
+
+> **Lemma C.** Let γ be a unit-reduced norm-m representative, v_n the
+> 3b-cleared α²-coordinate sequence of γ·ε^{−n} (n ≥ 0). There is an
+> absolute, explicitly computable constant c such that v_n ≠ 0 for all
+> n > N_C := c·(R + log|m| + log d + 1)·log(R + log|m| + log d + 2).
+
+*Proof.* Write v_n = b₁λ^{−n} + b₂μ^{−n} + b̄₂μ̄^{−n} with all bⱼ ≠ 0
+(γ ≠ 0), μ^{−1} = e^{R/2}e^{iθ}, b₂ = |b₂|e^{iφ}. If v_n = 0 then
+2|b₂|e^{nR/2}|cos(φ + nθ)| = |b₁|e^{−nR}, so with
+|cos x| ≥ (2/π)·dist(x, π/2 + πℤ):
+  dist(φ + nθ, π/2 + πℤ) ≤ (π/4)(|b₁|/|b₂|)·e^{−3nR/2}.   (†)
+The left side is |Λ_n| for the linear form
+Λ_n = a·log(−1) + log(b̄₂/b₂) + n·log(μ̄/μ), a ∈ ℤ, |a| ≤ n + 2.
+**Degenerate case is void**: Λ_n = 0 would give b₂μ^{−n} + b̄₂μ̄^{−n} = 0
+purely imaginary contribution — wait, precisely: Λ_n = 0 makes the
+conjugate-pair term vanish, leaving v_n = b₁λ^{−n} ≠ 0; so on a zero
+v_n = 0 we always have Λ_n ≠ 0 and Matveev applies.
+Matveev (k = 3, field degree D₀ ≤ 12 = deg of the Galois closure of
+K(ω)): log|Λ_n| > −C₀·A₁A₂A₃·log(e(n+2)) with C₀ = 2^{40}·D₀²·log(eD₀)
+absolute, A₁ = π, and:
+- A₂ ≤ D₀·h(b̄₂/b₂) + π ≤ D₀·2h(b₂) + π. Heights directly (Galois
+  invariance of the Weil height; the 3b-clearing shifts by ≤ log 3d):
+  h(b₂) ≤ h(γ) + log 3 + (2/3)log d + log 3d =: H₁, so
+  A₂ ≤ 24·H₁ + π = O(h(γ) + log d + 1).
+- A₃ ≤ D₀·h(μ̄/μ) ≤ D₀·2h(ε) = D₀·(2R/3) ≤ **8R** — since a unit of a
+  complex cubic has h(ε) = R/3.
+Combining with (†) and |log(|b₁|/|b₂|)| ≤ 12·H₁ (|log|b|| ≤ deg·h):
+  (3R/2)·n ≤ 12H₁ + log(π/4) + C₀·π·(24H₁+π)·8R·log(e(n+2)).
+Divide by 3R/2: **the R cancels in the Matveev term**, leaving
+  n ≤ 8H₁/R + c₂·(H₁ + 1)·log(e(n+2)),  c₂ absolute explicit.
+Resolving n against log n (x ≥ 2A log A ⟹ x/log x ≥ A) and inserting
+the unit-reduction bound H₁ = O(log|m| + R + log d) gives N_C as stated;
+in particular N_C = Õ(R + s) = 2^{O(s)} — quasi-linear in R, in place of
+v1's fatal e^{22.5R}. ∎
+*(Final write-up bookkeeping flags: compute D₀ exactly (≤ 12); the
+constant c traced through 2^{40}·D₀²·log(eD₀)·8π·24; branch conventions
+for log(−1) absorbed into |a| ≤ n+2 — all mechanical.)*
+
+## Lemma A (written, referee-simplified): generators along the cycle
+
+> **Lemma A′.** Fixed degree, unit rank 1, cycle length p < 2R/log τ + 1
+> (Williams: ε₀ > τ^{p/2}, τ the golden ratio). The neighbor minima
+> x₁, …, x_p of the reduced-ideal cycle each carry poly(s)-size data
+> (BW88 Prop 2.11), and the incremental exact products γ_k = x₁⋯x_k
+> (2^{O(s)} digits each) satisfy: the k-th reduced principal ideal is
+> (γ_k), and ε = γ_p. Hence every principality witness and ε itself are
+> computable, expanded, in deterministic total time 2^{O(s)}, with exact
+> HNF verification of each ideal identity.
+
+*Proof.* The infrastructure cycle at rank 1 is the sequence of reduced
+principal ideals I_k = (γ_k)^{−1}-normalized with I_{k+1} = I_k/(x_k)
+for the neighbor minimum x_k of I_k; BW88 Prop 2.11 gives x_k as
+poly(s)-size data (denominator ≤ √D, numerator coordinates < √D in the
+φ-representation), Prop 3.1(ii) controls the distance slip, and the
+Williams spacing bound caps p. The products γ_k are maintained by exact
+integer arithmetic (digit growth ≤ Σ poly(s) ≤ 2^{O(s)}; total cost
+2^{O(s)}); each step's ideal identity I_{k+1}·(x_k) = I_k is one exact
+HNF comparison — floats never certify, only steer the walk's bookkeeping.
+Compact representations (binary doubling) are needed only if poly-size
+*certificates* are desired; the EXP algorithm does not need them. ∎
+
 ## Remaining work
 
-- **Write Lemma C** (the backward window) — the only load-bearing
-  unwritten mathematics. ~2 pages, ingredients verified.
-- **Write Lemma A** to the repaired plan (~1 page).
-- Then a second referee pass on the completed manuscript, and the
-  write-up positioned against Smart (ANTS-II 1996), with the prototype
-  (1120/1120) and the referee's independent 13/13 as computational
-  companions.
+- Second referee pass on Lemmas A′ and C (narrow scope).
+- Then the manuscript: positioned against Smart (ANTS-II 1996), with
+  the prototype (1120/1120) and the first referee's independent 13/13
+  as computational companions.
