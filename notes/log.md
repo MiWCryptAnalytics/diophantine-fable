@@ -373,6 +373,22 @@ Five verifiers, 176 tool calls, and every verdict moved us forward:
 - 57 citations archived (`notes/citations/2026-07-21-a1v2-verification
   .json`).
 
+## 2026-07-22 — assembly phase opens: the lemma that explains "3"
+
+- Launched the two-extractor workflow for the cubic-Thue EXP theorem's
+  remaining citable ingredients: Min Sha's explicit Skolem thresholds
+  (the negative-window constants) and the norm-equation step complexity
+  given certified bnf (Schoof/Lenstra/Biasse–Fieker; plus the question
+  of whether rank-1 makes principality testing elementary).
+- **Wrote the unit-reduction lemma** — one-dimensional log-lattice
+  reduction, honestly trivial — and it retroactively explains the
+  prototype's empirical max vanishing index of 3: after reduction the
+  embedding spread is e^{O(R)}, the R's cancel in the elementary bound,
+  and the **positive-direction window is O(1) absolutely** (small
+  constant via the proven R ≥ 0.28119 minimum). The positive side was
+  never merely poly(s); it is bounded. All remaining hardness lives in
+  the negative (Baker/Skolem) direction, awaiting Sha's constants.
+
 ## 2026-07-22 — HBH⟹NP assembled honestly; a mini-theorem falls out
 
 - `notes/HBH-NP-assembly.md`: the citable-gap-#2 note structured. The

@@ -123,7 +123,26 @@ envelope (~145 digits at the same size).
   from `experiments/` into `smale5/solvers/` with certified caps and the
   never-overclaim contract, and A1 gains clause (v).
 
-## After the citation pass (2026-07-21, five verdicts)
+## The unit-reduction lemma (written, 2026-07-22)
+
+> **Lemma (rank-1 reduction).** K complex cubic, ε normalized with
+> λ = σ₁(ε) > 1, R = log λ. For γ ∈ O_K with N(γ) = m ≠ 0 there is j ∈ ℤ
+> with γ' = γ·ε^j satisfying |log|σ₁(γ')| − ⅓log|m|| ≤ R/2.
+
+*Proof.* |σ₁(γ)|·|σ₂(γ)|² = |m|, and t(γ·ε^j) = t(γ) + jR for
+t(γ) := log|σ₁(γ)| − ⅓log|m|; take j = −round(t(γ)/R). ∎
+(One-dimensional reduction in the log-unit lattice — genuinely trivial;
+computing j rigorously needs σ₁(γ) to poly-many digits via interval
+arithmetic, cost 2^{O(s)} on 2^{O(s)}-digit inputs, and a borderline
+rounding at half-integers only widens the window by 1.)
+
+**Why the empirical max index was 3.** After reduction,
+|σ₂(γ')/σ₁(γ')| ≤ e^{O(R)}, so the elementary positive-direction bound
+k ≤ (2/3R)·log(2·|σ₂/σ₁|) + O(1) becomes **k⁺ = O(1) absolutely** — the
+R's cancel; with the proven minimum R ≥ 0.28119… (ADF 2016) the constant
+is small. The positive window was never merely poly(s): it is bounded.
+The negative direction remains the Baker/Skolem side, with constants to
+come from the Sha extraction.
 
 1. **Skolem attributions pinned.** Order ≤ 4 decidable: Mignotte–Shorey–
    Tijdeman (Crelle 349, 1984) + Vereshchagin (Math. Notes 38, 1985), via
