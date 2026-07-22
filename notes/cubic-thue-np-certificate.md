@@ -74,6 +74,45 @@ projection can be certified alongside. Either yielding CVP ∈ P for
 Thue-shaped instances would complete: **cubic Thue ∈ NP,
 unconditionally** — Lagarias one rung up, for real.
 
+## Route (ii) deep-dive (2026-07-22, after the reviewer's endorsement)
+
+**Adopted**: the clean trace form. For β = x + yα + zα² (α = ∛d):
+βα = zd + xα + yα², and Tr(1) = 3, Tr(α) = Tr(α²) = 0 give
+**z = Tr(βα)/(3d)** — CVP is exactly "Tr(βα) = 0 for compact β".
+
+**The additive/multiplicative divide.** Thiel-style deterministic
+equality testing is a *multiplicative* technology: β = γ reduces to the
+quotient being 1, and units ≠ ±1 are separated from 1 by
+Dobrowolski-type lower bounds on the log-embedding lattice — poly
+precision suffices. CVP is *additive*: Tr(βα) is a sum of three
+conjugate terms. Separation is not the problem — integrality gives
+|Tr| ≥ 1/(3b) when nonzero. **Evaluation is the problem**: certifying
+the sum numerically needs absolute precision ~ the archimedean spread
+max log|σᵢ(β)| − min, and for TRUE Thue solutions the spread is
+2^{Θ(s)} forced (a solution has |σ₁(β)| = |m|/|σ₂(β)|² tiny precisely
+because it is a solution — the easy "balanced-β" case of CVP can never
+contain the instances we care about). Angle formulation hits the same
+wall: verifying arg σ₂(βα) ≈ ±π/2 to error e^{−spread} needs the small
+factors' arguments to exponentially many bits.
+
+**The conjugate-certificate attempt, and its circle.** One can move to
+the Galois closure L = K(ω) and note Tr(βα) = 0 ⟺
+β + ωσ₂(β) + ω²σ₃(β) = 0; certifying compact representations of the
+conjugates is fine, but the final check is again an additive vanishing
+of compact objects — the divide reappears intact. Sums of compact
+representations are not compact; that sentence IS the obstacle.
+
+**Where CVP actually lives.** Writing multiplication-by-βᵢ as 3×3
+integer matrices, β's compact representation is a MATRIX WORD with
+repeated-squaring structure, and CVP is: *decide whether the trace of a
+width-3 integer matrix word is zero*. That is polynomial identity
+testing for width-3 algebraic branching programs (a highly structured,
+whitebox, repeated-squaring instance). This is the right literature
+door: bounded-width ABP identity testing has real deterministic results
+in special cases — whether the repeated-squaring word class is among
+them is precisely the next question to research, and it connects our NP
+question to the derandomization frontier in the cleanest possible way.
+
 ## Honest status ledger
 
 - MA membership: proposition-with-sketch, needs a careful write-up

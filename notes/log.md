@@ -1,5 +1,28 @@
 # Research log
 
+## 2026-07-22 — CVP meets the additive wall; and finds its true home
+
+The reviewer endorsed MA, flagged the p-adic trap (valuations under
+addition — correct), and proposed the trace form Tr(βα) = 3dz (correct,
+adopted — cleaner than my generic dual). But pushing Route (ii) to the
+metal exposed the real structure: **Thiel equality testing is
+multiplicative technology** (quotients are units; Dobrowolski separates
+them from 1 at poly precision), while **CVP is additive** — and there
+the separation is free (integrality: |Tr| ≥ 1/3b) but EVALUATION costs
+precision equal to the archimedean spread, which is 2^{Θ(s)} for true
+solutions *because being a solution forces unbalancedness*. The
+balanced-easy case of CVP provably never contains our instances. The
+conjugate-certificate workaround circles back to the same wall: sums of
+compact representations are not compact.
+
+The productive landing: multiplication matrices turn the compact rep
+into a width-3 integer MATRIX WORD, and CVP becomes **zero-testing the
+trace of a width-3 ABP with repeated-squaring structure** — a highly
+structured whitebox PIT instance. The NP question for cubic Thue now
+connects to bounded-width PIT derandomization by the shortest path I
+know of. Next research door: what is deterministically known for that
+ABP class. MA stands unconditionally; NP waits on structured PIT.
+
 ## 2026-07-22 — the certificate collapses to one object; MA falls out
 
 The reviewer conceded the poly-time demand and asked for the certificate
