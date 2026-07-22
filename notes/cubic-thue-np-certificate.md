@@ -113,6 +113,39 @@ in special cases — whether the repeated-squaring word class is among
 them is precisely the next question to research, and it connects our NP
 question to the derandomization frontier in the cleanest possible way.
 
+## The literature verdict (2026-07-22 sweep, 1991–2026)
+
+- **Blömer is structurally inapplicable, not merely insufficient**: his
+  determinism rides Siegel's rigidity (independent radicals admit NO
+  nontrivial ℚ-linear relations, so zero-testing is coefficient
+  collection) — and our trace-zero instances ARE nontrivial relations in
+  the rank-2 trace-zero module: the exact phenomenon his theorem
+  excludes. Both pillars (rigidity + explicit poly-size arithmetic)
+  fail simultaneously.
+- **The compact-representation toolbox stops at the trace, precisely**:
+  Ge (FOCS 1993; Lenstra's notes Thm 4.75) decides multiplicative
+  relations of power products in deterministic poly time — so N(β) = m
+  is testable; BTW 1995 adds 2-term sign comparison in real quadratic
+  fields; NO additive ≥3-term test exists anywhere in the literature.
+- **EquSLP context**: coRP since Schönhage; open for P; ABKM Prop 2.1
+  makes iterated squaring the HARD CORE of EquSLP (derandomization ⟹
+  circuit lower bounds, Kabanets–Impagliazzo) — a caution, not a
+  hardness proof, for our width-3 single words.
+- **The Baker route (Galby–Ouaknine–Worrell PosMatPow, dim 3)** decides
+  trace-zero of matrix powers in P — for POLY-HEIGHT bases; the
+  bounded extension "CVP with O(1) multiplicative rank and poly heights
+  ∈ P" is publishable-but-bounded and does NOT cover Thue certificates
+  (ε has height 2^{Θ(s)}); at Θ(s) logarithms the Baker constants
+  degrade exponentially — the same wall that pins LRS Positivity at
+  order ≥ 6 (Ouaknine–Worrell).
+- **Verdict: genuinely NEW, sum-of-square-roots-class flavor** — coRP,
+  in CH, deterministic open; and the one unexplored asset is exactly
+  ours: the three summands are Galois-conjugate and the bases' full
+  multiplicative relation lattice is COMPUTABLE (Ge). The additive
+  analog of Lenstra's Lemma 4.76 — detecting trace-zero from the
+  relation lattice plus unit-lattice geometry — has never been
+  attempted. That is the door.
+
 ## Honest status ledger
 
 - MA membership: proposition-with-sketch, needs a careful write-up
