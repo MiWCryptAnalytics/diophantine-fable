@@ -170,9 +170,15 @@ infrastructure machinery of Buchmann–Williams [BW88] keeps every *per-step*
 object at polynomial size — minima are represented by poly-size ideal
 data, "whereas the order of magnitude of a minimum can be as large as
 $\exp\sqrt{D}$" [BW88, Prop. 2.11] — and full expansion is invoked only
-where the $2^{O(s)}$ budget explicitly covers it; plain exact products
-along the cycle suffice (Lemma A′), compact representations being a
-luxury needed only for poly-size certificates, which we do not pursue.
+where the $2^{O(s)}$ budget explicitly covers it. Stated precisely, the
+philosophy is that the algorithm never *enumerates solutions* — objects
+whose digit counts are exponential in $s$ — not that it never writes
+down a large number. At the exponential-time target of this paper,
+*expanding* the fundamental unit and the Binet data is a legitimate
+simplification, adopted deliberately in Lemma A′: plain exact products
+along the cycle suffice. Compact representations become essential only
+for the stronger targets — poly-size certificates, NP membership —
+discussed in Remark 7.5.
 
 ### 1.6 Organization
 
@@ -916,6 +922,35 @@ poly-size certificates; compact representations are exactly the extra
 ingredient a certificate version would need (Lemma A′), a further
 direction we leave open.
 
+### 7.5 Beyond exponential time: the named obstructions
+
+Deterministic *polynomial-time* decision for pure cubic Thue equations
+is not a rewrite of this paper away: it faces three independent open
+problems, which we name so that the reader can see exactly where the
+exponential lives.
+
+1. **The unit.** Polynomial-time computation of the regulator and the
+   fundamental unit — even in compact representation — is equivalent to
+   the principal ideal problem and is a major open problem of
+   computational number theory, classically believed hard: it underlies
+   infrastructure-based cryptography, and polynomial time is known only
+   quantumly, by Hallgren-type algorithms [Hal07]. Note that even
+   negative-Pell *decision*, one degree down, is in
+   $\mathrm{NP} \cap \mathrm{coNP}$ (Lagarias [Lag79]) with no
+   classical polynomial algorithm known.
+2. **The zero test.** Certified zero-testing of the recurrence values
+   against their $2^{O(s)}$-digit height bounds via modular evaluation
+   needs exponentially many primes; per-prime testing yields only
+   randomized decisions (coRP-style, as in straight-line-program
+   zero-testing), whose derandomization is open.
+3. **The window.** The scan window is quasi-linear in
+   $R = 2^{\Theta(s)}$ unless the strong window conjecture of
+   Remark 7.4 — empirical maximum index 3, Section 6.1 — is proven.
+
+The natural next target is therefore NP membership — a cubic analogue
+of Lagarias's Pell certificates [Lag79] — for which the strong window
+conjecture is the enabler.
+
 ---
 
 ## References
@@ -943,6 +978,9 @@ direction we leave open.
 - **[Ded00]** R. Dedekind, *Über die Anzahl der Idealklassen in reinen
   kubischen Zahlkörpern*, J. reine angew. Math. 121 (1900) 40–123. (The
   pure cubic index formula of Section 2.2.)
+- **[Hal07]** S. Hallgren, *Polynomial-time quantum algorithms for
+  Pell's equation and the principal ideal problem*, J. ACM 54 (2007).
+  (The quantum route to the unit; cited in Remark 7.5.)
 - **[Lag79]** J. C. Lagarias, *Succinct certificates for the solvability
   of binary quadratic Diophantine equations*, Proc. 20th IEEE FOCS
   (1979) 47–54; extended version arXiv:math/0611209. (§1.4 of the

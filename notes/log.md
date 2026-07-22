@@ -1,5 +1,56 @@
 # Research log
 
+## 2026-07-22 — an outside review arrives; what it gets right and wrong
+
+The user ran the .tex through another model (Gemini Pro Extended), which
+returned a peer review. Our point-by-point assessment:
+
+- **"The gap is real but trivial — rigorous folklore."** LARGELY ACCEPT.
+  This matches our own framing from the start: the citation pass asked
+  precisely "is this folklore?", the answer was "nobody states it;
+  closest is Smart 1996", and we have consistently called it a modest
+  publishable increment, never a breakthrough. Writing folklore down
+  with worst-case accounting is legitimate mathematics of the humble
+  kind. (The review's history is loose — Smart predates Matveev 2000,
+  and quasi-linear-in-R zero windows are Sha-2019-adjacent, not 1990s
+  folklore — but the calibration point stands.)
+- **"Fatal contradiction: §1.5's Pell philosophy vs Lemma A′'s
+  expansion."** REJECT AS A DEFECT, ACCEPT AS A WORDING FIX. At the
+  2^{O(s)} target, expanding ε is sound and simplifies proofs — our own
+  referee endorsed exactly this simplification. There is no mathematical
+  error; there is a paragraph that reads as promising more than the
+  theorem delivers. Fix: §1.5 now says explicitly that
+  decide-without-exhibiting refers to never enumerating SOLUTIONS, and
+  that at the EXP target unit expansion is a legitimate convenience,
+  with the compact-representation route reserved for stronger targets.
+- **"Path forward: rewrite for deterministic poly time."** REJECT AS
+  STATED — each step is a named open problem wearing a lab coat:
+  (1) "use Thiel's compact representations" — compact OUTPUT does not
+  give poly-time COMPUTATION of the unit; poly-time regulator/principal-
+  ideal computation is a major open problem, believed classically hard
+  (it underpins infrastructure cryptography; quantum-poly is Hallgren),
+  and even *negative Pell decision* — one degree DOWN — is in NP∩coNP
+  (Lagarias) with no classical poly algorithm known or particularly
+  believed. (2) "evaluate z_k modulo chosen primes" — certifying a zero
+  against a 2^{O(s)}-digit height bound needs exponentially many primes;
+  per-prime testing gives coRP-style zero-testing (SLP zero-testing!),
+  whose derandomization is itself open. (3) The scan window is Õ(R) =
+  2^{Θ(s)} unless the strong window conjecture (empirical max 3) is
+  proven. A reviewer demanding deterministic s^{O(1)} here is demanding,
+  in effect, progress on crypto-hardness assumptions — worth saying out
+  loud rather than nodding along.
+- **What the review is accidentally right about**: the interesting next
+  target is NOT poly-time decision but **cubic Thue ∈ NP** — Lagarias
+  one rung up: compact certificates (unit + representative + index,
+  window O(1) under the strong conjecture) with deterministic poly
+  verification as the open crux. Logged as a new target; the strong
+  window conjecture is its enabler.
+
+Manuscript edits applied: the §1.5 clarification, and a new remark
+mapping the poly-time obstructions by name (PIP hardness / Hallgren;
+SLP zero-testing; the window conjecture). Ambition calibrated, defect
+count unchanged: zero.
+
 ## 2026-07-20 — kickoff
 
 - **Context**: the day after the reported disproof of the Jacobian Conjecture
