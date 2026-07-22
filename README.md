@@ -120,6 +120,16 @@ python3 -m venv .venv
 PARI/GP (via cypari2) enables the unconditional Thue decisions; without it
 the toolkit degrades to sympy-only and reports wider `UNDECIDED` ranges.
 
+## First summit (2026-07-22)
+
+The expedition's first theorem-shaped result is drafted and twice
+adversarially refereed: **pure cubic Thue equations x³ − d·y³ = m decide,
+with full solution lists, in deterministic, unconditional 2^(O(s)) time**
+— a worst-case bound absent from the literature (closest prior: Smart,
+ANTS-II 1996). Manuscript: [papers/cubic-thue-exp.md](papers/cubic-thue-exp.md);
+the story, including the three traps it survived, is in
+[notes/log.md](notes/log.md).
+
 ## Roadmap
 
 - **Phase 2 (Track A):** genus-0 parametrization stratum + the A1

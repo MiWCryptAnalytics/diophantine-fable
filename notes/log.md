@@ -373,6 +373,24 @@ Five verifiers, 176 tool calls, and every verdict moved us forward:
 - 57 citations archived (`notes/citations/2026-07-21-a1v2-verification
   .json`).
 
+## 2026-07-22 — the manuscript exists
+
+`papers/cubic-thue-exp.md` (996 lines): abstract, introduction with the
+Smale-#5 framing and the Smart/TdW/Bilu–Hanrot positioning, preliminaries
+(with the load-bearing discriminant floor and its margin-0.018 sentence),
+the seven-step algorithm, full proofs of Lemma B, the unit-reduction
+lemma, Lemma A′, Proposition F (k₊ ≤ 3), and Lemma C with the corrected
+odd-parity linear form and the R-cancellation; the main-theorem assembly
+with cost accounting; the computational companion (1120/1120; 13/13
+independent; 1593-digit units); remarks; 20 references with corrected
+venues. Three honest footnotes carry the remaining bookkeeping (one
+constant evaluation, one exponent verification, one factor-4 slack). The
+assembler resolved five note ambiguities, all in the right direction —
+documented in its report. README now carries the First Summit notice.
+Next: LaTeX conversion, explicit constant evaluation, and the human
+courtesy pass (authorship, acknowledgments to the primary sources'
+authors) before any posting.
+
 ## 2026-07-22 — the summit: both lemmas pass the second referee
 
 Wrote Lemma C in full (the backward window: Matveev with A₃ ≤ 4R against
