@@ -184,6 +184,22 @@ Micro-yield: the Arakelov pinning (step 1) is itself a small clean
 result — "compact certificates verify everything about β except one
 plane membership" — worth a lemma in the eventual write-up.
 
+## Why no ideal-equality test can express CVP (recorded to prevent re-treading)
+
+The tempting sequel program "tear into Thiel's ideal equality tests to
+break CVP" is closed by rank counting. The trace-zero condition
+Tr(βα) = 0 defines a ℚ-**hyperplane** (the coordinate functionals ARE
+trace forms: c₂(β) = Tr(βα)/(3d), via the dual basis of the power
+basis). Ideals are **full-rank** ℤ-modules: any nonzero ideal has rank 3;
+any module contained in the hyperplane has rank ≤ 2. So no ideal
+containment, equality, or divisibility statement can capture membership
+in the trace-zero locus even in principle — Thiel/Ge machinery tests
+relations among full-rank multiplicative objects, and CVP lives in a
+corank-1 additive slice invisible to all of them. The
+multiplicative-to-additive bridge is not hiding inside ideal arithmetic;
+it must be genuinely new. (This confirms, from a third direction, the
+four-costumes-one-wall analysis above.)
+
 ## Honest status ledger
 
 - MA membership: proposition-with-sketch, needs a careful write-up

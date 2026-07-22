@@ -1,5 +1,20 @@
 # Research log
 
+## 2026-07-22 — the greenlight, and the hyperplane that closes a door
+
+The outside reviewer accepted the revised manuscript in full ("the
+complexity accounting is now flawless... ship this draft") — greenlight
+journaled; actual posting (arXiv, authorship, courtesy contacts) remains
+the user's call, as it has been all along. The reviewer's proposed
+sequel program — "tear into Thiel's ideal equality tests to break CVP" —
+is closed before it opens, by rank counting: the trace-zero locus is a
+ℚ-hyperplane (corank 1); ideals are full-rank; no ideal-theoretic
+statement can express membership in a hyperplane even in principle.
+Recorded in the certificate note as the third independent confirmation
+of the one-wall analysis. The sequel's real foundation stands as: the MA
+proposition, the Arakelov-pinning lemma, and CVP stated with its three
+equivalent faces (trace form, plane membership, width-3 ABP zero-test).
+
 ## 2026-07-22 — Phase 4: the synthesis is written
 
 `notes/synthesis.md` — the position paper the original approved plan
