@@ -115,21 +115,27 @@ Rocky Mountain J. Math. 15 (1985) 621–656, not PJM.
 2|b₂|e^{nR/2}|cos(φ + nθ)| = |b₁|e^{−nR}, so with
 |cos x| ≥ (2/π)·dist(x, π/2 + πℤ):
   dist(φ + nθ, π/2 + πℤ) ≤ (π/4)(|b₁|/|b₂|)·e^{−3nR/2}.   (†)
-The left side is |Λ_n| for the linear form
-Λ_n = a·log(−1) + log(b̄₂/b₂) + n·log(μ̄/μ), a ∈ ℤ, |a| ≤ n + 2.
-**Degenerate case is void**: Λ_n = 0 would give b₂μ^{−n} + b̄₂μ̄^{−n} = 0
-purely imaginary contribution — wait, precisely: Λ_n = 0 makes the
-conjugate-pair term vanish, leaving v_n = b₁λ^{−n} ≠ 0; so on a zero
+The left side is 2·|Λ_n| for the linear form (second-referee-corrected
+conjugation and the exact factor 2, both verified numerically on two
+fields):
+Λ_n = a·log(−1) + log(b₂/b̄₂) + n·log(μ̄/μ), a ∈ ℤ odd, |a| ≤ n + 2,
+with |Λ_n| = 2·dist(φ + nθ, π/2 + πℤ) exactly.
+**Degenerate case is void**: Λ_n = 0 ⟺ cos(φ + nθ) = 0 ⟺ the
+conjugate-pair term vanishes, leaving v_n = b₁λ^{−n} ≠ 0; so on a zero
 v_n = 0 we always have Λ_n ≠ 0 and Matveev applies.
-Matveev (k = 3, field degree D₀ ≤ 12 = deg of the Galois closure of
-K(ω)): log|Λ_n| > −C₀·A₁A₂A₃·log(e(n+2)) with C₀ = 2^{40}·D₀²·log(eD₀)
-absolute, A₁ = π, and:
-- A₂ ≤ D₀·h(b̄₂/b₂) + π ≤ D₀·2h(b₂) + π. Heights directly (Galois
-  invariance of the Weil height; the 3b-clearing shifts by ≤ log 3d):
-  h(b₂) ≤ h(γ) + log 3 + (2/3)log d + log 3d =: H₁, so
-  A₂ ≤ 24·H₁ + π = O(h(γ) + log d + 1).
-- A₃ ≤ D₀·h(μ̄/μ) ≤ D₀·2h(ε) = D₀·(2R/3) ≤ **8R** — since a unit of a
-  complex cubic has h(ε) = R/3.
+Matveev (k = 3, field degree **D₀ = 6**: L = ℚ(∛d, ω) IS the Galois
+closure of K — √disc generates ℚ(√−3) = ℚ(ω) for every pure cubic — and
+L is conjugation-stable and contains −1, b₂/b̄₂, μ̄/μ):
+log|Λ_n| > −C₀·A₁A₂A₃·log(e(n+2)) with C₀ = 2^{40}·D₀²·log(eD₀)
+absolute (the 2^{40}-vs-2^{38} slack absorbs the factor 2 above), A₁ = π:
+- A₂ ≤ D₀·h(b₂/b̄₂) + π ≤ 12·H₁ + π with (Galois-invariant heights; the
+  3b-clearing adds ≤ log 3d): h(b₂) ≤ h(γ) + log 3 + (2/3)log d + log 3d
+  =: H₁ = O(h(γ) + log d + 1).
+- A₃ = max(D₀·h(μ̄/μ), |log(μ̄/μ)|) ≤ max(4R, π) = 4R — the Matveev side
+  condition A₃ ≥ |log(μ̄/μ)| (which can approach π) is met because pure
+  cubics have |disc| ≥ 108, hence R > 0.79 (ADF 2016's exceptional
+  fields −23, −31, −44 are not pure), so 4R ≥ 3.16 > π — margin 0.018.
+  (h(ε) = R/3: the complex place carries weight 2.)
 Combining with (†) and |log(|b₁|/|b₂|)| ≤ 12·H₁ (|log|b|| ≤ deg·h):
   (3R/2)·n ≤ 12H₁ + log(π/4) + C₀·π·(24H₁+π)·8R·log(e(n+2)).
 Divide by 3R/2: **the R cancels in the Matveev term**, leaving
@@ -153,21 +159,41 @@ for log(−1) absorbed into |a| ≤ n+2 — all mechanical.)*
 > computable, expanded, in deterministic total time 2^{O(s)}, with exact
 > HNF verification of each ideal identity.
 
-*Proof.* The infrastructure cycle at rank 1 is the sequence of reduced
-principal ideals I_k = (γ_k)^{−1}-normalized with I_{k+1} = I_k/(x_k)
-for the neighbor minimum x_k of I_k; BW88 Prop 2.11 gives x_k as
-poly(s)-size data (denominator ≤ √D, numerator coordinates < √D in the
-φ-representation), Prop 3.1(ii) controls the distance slip, and the
-Williams spacing bound caps p. The products γ_k are maintained by exact
-integer arithmetic (digit growth ≤ Σ poly(s) ≤ 2^{O(s)}; total cost
-2^{O(s)}); each step's ideal identity I_{k+1}·(x_k) = I_k is one exact
-HNF comparison — floats never certify, only steer the walk's bookkeeping.
-Compact representations (binary doubling) are needed only if poly-size
-*certificates* are desired; the EXP algorithm does not need them. ∎
+*Proof (second-referee-corrected orientation and certification).* The
+Voronoi chain at rank 1: I₁ = O_K, I_{k+1} = (1/x_k)·I_k with x_k the
+neighbor minimum of I_k, **computed exactly by BW88 Alg 2.13 / Williams
+(Rocky Mountain J. Math. 15 (1985))** — exactness of the neighbor step
+is what certifies completeness of the stock (floats steering alone could
+skip a minimum and still pass every HNF test). Telescoping:
+γ_k = x₁⋯x_k is the (k+1)-st minimum and **I_{k+1} = (γ_k)^{−1}**;
+after a full cycle, γ_p = ε exactly under the σ₁ > 0, increasing-λ
+normalization. Poly(s)-size of each x_k follows from BW88 Prop 2.4
+(|N(x)| ≤ √D·N(a)) + Prop 2.7(i) (step < log √D) + denominator ≤ √D.
+Digit growth of the exact products is additive: O(p·poly(s)) = 2^{O(s)}
+per γ_k, 2^{O(s)} total including the per-step exact HNF chain identity
+I_{k+1}·(x_k) = I_k. **Candidate-side recipe (step 2's need)**: for an
+ideal I of norm |m|, reduce exactly to obtain the relative minimum μ_I
+(poly-size); I is principal iff the reduction lands on the cycle stock
+at some position k, and then its generator is **μ_I·γ_{k−1}^{−1}**
+(exact division on 2^{O(s)}-digit integers), certified by one terminal
+exact HNF check (g) = I. Compact representations remain a luxury for
+poly-size certificates only. ∎
 
-## Remaining work
+## Status after the second referee (2026-07-22)
 
-- Second referee pass on Lemmas A′ and C (narrow scope).
-- Then the manuscript: positioned against Smart (ANTS-II 1996), with
-  the prototype (1120/1120) and the first referee's independent 13/13
-  as computational companions.
+**Verdict: no broken items — both lemmas support the theorem statement
+modulo final manuscript polish.** All three load-bearing repairs applied
+above (Λ_n conjugation + factor 2 + odd parity; the Matveev side
+condition via the pure-cubic regulator floor with margin 0.018; the
+exact-neighbor certification attribution). The referee verified the
+linear-form analysis numerically on two fields and validated the Binet
+integer sequence with its Thue-shape zero. N_C's quasi-linear-in-R shape
+and Lemma A′'s 2^{O(s)} accounting "both survive scrutiny; the
+R-cancellation that replaces v1's e^{22.5R} is real and verified
+line-by-line."
+
+Remaining: the manuscript itself — assemble, compute the explicit
+constant chain (D₀ = 6 throughout), position against Smart (ANTS-II
+1996), with the prototype (1120/1120) and the first referee's
+independent 13/13 as computational companions. No unwritten mathematics
+remains.

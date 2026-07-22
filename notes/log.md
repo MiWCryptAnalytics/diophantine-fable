@@ -373,6 +373,36 @@ Five verifiers, 176 tool calls, and every verdict moved us forward:
 - 57 citations archived (`notes/citations/2026-07-21-a1v2-verification
   .json`).
 
+## 2026-07-22 — the summit: both lemmas pass the second referee
+
+Wrote Lemma C in full (the backward window: Matveev with A₃ ≤ 4R against
+the ratio gap 3R/2 — the R cancels, N_C quasi-linear in R + s where v1's
+black-box was doubly exponential) and Lemma A′ (referee-simplified plain
+products along the Voronoi cycle). Sent a narrow hostile referee at
+exactly these two lemmas. **Verdict: NO BROKEN ITEMS** — with three
+one-paragraph repairs, all applied:
+
+1. My linear form had the conjugation flipped in one slot
+   (log(b₂/b̄₂), not log(b̄₂/b₂)) — fatal for the degenerate-case
+   argument until fixed, trivially valid after; |Λ_n| = 2·dist exactly,
+   a odd; verified numerically on two fields.
+2. **The margin-0.018 sentence**: Matveev's side condition A₃ ≥
+   |log(μ̄/μ)| ~ π would FAIL at the minimal complex-cubic regulator
+   (8R = 2.25 < π at ADF's −23 field) — but pure cubics have
+   |disc| ≥ 108, none of ADF's three exceptional fields is pure, so
+   R > 0.79 and 4R ≥ 3.16 > π. The theorem survives on a discriminant
+   floor by less than two hundredths.
+3. Lemma A′'s completeness rides on the EXACT neighbor step (BW88
+   Alg 2.13 / Williams 1985) — floats steering alone could skip a
+   minimum and pass every HNF test; attribution corrected, orientation
+   fixed (I_{k+1} = (γ_k)^{−1}, generators μ_I·γ_{k−1}^{−1}).
+
+Also: D₀ = 6 exactly (ω always lives in a pure cubic's Galois closure
+via √disc ∈ ℚ(√−3)). The bottom line, in the referee's words: the
+R-cancellation "is real and verified line-by-line." **No unwritten
+mathematics remains** — what's left is manuscript assembly, explicit
+constants, and positioning against Smart 1996.
+
 ## 2026-07-22 — the referee breaks the draft, in the best possible way
 
 Lemmas A and B written; hostile referee dispatched at the whole assembly
