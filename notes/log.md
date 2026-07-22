@@ -1,5 +1,18 @@
 # Research log
 
+## 2026-07-22 — Phase 4: the synthesis is written
+
+`notes/synthesis.md` — the position paper the original approved plan
+always ended with. The map as we leave it: what decides (clauses i–v +
+the flagship), the corrected complexity picture (γ-hard since 1978;
+O33a the true open floor; MA/NP⟺CVP above), the **five named open
+problems this expedition minted or sharpened** (window conjecture,
+HBH₀, the multiplicative-to-additive bridge, O33a, DIVIS hardness), the
+instruments (Census, envelopes, errata), and the method — adversarial
+verification as a way of life, with the standing question that caught
+three traps: *exponential in what?* The original plan's Phase 4,
+delivered.
+
 ## 2026-07-22 — the Ge-lattice door: the wall shows its true face
 
 Attempted the unexplored door myself (no agents — this one wanted a
