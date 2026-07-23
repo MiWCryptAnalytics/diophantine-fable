@@ -3,6 +3,10 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 
+%% Typographic only: relax line breaking slightly to avoid overfull
+%% lines around long compound words and bracketed citations.
+\emergencystretch=1.5em
+
 %% ------------------------------------------------------------------
 %% Theorem environments
 %% ------------------------------------------------------------------
@@ -278,8 +282,8 @@ Pure cubic Thue solvability is in MA, with perfect completeness and
 one-sided, amplifiable soundness error.
 \end{proposition}
 
-\begin{proof}[Proof (complete modulo the compact-representation
-format bounds quoted in Section~\textup{\ref{sec:compact}})]
+\begin{longproof}{Proof (complete modulo the compact-representation
+format bounds quoted in Section~\textup{\ref{sec:compact}})}
 Merlin sends the compact representation of a claimed solution element
 $\beta$. Arthur runs V1 and V2 of Section~\ref{sec:verifier}
 deterministically, then tests V3 modulo random primes.
@@ -335,7 +339,7 @@ probability $\ge 2/3$. Arthur never rejects a valid certificate.
 widening the range to $2^{s^c}$, $c \ge 2$, already makes a single
 prime's error exponentially small, since $\omega(W)/\pi(2^{s^c}) \le
 2^{c_4 s - s^c}\,\mathrm{poly}(s)$.
-\end{proof}
+\end{longproof}
 
 \emph{Complexity-class bookkeeping.} Step V3 alone is a coRP test:
 vanishing instances are accepted with probability 1, non-vanishing
@@ -445,8 +449,8 @@ given Arakelov divisor lie in an explicit rank-2 sublattice?}
 \subsection{Face three: width-3 ABP trace zero-testing}
 \label{sec:abpface}
 
-Writing multiplication-by-$\beta_i$ as $3\times 3$ integer matrices
-(after clearing the format's denominators), the compact
+Writing multi\-pli\-ca\-tion-by-$\beta_i$ as $3\times 3$ integer
+matrices (after clearing the format's denominators), the compact
 representation becomes a \textbf{matrix word with repeated-squaring
 structure}, and by the trace form CVP reads: \emph{decide whether the
 trace of a width-3 integer matrix word is zero}. That is polynomial
