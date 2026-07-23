@@ -9,8 +9,10 @@
   resolved on the second pass. The never-compiled agent-written LaTeX
   was simply correct, which deserves a line in the record.
 - Paper two's .tex conversion delegated (compile-until-clean); first
-  attempt starved on quota mid-read and was resumed from transcript —
-  PDF lands when it reports.
+  attempt starved on quota mid-read, resumed from transcript, and
+  delivered: **879-line .tex, 13-page PDF**, verified through the
+  Makefile's undefined-reference gate. Both papers now build with one
+  `make`. The expedition's papers exist on paper.
 
 ## 2026-07-22 — the Thiel pinpoint: the last debt is paid
 

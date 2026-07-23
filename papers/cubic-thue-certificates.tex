@@ -18,6 +18,21 @@
 \theoremstyle{remark}
 \newtheorem{remark}{Remark}[section]
 
+%% A proof environment whose head may wrap: amsthm's \proof puts the
+%% optional title into an unbreakable \item label, which overflows the
+%% line for the long proof head of Proposition 3.1. Same mechanics as
+%% amsthm's proof, with the head set as ordinary (breakable) text.
+\makeatletter
+\newenvironment{longproof}[1]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \trivlist
+  \item\relax{\itshape #1\@addpunct{.}}\ \ignorespaces
+}{%
+  \popQED\endtrivlist\@endpefalse
+}
+\makeatother
+
 %% ------------------------------------------------------------------
 
 \begin{document}
