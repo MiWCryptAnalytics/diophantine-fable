@@ -1,5 +1,17 @@
 # Research log
 
+## 2026-07-22 — the papers learn to compile
+
+- TeX pipeline stood up without root: user-space TinyTeX (TeX Live
+  2026) at ~/.TinyTeX, amscls installed, `papers/Makefile` with an
+  undefined-reference gate, build artifacts gitignored, PDFs tracked.
+- **Paper one compiled on the first try** — 20 pages, all references
+  resolved on the second pass. The never-compiled agent-written LaTeX
+  was simply correct, which deserves a line in the record.
+- Paper two's .tex conversion delegated (compile-until-clean); first
+  attempt starved on quota mid-read and was resumed from transcript —
+  PDF lands when it reports.
+
 ## 2026-07-22 — the Thiel pinpoint: the last debt is paid
 
 The agent recovered **Thiel's 1995 Saarbrücken thesis itself** (Wayback,
